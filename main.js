@@ -1,4 +1,5 @@
 import "./style.css";
+import "./reset.css";
 import axios from "axios";
 import DaySelectorBtn from "./components/DaySelectorBtn";
 import LabelledToggle from "./components/LabelledToggle";

@@ -32,7 +32,6 @@
 
 html {
   font-size: 0.625em;
-
   word-break: keep-all;
   background-color: var(--depth-100);
 }

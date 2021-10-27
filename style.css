@@ -1,5 +1,3 @@
-@import url(./reset.css);
-
 .inner {
   padding: 12rem var(--inner-padding) 0;
   display: flex;

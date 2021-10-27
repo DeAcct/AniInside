@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.17e50649.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <script type="module" crossorigin src="/assets/index.e7293ae0.js"></script>
+    <title>애니인사이드</title>
+    <script type="module" crossorigin src="/assets/index.9b8ddc58.js"></script>
     <link rel="modulepreload" href="/assets/vendor.6005cee6.js">
-    <link rel="stylesheet" href="/assets/index.b6e72909.css">
+    <link rel="stylesheet" href="/assets/index.cffec20c.css">
   </head>
   <body>
     <div id="app">
@@ -48,7 +48,28 @@
 
     <template id="labelled-toggle">
       <style>
-        @import url("./reset.css");
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: "Noto Sans KR", sans-serif;
+        }
+        ul,
+        li {
+          list-style-type: none;
+        }
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+        button {
+          border: none;
+          cursor: unset;
+        }
+        *:focus {
+          outline: none;
+          opacity: 0.5;
+        }
       </style>
       <label>
         <input type="checkbox" class="blind" />
@@ -61,7 +82,29 @@
 
     <template id="day-selector-btn">
       <style>
-        @import url(./reset.css);
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: "Noto Sans KR", sans-serif;
+        }
+        ul,
+        li {
+          list-style-type: none;
+        }
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+        button {
+          border: none;
+          cursor: unset;
+        }
+        *:focus {
+          outline: none;
+          opacity: 0.5;
+        }
+
         :host(day-selector-button) {
           width: 4.5rem;
           height: 4.5rem;
@@ -97,7 +140,29 @@
 
     <template id="anime-card">
       <style>
-        @import url(./reset.css);
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: "Noto Sans KR", sans-serif;
+        }
+        ul,
+        li {
+          list-style-type: none;
+        }
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+        button {
+          border: none;
+          cursor: unset;
+        }
+        *:focus {
+          outline: none;
+          opacity: 0.5;
+        }
+
         :host(anime-card) {
           display: flex;
           justify-content: center;

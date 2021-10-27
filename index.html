@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>애니인사이드</title>
   </head>
   <body>
     <div id="app">
@@ -45,7 +45,28 @@
 
     <template id="labelled-toggle">
       <style>
-        @import url("./reset.css");
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: "Noto Sans KR", sans-serif;
+        }
+        ul,
+        li {
+          list-style-type: none;
+        }
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+        button {
+          border: none;
+          cursor: unset;
+        }
+        *:focus {
+          outline: none;
+          opacity: 0.5;
+        }
       </style>
       <label>
         <input type="checkbox" class="blind" />
@@ -58,7 +79,29 @@
 
     <template id="day-selector-btn">
       <style>
-        @import url(./reset.css);
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: "Noto Sans KR", sans-serif;
+        }
+        ul,
+        li {
+          list-style-type: none;
+        }
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+        button {
+          border: none;
+          cursor: unset;
+        }
+        *:focus {
+          outline: none;
+          opacity: 0.5;
+        }
+
         :host(day-selector-button) {
           width: 4.5rem;
           height: 4.5rem;
@@ -94,7 +137,29 @@
 
     <template id="anime-card">
       <style>
-        @import url(./reset.css);
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: "Noto Sans KR", sans-serif;
+        }
+        ul,
+        li {
+          list-style-type: none;
+        }
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+        button {
+          border: none;
+          cursor: unset;
+        }
+        *:focus {
+          outline: none;
+          opacity: 0.5;
+        }
+
         :host(anime-card) {
           display: flex;
           justify-content: center;
