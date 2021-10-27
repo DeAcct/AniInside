@@ -1,0 +1,16 @@
+{
+  "name": "anime-api-request-test",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.6.4"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "gsap": "^3.8.0"
+  }
+}

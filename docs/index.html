@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko" data-dark-mode="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.17e50649.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script type="module" crossorigin src="/assets/index.e7293ae0.js"></script>
+    <link rel="modulepreload" href="/assets/vendor.6005cee6.js">
+    <link rel="stylesheet" href="/assets/index.b6e72909.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="inner">
+        <header class="fixed-area">
+          <div class="top">
+            <div class="left">
+              <h1 class="page-title">
+                <span class="page-name">애니인사이드</span>
+              </h1>
+              <span class="sub-name">
+                <span aria-live="polite" class="partial"></span>
+                애니 목록
+              </span>
+            </div>
+          </div>
+          <div class="day-selector" role="tablist" aria-label="요일 선택"></div>
+        </header>
+        <main class="main"></main>
+      </div>
+      <footer class="footer">
+        <p class="col">
+          API from
+          <span>
+            <strong>MyAnimeList</strong>
+            and
+            <strong>Jikan API</strong>
+          </span>
+        </p>
+        <p class="col">
+          Made by
+          <span>
+            <strong>Lee Hyeon Seong</strong>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    <template id="labelled-toggle">
+      <style>
+        @import url("./reset.css");
+      </style>
+      <label>
+        <input type="checkbox" class="blind" />
+        <slot></slot>
+        <div class="track">
+          <div class="body"></div>
+        </div>
+      </label>
+    </template>
+
+    <template id="day-selector-btn">
+      <style>
+        @import url(./reset.css);
+        :host(day-selector-button) {
+          width: 4.5rem;
+          height: 4.5rem;
+          display: flex;
+          justify-content: center;
+        }
+
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+          color: inherit;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: -1px;
+          border-bottom: 2px solid transparent;
+          transition: 150ms ease-out;
+        }
+        button:hover,
+        button:focus {
+          opacity: 1;
+          background-color: var(--depth-200);
+        }
+        :host(.selected) button {
+          border-bottom: 2px solid var(--theme-color);
+        }
+      </style>
+      <button><slot></slot></button>
+    </template>
+
+    <template id="anime-card">
+      <style>
+        @import url(./reset.css);
+        :host(anime-card) {
+          display: flex;
+          justify-content: center;
+          border-radius: 0.5rem;
+          transition: box-shadow 150ms ease-out;
+          padding: 2rem 2rem 3rem !important;
+          background-color: var(--depth-200);
+        }
+        a {
+          transition: 150ms ease-out;
+        }
+        :host(anime-card:hover) {
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        .card {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        img {
+          width: 100%;
+          aspect-ratio: 16/9;
+          object-fit: cover;
+          margin-bottom: 1rem;
+          border-radius: 0.25rem;
+        }
+        figcaption {
+          font-size: 1.5rem;
+          text-align: center;
+        }
+        @media screen and (min-width: 1080px) {
+          img {
+            aspect-ratio: 4/6;
+          }
+        }
+      </style>
+      <a href="#none" class="card">
+        <figure>
+          <img />
+          <figcaption><slot></slot></figcaption>
+        </figure>
+      </a>
+    </template>
+    
+  </body>
+</html>
