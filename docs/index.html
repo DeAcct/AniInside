@@ -5,9 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.17e50649.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>애니인사이드</title>
-    <script type="module" crossorigin src="/assets/index.41e47bbd.js"></script>
+    <script type="module" crossorigin src="/assets/index.00bb264f.js"></script>
     <link rel="modulepreload" href="/assets/vendor.6005cee6.js">
-    <link rel="stylesheet" href="/assets/index.0a109541.css">
+    <link rel="stylesheet" href="/assets/index.a3b25ef7.css">
   </head>
   <body>
     <div id="app">
@@ -44,6 +44,44 @@
       </footer>
     </div>
 
+    <template id="star-rating">
+      <figure>
+        <svg viewBox="0 0 280 48" role="img">
+          <path
+            d="M21.44,1.63,15.65,14l-13.25,2A2.84,2.84,0,0,0,.81,20.86l9.67,10L8.23,44.7a2.82,2.82,0,0,0,4.15,2.94L24,41.19V0A2.79,2.79,0,0,0,21.44,1.63Z"
+          />
+          <path
+            d="M39.77,44.7,37.52,30.82l9.67-10a2.84,2.84,0,0,0-1.59-4.79L32.35,14,26.56,1.63A2.79,2.79,0,0,0,24,0V41.19l11.62,6.45A2.82,2.82,0,0,0,39.77,44.7Z"
+          />
+          <path
+            d="M79.44,1.63,73.65,14l-13.25,2a2.84,2.84,0,0,0-1.59,4.79l9.67,10L66.23,44.7a2.82,2.82,0,0,0,4.15,2.94L82,41.19V0A2.79,2.79,0,0,0,79.44,1.63Z"
+          />
+          <path
+            d="M97.77,44.7,95.52,30.82l9.67-10a2.84,2.84,0,0,0-1.59-4.79L90.35,14,84.56,1.63A2.79,2.79,0,0,0,82,0V41.19l11.62,6.45A2.82,2.82,0,0,0,97.77,44.7Z"
+          />
+          <path
+            d="M137.44,1.63,131.65,14l-13.25,2a2.84,2.84,0,0,0-1.59,4.79l9.67,10L124.23,44.7a2.82,2.82,0,0,0,4.15,2.94L140,41.19V0A2.79,2.79,0,0,0,137.44,1.63Z"
+          />
+          <path
+            d="M155.77,44.7l-2.25-13.88,9.67-10a2.84,2.84,0,0,0-1.59-4.79l-13.25-2L142.56,1.63A2.79,2.79,0,0,0,140,0V41.19l11.62,6.45A2.82,2.82,0,0,0,155.77,44.7Z"
+          />
+          <path
+            d="M195.44,1.63,189.65,14l-13.25,2a2.84,2.84,0,0,0-1.59,4.79l9.67,10L182.23,44.7a2.82,2.82,0,0,0,4.15,2.94L198,41.19V0A2.79,2.79,0,0,0,195.44,1.63Z"
+          />
+          <path
+            d="M213.77,44.7l-2.25-13.88,9.67-10a2.84,2.84,0,0,0-1.59-4.79l-13.25-2L200.56,1.63A2.79,2.79,0,0,0,198,0V41.19l11.62,6.45A2.82,2.82,0,0,0,213.77,44.7Z"
+          />
+          <path
+            d="M253.44,1.63,247.65,14l-13.25,2a2.84,2.84,0,0,0-1.59,4.79l9.67,10L240.23,44.7a2.82,2.82,0,0,0,4.15,2.94L256,41.19V0A2.79,2.79,0,0,0,253.44,1.63Z"
+          />
+          <path
+            d="M271.77,44.7l-2.25-13.88,9.67-10a2.84,2.84,0,0,0-1.59-4.79l-13.25-2L258.56,1.63A2.79,2.79,0,0,0,256,0V41.19l11.62,6.45A2.82,2.82,0,0,0,271.77,44.7Z"
+          />
+        </svg>
+        <figcaption class="score"><slot></slot></figcaption>
+      </figure>
+    </template>
+
     <template id="loading-bar">
       <div class="loading-bar">
         <span class="blind">로딩중</span>
@@ -66,10 +104,12 @@
     </template>
 
     <template id="anime-card">
-      <a href="#none" class="card">
+      <a class="card" target="_blank">
         <figure>
           <img />
-          <figcaption><slot></slot></figcaption>
+          <div class="right">
+            <figcaption><slot></slot></figcaption>
+          </div>
         </figure>
       </a>
     </template>
