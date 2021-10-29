@@ -69,6 +69,17 @@ customElements.define(
           object-fit: cover;
           margin-right: 1.5rem;
           border-radius: 0.25rem;
+          background-image: linear-gradient(90deg, var(--depth-300), var(--depth-400), var(--depth-300));
+          background-size: 300% 300%;
+          animation: 0.8s ease-out infinite img-loading-animation; 
+        }
+        @keyframes img-loading-animation {
+          0% {
+            background-position: 200% 200%; 
+          }
+          80% {
+            background-position: 0% 0%; 
+          }
         }
         figcaption {
           font-size: 1.8rem;

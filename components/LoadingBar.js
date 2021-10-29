@@ -22,9 +22,10 @@ customElements.define(
           width: 100%;
           height: 100%;
           background-color: var(--theme-color);
-          animation: 1s linear infinite loading-animation;
+          animation: 1s linear infinite page-loading-animation;
+          transform-origin: top left;
         }
-        @keyframes loading-animation {
+        @keyframes page-loading-animation {
           0% {
             transform: translateX(-100%) scaleX(1);
           }

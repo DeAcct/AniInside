@@ -192,6 +192,17 @@ import{g,a as q}from"./vendor.6005cee6.js";const T=function(){const t=document.c
           object-fit: cover;
           margin-right: 1.5rem;
           border-radius: 0.25rem;
+          background-image: linear-gradient(90deg, var(--depth-300), var(--depth-400), var(--depth-300));
+          background-size: 300% 300%;
+          animation: 0.8s ease-out infinite img-loading-animation; 
+        }
+        @keyframes img-loading-animation {
+          0% {
+            background-position: 200% 200%; 
+          }
+          80% {
+            background-position: 0% 0%; 
+          }
         }
         figcaption {
           font-size: 1.8rem;
@@ -216,7 +227,7 @@ import{g,a as q}from"./vendor.6005cee6.js";const T=function(){const t=document.c
             aspect-ratio: 7/10;
           }
         }
-      `;const n=this.attachShadow({mode:"open"});n.appendChild(e),n.appendChild(t.cloneNode(!0))}});const A=(o,t,e)=>{fetch(t).then(n=>n.blob()).then(n=>{o.setAttribute("src",URL.createObjectURL(n))}),o.setAttribute("alt",e)},I=(o,t,e,n,a)=>{const r=document.createElement("anime-card"),s=r.shadowRoot.querySelector("img");A(s,e,`${t} \uC378\uB124\uC77C`),r.shadowRoot.querySelector("a").setAttribute("href",n),r.appendChild(document.createTextNode(t));const d=r.shadowRoot.querySelector(".right");if(a)B(d,a);else{const l=document.createElement("span");l.className="score",l.appendChild(document.createTextNode("\uC810\uC218 \uC5C6\uC74C")),d.appendChild(l)}return o.appendChild(r),r};customElements.define("loading-bar",class extends HTMLElement{constructor(){super();let t=document.getElementById("loading-bar").content;const e=document.createElement("style");e.textContent=`
+      `;const n=this.attachShadow({mode:"open"});n.appendChild(e),n.appendChild(t.cloneNode(!0))}});const A=(o,t,e)=>{fetch(t).then(n=>n.blob()).then(n=>{o.setAttribute("src",URL.createObjectURL(n))}),o.setAttribute("alt",e)},I=(o,t,e,n,a)=>{const r=document.createElement("anime-card"),s=r.shadowRoot.querySelector("img");A(s,e,`${t} \uC378\uB124\uC77C`),r.shadowRoot.querySelector("a").setAttribute("href",n),r.appendChild(document.createTextNode(t));const l=r.shadowRoot.querySelector(".right");if(a)B(l,a);else{const d=document.createElement("span");d.className="score",d.appendChild(document.createTextNode("\uC810\uC218 \uC5C6\uC74C")),l.appendChild(d)}return o.appendChild(r),r};customElements.define("loading-bar",class extends HTMLElement{constructor(){super();let t=document.getElementById("loading-bar").content;const e=document.createElement("style");e.textContent=`
         .loading-bar {
           position: fixed;
           top: 0;
@@ -231,9 +242,10 @@ import{g,a as q}from"./vendor.6005cee6.js";const T=function(){const t=document.c
           width: 100%;
           height: 100%;
           background-color: var(--theme-color);
-          animation: 1s linear infinite loading-animation;
+          animation: 1s linear infinite page-loading-animation;
+          transform-origin: top left;
         }
-        @keyframes loading-animation {
+        @keyframes page-loading-animation {
           0% {
             transform: translateX(-100%) scaleX(1);
           }
@@ -258,7 +270,7 @@ import{g,a as q}from"./vendor.6005cee6.js";const T=function(){const t=document.c
           font-weight: 700;
           color: inherit;
         }
-      `;const n=this.attachShadow({mode:"open"});n.appendChild(e),n.appendChild(t.cloneNode(!0))}});const $=(o,t)=>{const e=document.createElement("styled-button");return e.appendChild(document.createTextNode(t)),o.appendChild(e),e};customElements.define("error-ui",class extends HTMLElement{constructor(){super();let t=document.getElementById("error-ui").content;const e=document.createElement("style");e.textContent=`
+      `;const n=this.attachShadow({mode:"open"});n.appendChild(e),n.appendChild(t.cloneNode(!0))}});const z=(o,t)=>{const e=document.createElement("styled-button");return e.appendChild(document.createTextNode(t)),o.appendChild(e),e};customElements.define("error-ui",class extends HTMLElement{constructor(){super();let t=document.getElementById("error-ui").content;const e=document.createElement("style");e.textContent=`
         *{
           margin: 0;
           padding: 0;
@@ -273,4 +285,4 @@ import{g,a as q}from"./vendor.6005cee6.js";const T=function(){const t=document.c
           font-size: 2rem;
           margin-bottom: 1rem;
         }
-    `;const n=this.attachShadow({mode:"open"});n.appendChild(e),n.appendChild(t.cloneNode(!0))}});const z=o=>{const t=document.createElement("error-ui");return $(t.shadowRoot,"\uC0C8\uB85C\uACE0\uCE68").addEventListener("click",()=>{location.reload()}),o.appendChild(t),t},f=document.querySelector(".main"),m=document.querySelector(".day-selector"),j=document.querySelector(".partial"),X=document.querySelector(".fixed-area .top");M();const y=R(X,"\uB2E4\uD06C \uBAA8\uB4DC"),b=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light",u=localStorage.getItem("theme"),i=y.shadowRoot.querySelector(".real-checkbox");console.log(b,u,i.checked);const x=()=>u||b;console.log(x());const E=()=>{document.documentElement.dataset.theme="dark",localStorage.setItem("theme","dark"),i.checked=!0},w=()=>{document.documentElement.dataset.theme="light",localStorage.setItem("theme","light"),i.checked=!1};x()==="dark"?E():w();y.addEventListener("click",()=>{i.checked?w():E()});const C=[{request:"sunday",day:"\uC77C"},{request:"monday",day:"\uC6D4"},{request:"tuesday",day:"\uD654"},{request:"wednesday",day:"\uC218"},{request:"thursday",day:"\uBAA9"},{request:"friday",day:"\uAE08"},{request:"saturday",day:"\uD1A0"}],k=new Date,p=k.getDay(),H=()=>{switch(k.getMonth()+1){case 1:case 2:case 3:return"1";case 4:case 5:case 6:return"2";case 7:case 8:case 9:return"3";default:return"4"}};j.textContent=`${H()}\uBD84\uAE30`;C.forEach(o=>{L(m,o.day)});const h=m.querySelectorAll("day-selector-button"),O=async()=>{try{return(await q.get("https://api.jikan.moe/v3/schedule")).data}catch{z(f)}};O().then(o=>{let t=h[p];h.forEach((n,a)=>{n.addEventListener("click",r=>{scroll({top:0}),h.forEach(s=>{s.setAttribute("aria-selected",!1),s.classList.remove("selected")}),r.currentTarget.setAttribute("aria-selected",!0),r.currentTarget.classList.add("selected"),r.currentTarget.blur(),t!==r.currentTarget&&(S(o,a),t=r.currentTarget)})});const e=m.querySelectorAll("day-selector-button")[p];e.classList.add("selected"),e.setAttribute("aria-selected",!0),S(o,p)}).then(()=>{document.querySelector("loading-bar").remove()});const S=(o,t)=>{let e=document.querySelector(".day-section");e&&g.to(e,{y:10,opacity:0,duration:.15,ease:"expo.inOut",onComplete:()=>{e.remove(),e=document.querySelector(".day-section"),g.from(e,{y:-10,opacity:0,ease:"expo.inOut"})}});const n=C[t],a=document.createElement("section");a.className="day-section";const r=document.createElement("h2");r.className="blind",r.appendChild(document.createTextNode("\uC560\uB2C8\uBA54\uC774\uC158 \uBAA9\uB85D"));const s=document.createElement("div");s.className="card-wrap",o[n.request].forEach(c=>{const d=c.image_url,l=c.title,v=c.url,N=c.score;I(s,l,d,v,N),a.appendChild(r),a.appendChild(s)}),f.appendChild(a)};
+    `;const n=this.attachShadow({mode:"open"});n.appendChild(e),n.appendChild(t.cloneNode(!0))}});const $=o=>{const t=document.createElement("error-ui");return z(t.shadowRoot,"\uC0C8\uB85C\uACE0\uCE68").addEventListener("click",()=>{location.reload()}),o.appendChild(t),t},f=document.querySelector(".main"),m=document.querySelector(".day-selector"),j=document.querySelector(".partial"),X=document.querySelector(".fixed-area .top");M();const y=R(X,"\uB2E4\uD06C \uBAA8\uB4DC"),b=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light",u=localStorage.getItem("theme"),i=y.shadowRoot.querySelector(".real-checkbox");console.log(b,u,i.checked);const x=()=>u||b;console.log(x());const E=()=>{document.documentElement.dataset.theme="dark",localStorage.setItem("theme","dark"),i.checked=!0},w=()=>{document.documentElement.dataset.theme="light",localStorage.setItem("theme","light"),i.checked=!1};x()==="dark"?E():w();y.addEventListener("click",()=>{i.checked?w():E()});const C=[{request:"sunday",day:"\uC77C"},{request:"monday",day:"\uC6D4"},{request:"tuesday",day:"\uD654"},{request:"wednesday",day:"\uC218"},{request:"thursday",day:"\uBAA9"},{request:"friday",day:"\uAE08"},{request:"saturday",day:"\uD1A0"}],k=new Date,p=k.getDay(),H=()=>{switch(k.getMonth()+1){case 1:case 2:case 3:return"1";case 4:case 5:case 6:return"2";case 7:case 8:case 9:return"3";default:return"4"}};j.textContent=`${H()}\uBD84\uAE30`;C.forEach(o=>{L(m,o.day)});const h=m.querySelectorAll("day-selector-button"),O=async()=>{try{return(await q.get("https://api.jikan.moe/v3/schedule")).data}catch{$(f)}};O().then(o=>{let t=h[p];h.forEach((n,a)=>{n.addEventListener("click",r=>{scroll({top:0}),h.forEach(s=>{s.setAttribute("aria-selected",!1),s.classList.remove("selected")}),r.currentTarget.setAttribute("aria-selected",!0),r.currentTarget.classList.add("selected"),r.currentTarget.blur(),t!==r.currentTarget&&(S(o,a),t=r.currentTarget)})});const e=m.querySelectorAll("day-selector-button")[p];e.classList.add("selected"),e.setAttribute("aria-selected",!0),S(o,p)}).then(()=>{document.querySelector("loading-bar").remove()});const S=(o,t)=>{let e=document.querySelector(".day-section");e&&g.to(e,{y:10,opacity:0,duration:.15,ease:"expo.inOut",onComplete:()=>{e.remove(),e=document.querySelector(".day-section"),g.from(e,{y:-10,opacity:0,ease:"expo.inOut"})}});const n=C[t],a=document.createElement("section");a.className="day-section";const r=document.createElement("h2");r.className="blind",r.appendChild(document.createTextNode("\uC560\uB2C8\uBA54\uC774\uC158 \uBAA9\uB85D"));const s=document.createElement("div");s.className="card-wrap",o[n.request].forEach(c=>{const l=c.image_url,d=c.title,v=c.url,N=c.score;I(s,d,l,v,N),a.appendChild(r),a.appendChild(s)}),f.appendChild(a)};
