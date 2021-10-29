@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview",
-    "https-preview": "serve docs"
+    "serve": "vite preview"
   },
   "devDependencies": {
     "https-localhost": "^4.7.0",

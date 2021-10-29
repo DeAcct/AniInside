@@ -8,14 +8,6 @@ import LoadingBar from "./components/LoadingBar";
 import ErrorUI from "./components/ErrorUI";
 import { gsap } from "gsap";
 
-import { registerSW } from "virtual:pwa-register";
-
-const updateSW = registerSW({
-  onOfflineReady() {
-    console.log("ddd");
-  },
-});
-
 const $main = document.querySelector(".main");
 const $DaySelector = document.querySelector(".day-selector");
 const $partial = document.querySelector(".partial");
