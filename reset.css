@@ -29,6 +29,8 @@
   --depth-800: hsl(261, 30%, 64%);
   --depth-900: hsl(261, 30%, 72%);
   --text-color: hsl(213, 11%, 84%);
+
+  color: #251d35;
 }
 
 html {

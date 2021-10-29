@@ -4,7 +4,51 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>애니인사이드</title>
+
+    <title>애니인사이드 - 요일별 애니 편성표</title>
+    <meta
+      name="description"
+      content="분기마다 실시간으로 업데이트되는 요일별 애니메이션 목록"
+    />
+
+    <meta property="og:title" content="애니인사이드 - 요일별 애니 편성표" />
+    <meta
+      property="og:description"
+      content="분기마다 실시간으로 업데이트되는 요일별 애니메이션 목록"
+    />
+    <meta property="og:title" content="애니인사이드 - 요일별 애니 편성표" />
+    <meta property="og:url" content="https://aniinside.hyse.kr" />
+    <meta
+      property="og:image"
+      content="https://aniinside.hyse.kr/assets/ogImage.jpg"
+    />
+    <meta property="og:type" content="website" />
+
+    <meta property="twitter:card" content="애니인사이드 - 요일별 애니 편성표" />
+    <meta
+      property="twitter:description"
+      content="분기마다 실시간으로 업데이트되는 요일별 애니메이션 목록"
+    />
+    <meta
+      property="twitter:title"
+      content="애니인사이드 - 요일별 애니 편성표"
+    />
+    <meta property="twitter:domain" content="https://aniinside.hyse.kr" />
+    <meta
+      property="twitter:image"
+      content="https://aniinside.hyse.kr/assets/ogImage.jpg"
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="alternate icon"
+      href="/favicon.ico"
+      type="image/png"
+      sizes="16x16"
+    />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="mask-icon" href="/favicon.svg" color="#FFFFFF" />
+    <meta name="theme-color" content="#17ba76" />
   </head>
   <body>
     <div id="app">
@@ -40,6 +84,14 @@
         </p>
       </footer>
     </div>
+
+    <template id="styled-button">
+      <button><slot></slot></button>
+    </template>
+
+    <template id="error-ui">
+      <strong>뭔가 잘못됐어요!</strong>
+    </template>
 
     <template id="star-rating">
       <figure>

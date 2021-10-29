@@ -1,11 +1,20 @@
 import "./style.css";
 import "./reset.css";
 import axios from "axios";
-import DaySelectorBtn from "./components/DaySelectorBtn";
+import DaySelectorButton from "./components/DaySelectorButton";
 import LabelledToggle from "./components/LabelledToggle";
 import AnimeCard from "./components/AnimeCard";
 import LoadingBar from "./components/LoadingBar";
+import ErrorUI from "./components/ErrorUI";
 import { gsap } from "gsap";
+
+import { registerSW } from "virtual:pwa-register";
+
+const updateSW = registerSW({
+  onOfflineReady() {
+    console.log("ddd");
+  },
+});
 
 const $main = document.querySelector(".main");
 const $DaySelector = document.querySelector(".day-selector");
@@ -105,14 +114,20 @@ const year = () => {
 $partial.textContent = `${year()}분기`;
 
 days.forEach((day) => {
-  DaySelectorBtn($DaySelector, day.day);
+  DaySelectorButton($DaySelector, day.day);
 });
 const DaySelectorBtnArr = $DaySelector.querySelectorAll("day-selector-button");
 
 const request = async () => {
   try {
     const response = await axios.get("https://api.jikan.moe/v3/schedule");
-
+    return response.data;
+  } catch (error) {
+    ErrorUI($main);
+  }
+};
+request()
+  .then((data) => {
     let lastClicked = DaySelectorBtnArr[today];
     DaySelectorBtnArr.forEach((DaySelectorBtn, index) => {
       DaySelectorBtn.addEventListener("click", (e) => {
@@ -129,26 +144,24 @@ const request = async () => {
         if (lastClicked === e.currentTarget) {
           return;
         } else {
-          cardUpdate(response.data, index);
+          cardUpdate(data, index);
         }
         lastClicked = e.currentTarget;
       });
     });
+
     const todaySeleted = $DaySelector.querySelectorAll("day-selector-button")[
       today
     ];
     todaySeleted.classList.add("selected");
     todaySeleted.setAttribute("aria-selected", true);
 
-    cardUpdate(response.data, today);
-  } catch (error) {
-    console.error(error);
-  }
-};
-request().then(() => {
-  const $loadingBar = document.querySelector("loading-bar");
-  $loadingBar.remove();
-});
+    cardUpdate(data, today);
+  })
+  .then(() => {
+    const $loadingBar = document.querySelector("loading-bar");
+    $loadingBar.remove();
+  });
 
 const cardUpdate = (target, index) => {
   let $daySection = document.querySelector(".day-section");

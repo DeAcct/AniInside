@@ -64,7 +64,7 @@ customElements.define(
   }
 );
 
-const DaySelectorBtn = (appendIn, slot) => {
+const DaySelectorButton = (appendIn, slot) => {
   const returnElement = document.createElement("day-selector-button");
   returnElement.setAttribute("aria-selected", false);
   returnElement.setAttribute("role", "tab");
@@ -73,4 +73,4 @@ const DaySelectorBtn = (appendIn, slot) => {
   return returnElement;
 };
 
-export default DaySelectorBtn;
+export default DaySelectorButton;
