@@ -7,6 +7,16 @@ import AnimeCard from "./components/AnimeCard";
 import LoadingBar from "./components/LoadingBar";
 import ErrorUI from "./components/ErrorUI";
 import { gsap } from "gsap";
+import { registerSW } from "virtual:pwa-register";
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    console.log("새로고침침 필요");
+  },
+  onOfflineReady() {
+    console.log("설치 준비 완료");
+  },
+});
 
 const $main = document.querySelector(".main");
 const $DaySelector = document.querySelector(".day-selector");
@@ -21,10 +31,8 @@ const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
   : "light";
 const userMode = localStorage.getItem("theme");
 const $realCheckBox = darkmodeToggle.shadowRoot.querySelector(".real-checkbox");
-console.log(systemMode, userMode, $realCheckBox.checked);
 
 const useTheme = () => (userMode ? userMode : systemMode);
-console.log(useTheme());
 
 const enable = () => {
   document.documentElement.dataset.theme = "dark";
