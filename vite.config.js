@@ -14,6 +14,7 @@ export default {
       ],
       manifest: {
         name: "애니인사이드",
+        short_name: "애니인사이드",
         description: "분기마다 실시간으로 업데이트되는 요일별 애니메이션 목록",
         theme_color: "#17ba76",
         icons: [
@@ -23,12 +24,12 @@ export default {
             type: "image/png",
           },
           {
-            src: "assets/pwa-512x512.695d0474.png",
+            src: "assets/pwa-512x512.cd466f14.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "assets/pwa-512x512.695d0474.png",
+            src: "assets/pwa-512x512.cd466f14.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
