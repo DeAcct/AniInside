@@ -1,8 +1,12 @@
+#app {
+  position: relative;
+  min-height: 100vh;
+}
+
 .inner {
-  padding: 12rem var(--inner-padding) 0;
+  padding: 0 var(--inner-padding);
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .fixed-area {
@@ -24,12 +28,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 var(--inner-padding);
 }
 .fixed-area .top .left {
   display: flex;
-  align-items: center;
-  width: 100%;
+  flex-direction: column;
 }
 .page-name {
   margin-right: 1rem;
@@ -57,7 +59,8 @@
 }
 .main {
   width: 100%;
-  margin-bottom: 5rem;
+  padding-bottom: 22rem;
+  padding-top: 13.1rem;
 }
 
 .day-heading {
@@ -75,6 +78,8 @@
 }
 
 .footer {
+  position: absolute;
+  bottom: 0;
   width: 100%;
   padding: 3rem var(--inner-padding);
   background-color: var(--depth-500);
@@ -99,6 +104,10 @@
 }
 
 @media screen and (min-width: 512px) {
+  .main {
+    padding-bottom: 15rem;
+  }
+
   .footer {
     flex-direction: row;
   }
@@ -110,33 +119,39 @@
     border-bottom: 0;
     border-right: 1px solid var(--depth-700);
   }
+}
+@media screen and (min-width: 768px) {
   .card-wrap {
     grid-template-columns: repeat(2, calc((100% - 3rem) / 2));
   }
 }
 @media screen and (min-width: 1080px) {
+  .fixed-area .top .left {
+    flex-direction: row;
+    align-items: center;
+  }
   .page-title {
     font-size: 1.2rem;
   }
   .page-name {
     font-size: 3rem;
   }
-  .fixed-area {
-    border-bottom: 0.1rem solid var(--depth-300);
-  }
   .card-wrap {
     grid-template-columns: repeat(3, calc((100% - 6rem) / 3));
   }
 }
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1366px) {
   .card-wrap {
     grid-template-columns: repeat(4, calc((100% - 9rem) / 4));
   }
 }
 
 @media screen and (min-width: 1400px) {
+  .main {
+    padding-bottom: 23rem;
+  }
   .footer {
-    padding: 5rem calc((100% - 130rem) / 2);
+    padding: 5rem var(--inner-padding);
   }
   .footer .col {
     height: 8rem;

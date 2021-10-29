@@ -13,11 +13,12 @@
 
   --text-color: hsl(210, 29%, 24%);
   --theme-color: hsl(155, 78%, 41%);
+  --star-color: hsl(38, 100%, 50%);
 
   --inner-padding: 3rem;
 }
 
-[data-dark-mode="dark"] {
+[data-theme="dark"] {
   --depth-100: hsl(261, 30%, 8%);
   --depth-200: hsl(261, 30%, 16%);
   --depth-300: hsl(261, 30%, 24%);
@@ -77,6 +78,11 @@ button {
 @media screen and (min-width: 769px) {
   button {
     cursor: pointer;
+  }
+}
+@media screen and (min-width: 1400px) {
+  :root {
+    --inner-padding: calc((100% - 130rem) / 2);
   }
 }
 
