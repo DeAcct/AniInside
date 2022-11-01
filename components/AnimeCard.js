@@ -112,20 +112,29 @@ customElements.define(
   }
 );
 
-const useImage = (dom, source, alt) => {
-  fetch(source)
-    .then((response) => response.blob())
-    .then((blob) => {
-      dom.setAttribute("src", URL.createObjectURL(blob));
-    });
-  dom.setAttribute("alt", alt);
+const useImage = (dom, imgSrc, alt) => {
+  dom.fallbackElement.setAttribute("alt", alt);
+  dom.webpElement.setAttribute("srcset", imgSrc.webp);
+  dom.fallbackElement.setAttribute("src", imgSrc.jpg);
 };
+
+/**
+ *
+ * @param {HTMLElement} appendIn
+ * @param {string} slot
+ * @param {{webp:string, jpg:string}} imgSrc
+ * @param {string} linkTo
+ * @param {number} starRating
+ * @returns
+ */
 
 const AnimeCard = (appendIn, slot, imgSrc, linkTo, starRating) => {
   const returnElement = document.createElement("anime-card");
 
-  const imgElement = returnElement.shadowRoot.querySelector("img");
-  useImage(imgElement, imgSrc, `${slot} 썸네일`);
+  const webpElement = returnElement.shadowRoot.querySelector("source");
+  const fallbackElement = returnElement.shadowRoot.querySelector("img");
+  console.log(imgSrc);
+  useImage({ webpElement, fallbackElement }, imgSrc, `${slot} 썸네일`);
 
   const anchorElement = returnElement.shadowRoot.querySelector("a");
   anchorElement.setAttribute("href", linkTo);

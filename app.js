@@ -23,8 +23,6 @@ const $DaySelector = document.querySelector(".day-selector");
 const $partial = document.querySelector(".partial");
 const $FixedTop = document.querySelector(".fixed-area .top");
 
-LoadingBar();
-
 const darkmodeToggle = LabelledToggle($FixedTop, "다크 모드");
 const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
   ? "dark"
@@ -91,7 +89,6 @@ const days = [
 ];
 
 const current = new Date();
-const today = current.getDay();
 const year = () => {
   const month = current.getMonth() + 1;
   switch (month) {
@@ -113,57 +110,34 @@ const year = () => {
 };
 $partial.textContent = `${year()}분기`;
 
-days.forEach((day) => {
-  DaySelectorButton($DaySelector, day.day);
-});
-const DaySelectorBtnArr = $DaySelector.querySelectorAll("day-selector-button");
+const today = days[current.getDay()];
 
-const request = async () => {
+const request = async (day) => {
+  LoadingBar();
+  const $loadingBar = document.querySelector("loading-bar");
   try {
-    const response = await axios.get("https://api.jikan.moe/v3/schedule");
+    const response = await axios.get(
+      `https://api.jikan.moe/v4/schedules?filter=${day}`
+    );
+    $loadingBar.remove();
     return response.data;
   } catch (error) {
+    $loadingBar.remove();
     ErrorUI($main);
   }
 };
-request()
-  .then((data) => {
-    let lastClicked = DaySelectorBtnArr[today];
-    DaySelectorBtnArr.forEach((DaySelectorBtn, index) => {
-      DaySelectorBtn.addEventListener("click", (e) => {
-        scroll({
-          top: 0,
-        });
-        DaySelectorBtnArr.forEach((DaySelectorBtn) => {
-          DaySelectorBtn.setAttribute("aria-selected", false);
-          DaySelectorBtn.classList.remove("selected");
-        });
-        e.currentTarget.setAttribute("aria-selected", true);
-        e.currentTarget.classList.add("selected");
-        e.currentTarget.blur();
-        if (lastClicked === e.currentTarget) {
-          return;
-        } else {
-          cardUpdate(data, index);
-        }
-        lastClicked = e.currentTarget;
-      });
-    });
+const cardUpdate = async (day) => {
+  const { data: animes } = await request(day);
+  console.log(animes);
 
-    const todaySeleted = $DaySelector.querySelectorAll("day-selector-button")[
-      today
-    ];
-    todaySeleted.classList.add("selected");
-    todaySeleted.setAttribute("aria-selected", true);
+  const daySection = document.createElement("section");
+  daySection.className = "day-section";
+  const dayHeading = document.createElement("h2");
+  dayHeading.className = "blind";
+  dayHeading.appendChild(document.createTextNode("애니메이션 목록"));
+  const cardWrap = document.createElement("div");
+  cardWrap.className = "card-wrap";
 
-    cardUpdate(data, today);
-  })
-  .then(() => {
-    const $loadingBar = document.querySelector("loading-bar");
-    $loadingBar.remove();
-  });
-
-const cardUpdate = (target, index) => {
   let $daySection = document.querySelector(".day-section");
   if ($daySection) {
     gsap.to($daySection, {
@@ -183,25 +157,126 @@ const cardUpdate = (target, index) => {
     });
   }
 
-  const selected = days[index];
-  const daySection = document.createElement("section");
-  daySection.className = "day-section";
-  const dayHeading = document.createElement("h2");
-  dayHeading.className = "blind";
-  dayHeading.appendChild(document.createTextNode("애니메이션 목록"));
-  const cardWrap = document.createElement("div");
-  cardWrap.className = "card-wrap";
-
-  target[selected.request].forEach((day) => {
-    const imgURL = day.image_url;
-    const title = day.title;
-    const link = day.url;
-    const starRating = day.score;
+  animes.forEach((anime) => {
+    const imgURL = anime.images;
+    const title = anime.title;
+    const link = anime.url;
+    const starRating = anime.score;
     AnimeCard(cardWrap, title, imgURL, link, starRating);
 
     daySection.appendChild(dayHeading);
     daySection.appendChild(cardWrap);
   });
-
   $main.appendChild(daySection);
+  //animes.forEach();
 };
+const init = async () => {
+  days.forEach((day) => {
+    const element = DaySelectorButton($DaySelector, day.day, day.request, {
+      eventTarget: "click",
+      async eventCallback() {
+        element.setAttribute("aria-selected", false);
+        await daySelectorChange(this);
+      },
+    });
+    if (element.dataset.key === today.request) {
+      element.setAttribute("aria-selected", true);
+    }
+  });
+  await cardUpdate(today.request);
+};
+init();
+
+const DaySelectorBtnArr = $DaySelector.querySelectorAll("day-selector-button");
+const daySelectorChange = async (target) => {
+  DaySelectorBtnArr.forEach((element) => {
+    element.setAttribute("aria-selected", false);
+    target.setAttribute("aria-selected", true);
+  });
+  await cardUpdate(target.dataset.key);
+};
+
+// .then((data) => {
+//   console.log(data);
+//   let lastClicked = DaySelectorBtnArr[today];
+//   DaySelectorBtnArr.forEach((DaySelectorBtn, index) => {
+//     DaySelectorBtn.addEventListener("click", (e) => {
+//       scroll({
+//         top: 0,
+//       });
+//       DaySelectorBtnArr.forEach((DaySelectorBtn) => {
+//         DaySelectorBtn.setAttribute("aria-selected", false);
+//         DaySelectorBtn.classList.remove("selected");
+//       });
+//       e.currentTarget.setAttribute("aria-selected", true);
+//       e.currentTarget.classList.add("selected");
+//       e.currentTarget.blur();
+//       if (lastClicked === e.currentTarget) {
+//         return;
+//       }
+//       cardUpdate(data, index);
+//       lastClicked = e.currentTarget;
+//     });
+//   });
+
+//   const todaySeleted = $DaySelector.querySelectorAll("day-selector-button")[
+//     today
+//   ];
+//   todaySeleted.classList.add("selected");
+//   todaySeleted.setAttribute("aria-selected", true);
+
+//   cardUpdate(data, today);
+// })
+// .then(() => {
+//   const $loadingBar = document.querySelector("loading-bar");
+//   $loadingBar.remove();
+// });
+
+// const render = async () => {
+//   const { data } = await request(today.request);
+//   console.log(data);
+
+//   let $daySection = document.querySelector(".day-section");
+//   if ($daySection) {
+//     gsap.to($daySection, {
+//       y: 10,
+//       opacity: 0,
+//       duration: 0.15,
+//       ease: "expo.inOut",
+//       onComplete: () => {
+//         $daySection.remove();
+//         $daySection = document.querySelector(".day-section");
+//         gsap.from($daySection, {
+//           y: -10,
+//           opacity: 0,
+//           ease: "expo.inOut",
+//         });
+//       },
+//     });
+//   }
+// };
+// render();
+
+// const cardUpdate = async (target, index) => {
+//   const selected = days[index];
+//   const daySection = document.createElement("section");
+//   daySection.className = "day-section";
+//   const dayHeading = document.createElement("h2");
+//   dayHeading.className = "blind";
+//   dayHeading.appendChild(document.createTextNode("애니메이션 목록"));
+//   const cardWrap = document.createElement("div");
+//   cardWrap.className = "card-wrap";
+
+//   target[selected.request].forEach((day) => {
+//     const imgURL = day.image_url;
+//     const title = day.title;
+//     const link = day.url;
+//     const starRating = day.score;
+//     AnimeCard(cardWrap, title, imgURL, link, starRating);
+
+//     daySection.appendChild(dayHeading);
+//     daySection.appendChild(cardWrap);
+//   });
+
+//   $main.appendChild(daySection);
+// };

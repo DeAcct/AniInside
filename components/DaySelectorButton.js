@@ -48,7 +48,7 @@ customElements.define(
         opacity: 1;
         background-color: var(--depth-200);
       }
-      :host(.selected) button {
+      :host([aria-selected="true"]) button {
         border-bottom-color: var(--theme-color);
       }
       @media screen and (min-width: 769px) {
@@ -64,12 +64,21 @@ customElements.define(
   }
 );
 
-const DaySelectorButton = (appendIn, slot) => {
+const DaySelectorButton = (
+  appendIn,
+  slot,
+  key,
+  { eventTarget, eventCallback }
+) => {
   const returnElement = document.createElement("day-selector-button");
   returnElement.setAttribute("aria-selected", false);
   returnElement.setAttribute("role", "tab");
   returnElement.appendChild(document.createTextNode(slot));
   appendIn.appendChild(returnElement);
+  returnElement.dataset.key = key;
+  if (eventTarget) {
+    returnElement.addEventListener(eventTarget, eventCallback);
+  }
   return returnElement;
 };
 
