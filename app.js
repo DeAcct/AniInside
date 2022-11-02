@@ -6,202 +6,287 @@ import LabelledToggle from "./components/LabelledToggle";
 import AnimeCard from "./components/AnimeCard";
 import LoadingBar from "./components/LoadingBar";
 import ErrorUI from "./components/ErrorUI";
-import { gsap } from "gsap";
+//import { gsap } from "gsap";
 import { registerSW } from "virtual:pwa-register";
 
 const updateSW = registerSW({
   onNeedRefresh() {
-    console.log("새로고침침 필요");
+    console.log("새로고침 필요");
   },
   onOfflineReady() {
     console.log("설치 준비 완료");
   },
 });
 
-const $main = document.querySelector(".main");
-const $DaySelector = document.querySelector(".day-selector");
-const $partial = document.querySelector(".partial");
-const $FixedTop = document.querySelector(".fixed-area .top");
-
-LoadingBar();
-
-const darkmodeToggle = LabelledToggle($FixedTop, "다크 모드");
-const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
-  ? "dark"
-  : "light";
-const userMode = localStorage.getItem("theme");
-const $realCheckBox = darkmodeToggle.shadowRoot.querySelector(".real-checkbox");
-
-const useTheme = () => (userMode ? userMode : systemMode);
-
-const enable = () => {
-  document.documentElement.dataset.theme = "dark";
-  localStorage.setItem("theme", "dark");
-  $realCheckBox.checked = true;
-};
-const disable = () => {
-  document.documentElement.dataset.theme = "light";
-  localStorage.setItem("theme", "light");
-  $realCheckBox.checked = false;
-};
-
-if (useTheme() === "dark") {
-  enable();
-} else {
-  disable();
-}
-
-darkmodeToggle.addEventListener("click", () => {
-  if ($realCheckBox.checked) {
-    disable();
-  } else {
-    enable();
-  }
-});
-
-const days = [
+const DAY_DATA = [
   {
-    request: "sunday",
+    key: "sunday",
     day: "일",
   },
   {
-    request: "monday",
+    key: "monday",
     day: "월",
   },
   {
-    request: "tuesday",
+    key: "tuesday",
     day: "화",
   },
   {
-    request: "wednesday",
+    key: "wednesday",
     day: "수",
   },
   {
-    request: "thursday",
+    key: "thursday",
     day: "목",
   },
   {
-    request: "friday",
+    key: "friday",
     day: "금",
   },
   {
-    request: "saturday",
+    key: "saturday",
     day: "토",
   },
 ];
-
-const current = new Date();
-const today = current.getDay();
-const year = () => {
-  const month = current.getMonth() + 1;
-  switch (month) {
-    case 1:
-    case 2:
-    case 3:
-      return "1";
-    case 4:
-    case 5:
-    case 6:
-      return "2";
-    case 7:
-    case 8:
-    case 9:
-      return "3";
-    default:
-      return "4";
+class App {
+  constructor() {
+    this.$DaySelectorButtonArr = undefined;
   }
-};
-$partial.textContent = `${year()}분기`;
-
-days.forEach((day) => {
-  DaySelectorButton($DaySelector, day.day);
-});
-const DaySelectorBtnArr = $DaySelector.querySelectorAll("day-selector-button");
-
-const request = async () => {
-  try {
-    const response = await axios.get("https://api.jikan.moe/v3/schedule");
-    return response.data;
-  } catch (error) {
-    ErrorUI($main);
+  setup() {
+    this.parseDOM();
   }
-};
-request()
-  .then((data) => {
-    let lastClicked = DaySelectorBtnArr[today];
-    DaySelectorBtnArr.forEach((DaySelectorBtn, index) => {
-      DaySelectorBtn.addEventListener("click", (e) => {
-        scroll({
-          top: 0,
-        });
-        DaySelectorBtnArr.forEach((DaySelectorBtn) => {
-          DaySelectorBtn.setAttribute("aria-selected", false);
-          DaySelectorBtn.classList.remove("selected");
-        });
-        e.currentTarget.setAttribute("aria-selected", true);
-        e.currentTarget.classList.add("selected");
-        e.currentTarget.blur();
-        if (lastClicked === e.currentTarget) {
-          return;
-        } else {
-          cardUpdate(data, index);
-        }
-        lastClicked = e.currentTarget;
+  parseDOM() {
+    this.$AnimeMountPosition = document.querySelector(".main");
+    this.$DaySelector = document.querySelector(".day-selector");
+    this.$Season = document.querySelector(".season");
+    this.$FixedTop = document.querySelector(".fixed-area .top");
+  }
+  inject() {
+    this.mountDaySelector();
+  }
+  mountDaySelector() {
+    DAY_DATA.forEach((day) => {
+      DaySelectorButton(this.$DaySelector, day.day, day.key, {
+        eventType: "click",
+        eventCallback: (e) => {
+          this.setDaySelector(e.currentTarget.dataset.key);
+        },
       });
     });
-
-    const todaySeleted = $DaySelector.querySelectorAll("day-selector-button")[
-      today
-    ];
-    todaySeleted.classList.add("selected");
-    todaySeleted.setAttribute("aria-selected", true);
-
-    cardUpdate(data, today);
-  })
-  .then(() => {
-    const $loadingBar = document.querySelector("loading-bar");
-    $loadingBar.remove();
-  });
-
-const cardUpdate = (target, index) => {
-  let $daySection = document.querySelector(".day-section");
-  if ($daySection) {
-    gsap.to($daySection, {
-      y: 10,
-      opacity: 0,
-      duration: 0.15,
-      ease: "expo.inOut",
-      onComplete: () => {
-        $daySection.remove();
-        $daySection = document.querySelector(".day-section");
-        gsap.from($daySection, {
-          y: -10,
-          opacity: 0,
-          ease: "expo.inOut",
-        });
-      },
+    this.$DaySelectorButtonArr = this.$DaySelector.querySelectorAll(
+      "day-selector-button"
+    );
+    this.setDaySelector(this.today.key);
+  }
+  setDaySelector(day) {
+    this.$DaySelectorButtonArr.forEach((element) => {
+      element.setAttribute("aria-selected", false);
+      if (element.dataset.key === day) {
+        element.setAttribute("aria-selected", true);
+      }
     });
   }
+  get today() {
+    const today = new Date().getDay();
+    return DAY_DATA[today];
+  }
+  get season() {
+    const month = current.getMonth() + 1;
+    switch (month) {
+      case 1:
+      case 2:
+      case 3:
+        return "1";
+      case 4:
+      case 5:
+      case 6:
+        return "2";
+      case 7:
+      case 8:
+      case 9:
+        return "3";
+      default:
+        return "4";
+    }
+  }
+  //요첮기능 추가
+}
+const app = new App();
+app.setup();
+app.inject();
 
-  const selected = days[index];
-  const daySection = document.createElement("section");
-  daySection.className = "day-section";
-  const dayHeading = document.createElement("h2");
-  dayHeading.className = "blind";
-  dayHeading.appendChild(document.createTextNode("애니메이션 목록"));
-  const cardWrap = document.createElement("div");
-  cardWrap.className = "card-wrap";
+// const $main = document.querySelector(".main");
+// const $DaySelector = document.querySelector(".day-selector");
+// const $partial = document.querySelector(".partial");
+// const $FixedTop = document.querySelector(".fixed-area .top");
 
-  target[selected.request].forEach((day) => {
-    const imgURL = day.image_url;
-    const title = day.title;
-    const link = day.url;
-    const starRating = day.score;
-    AnimeCard(cardWrap, title, imgURL, link, starRating);
+// LoadingBar();
 
-    daySection.appendChild(dayHeading);
-    daySection.appendChild(cardWrap);
-  });
+// const darkmodeToggle = LabelledToggle($FixedTop, "다크 모드");
+// const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
+//   ? "dark"
+//   : "light";
+// const userMode = localStorage.getItem("theme");
+// const $realCheckBox = darkmodeToggle.shadowRoot.querySelector(".real-checkbox");
 
-  $main.appendChild(daySection);
-};
+// const useTheme = () => (userMode ? userMode : systemMode);
+
+// const enable = () => {
+//   document.documentElement.dataset.theme = "dark";
+//   localStorage.setItem("theme", "dark");
+//   $realCheckBox.checked = true;
+// };
+// const disable = () => {
+//   document.documentElement.dataset.theme = "light";
+//   localStorage.setItem("theme", "light");
+//   $realCheckBox.checked = false;
+// };
+
+// if (useTheme() === "dark") {
+//   enable();
+// } else {
+//   disable();
+// }
+
+// darkmodeToggle.addEventListener("click", () => {
+//   if ($realCheckBox.checked) {
+//     disable();
+//   } else {
+//     enable();
+//   }
+// });
+
+// const days = [
+//   {
+//     request: "sunday",
+//     day: "일",
+//   },
+//   {
+//     request: "monday",
+//     day: "월",
+//   },
+//   {
+//     request: "tuesday",
+//     day: "화",
+//   },
+//   {
+//     request: "wednesday",
+//     day: "수",
+//   },
+//   {
+//     request: "thursday",
+//     day: "목",
+//   },
+//   {
+//     request: "friday",
+//     day: "금",
+//   },
+//   {
+//     request: "saturday",
+//     day: "토",
+//   },
+// ];
+
+// const current = new Date();
+// const today = current.getDay();
+// const year = () => {
+
+// };
+// $partial.textContent = `${year()}분기`;
+
+// days.forEach((day) => {
+//   DaySelectorButton($DaySelector, day.day);
+// });
+// const DaySelectorBtnArr = $DaySelector.querySelectorAll("day-selector-button");
+
+// const request = async () => {
+//   try {
+//     const response = await axios.get(
+//       "https://api.jikan.moe/v4/schedules?filter=monday"
+//     );
+//     console.log(response.data.data);
+//     return response.data;
+//   } catch (error) {
+//     ErrorUI($main);
+//   }
+// };
+
+// const onMounted = request();
+//   .then((data) => {
+//     let lastClicked = DaySelectorBtnArr[today];
+//     DaySelectorBtnArr.forEach((DaySelectorBtn, index) => {
+//       DaySelectorBtn.addEventListener("click", (e) => {
+//         scroll({
+//           top: 0,
+//         });
+//         DaySelectorBtnArr.forEach((DaySelectorBtn) => {
+//           DaySelectorBtn.setAttribute("aria-selected", false);
+//           DaySelectorBtn.classList.remove("selected");
+//         });
+//         e.currentTarget.setAttribute("aria-selected", true);
+//         e.currentTarget.classList.add("selected");
+//         e.currentTarget.blur();
+//         if (lastClicked === e.currentTarget) {
+//           return;
+//         } else {
+//           cardUpdate(data, index);
+//         }
+//         lastClicked = e.currentTarget;
+//       });
+//     });
+
+//     const todaySeleted = $DaySelector.querySelectorAll("day-selector-button")[
+//       today
+//     ];
+//     todaySeleted.classList.add("selected");
+//     todaySeleted.setAttribute("aria-selected", true);
+
+//     cardUpdate(data, today);
+//   })
+//   .then(() => {
+//     const $loadingBar = document.querySelector("loading-bar");
+//     $loadingBar.remove();
+//   });
+
+// const cardUpdate = (target, index) => {
+//   let $daySection = document.querySelector(".day-section");
+//   if ($daySection) {
+//     gsap.to($daySection, {
+//       y: 10,
+//       opacity: 0,
+//       duration: 0.15,
+//       ease: "expo.inOut",
+//       onComplete: () => {
+//         $daySection.remove();
+//         $daySection = document.querySelector(".day-section");
+//         gsap.from($daySection, {
+//           y: -10,
+//           opacity: 0,
+//           ease: "expo.inOut",
+//         });
+//       },
+//     });
+//   }
+
+//   const selected = days[index];
+//   const daySection = document.createElement("section");
+//   daySection.className = "day-section";
+//   const dayHeading = document.createElement("h2");
+//   dayHeading.className = "blind";
+//   dayHeading.appendChild(document.createTextNode("애니메이션 목록"));
+//   const cardWrap = document.createElement("div");
+//   cardWrap.className = "card-wrap";
+
+//   target[selected.request].forEach((day) => {
+//     const imgURL = day.image_url;
+//     const title = day.title;
+//     const link = day.url;
+//     const starRating = day.score;
+//     AnimeCard(cardWrap, title, imgURL, link, starRating);
+
+//     daySection.appendChild(dayHeading);
+//     daySection.appendChild(cardWrap);
+//   });
+
+//   $main.appendChild(daySection);
+// };
