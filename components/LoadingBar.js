@@ -49,6 +49,7 @@ const LoadingBar = () => {
 
   const returnElement = document.createElement("loading-bar");
   $app.prepend(returnElement);
+  return returnElement;
 };
 
 export default LoadingBar;

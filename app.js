@@ -51,6 +51,9 @@ const DAY_DATA = [
 class App {
   constructor() {
     this.$DaySelectorButtonArr = undefined;
+    this.selectedDay = this.today;
+    this.sfwMode = false;
+    this.kidsMode = false;
   }
   setup() {
     this.parseDOM();
@@ -61,37 +64,63 @@ class App {
     this.$Season = document.querySelector(".season");
     this.$FixedTop = document.querySelector(".fixed-area .top");
   }
-  inject() {
+  async inject() {
+    this.$Season.textContent = `${this.season}분기 애니 목록`;
     this.mountDaySelector();
+    await this.setAnimeCards();
   }
   mountDaySelector() {
     DAY_DATA.forEach((day) => {
       DaySelectorButton(this.$DaySelector, day.day, day.key, {
         eventType: "click",
-        eventCallback: (e) => {
+        eventCallback: async (e) => {
+          if (e.currentTarget.getAttribute("aria-selected") === "true") {
+            return;
+          }
           this.setDaySelector(e.currentTarget.dataset.key);
+          await this.setAnimeCards();
         },
       });
     });
     this.$DaySelectorButtonArr = this.$DaySelector.querySelectorAll(
       "day-selector-button"
     );
-    this.setDaySelector(this.today.key);
+    this.setDaySelector(this.selectedDay.key);
   }
   setDaySelector(day) {
     this.$DaySelectorButtonArr.forEach((element) => {
-      element.setAttribute("aria-selected", false);
-      if (element.dataset.key === day) {
-        element.setAttribute("aria-selected", true);
-      }
+      element.setAttribute("aria-selected", element.dataset.key === day);
     });
+  }
+  async setAnimeCards() {
+    const animes = await this.requestAnimeData(this.selectedDay.key);
+    const daySection = document.createElement("section");
+    daySection.className = "day-section";
+    const dayHeading = document.createElement("h2");
+    dayHeading.className = "blind";
+    dayHeading.appendChild(document.createTextNode("애니메이션 목록"));
+    const cardWrap = document.createElement("div");
+    cardWrap.className = "card-wrap";
+    animes.forEach((anime) => {
+      AnimeCard(
+        cardWrap,
+        anime.title,
+        anime.imgURL,
+        anime.url,
+        anime.starRating
+      );
+      console.log(anime);
+      daySection.appendChild(dayHeading);
+      daySection.appendChild(cardWrap);
+    });
+    this.$AnimeMountPosition.appendChild(daySection);
   }
   get today() {
     const today = new Date().getDay();
     return DAY_DATA[today];
   }
   get season() {
-    const month = current.getMonth() + 1;
+    const month = new Date().getMonth() + 1;
     switch (month) {
       case 1:
       case 2:
@@ -107,6 +136,22 @@ class App {
         return "3";
       default:
         return "4";
+    }
+  }
+  async requestAnimeData(day) {
+    const $loadingBar = LoadingBar();
+    try {
+      const { data: animeData } = await axios(
+        `https://api.jikan.moe/v4/schedules?filter=${day}&sfw=${this.sfwMode}${
+          this.kidsMode ? "&kids=true" : ""
+        }`
+      );
+      $loadingBar.remove();
+      console.log($loadingBar);
+      return animeData.data;
+    } catch {
+      $loadingBar.remove();
+      ErrorUI(this.$AnimeMountPosition);
     }
   }
   //요첮기능 추가

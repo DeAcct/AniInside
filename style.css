@@ -38,8 +38,9 @@
   font-size: 2rem;
   font-weight: 900;
 }
-.sub-name {
+.season {
   font-size: 1.2rem;
+  font-weight: 500;
 }
 .day-selector {
   display: flex;

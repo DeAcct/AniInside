@@ -67,6 +67,7 @@ customElements.define(
           width: 10rem;
           height: calc(10rem / 7 * 10);
           object-fit: cover;
+          flex-shrink: 0;
           margin-right: 1.5rem;
           border-radius: 0.25rem;
           background-image: linear-gradient(90deg, var(--depth-300), var(--depth-400), var(--depth-300));
@@ -90,7 +91,6 @@ customElements.define(
           a {
             text-decoration: none;
             color: inherit;
-            cursor: pointer;
           }
           figure{
             justify-content: space-between;
@@ -102,6 +102,11 @@ customElements.define(
             width: 100%;
             height: auto;
             aspect-ratio: 7/10;
+          }
+        }
+        @media screen and (hover:hover) and (pointer:fine){
+          a{
+            cursor:pointer;
           }
         }
       `;
