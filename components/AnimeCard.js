@@ -126,6 +126,7 @@ customElements.define(
   }
 );
 
+<<<<<<< HEAD
 const useImage = (dom, source, alt) => {
   console.log(source, dom);
   const $pcImage = document.createElement("source");
@@ -139,10 +140,17 @@ const useImage = (dom, source, alt) => {
   });
   dom.appendChild($mobileImage);
   dom.appendChild($pcImage);
+=======
+const useImage = (dom, imgSrc, alt) => {
+  dom.fallbackElement.setAttribute("alt", alt);
+  dom.webpElement.setAttribute("srcset", imgSrc.webp);
+  dom.fallbackElement.setAttribute("src", imgSrc.jpg);
+>>>>>>> 460cc4b9b84cf471f7bd9554cdea893d93d77c29
 };
 
 /**
  *
+<<<<<<< HEAD
  * @param {HTMLElement} appendIn 카드가 추가될 부모요소를 받습니다.
  * @param {string|number} slot 이 요소에 들어갈 문자나 숫자를 받습니다.
  * @param {
@@ -159,6 +167,23 @@ const AnimeCard = (appendIn, slot, imgSrc, href, starRating) => {
 
   const imgElement = returnElement.shadowRoot.querySelector("picture");
   useImage(imgElement, imgSrc, `${slot} 썸네일`);
+=======
+ * @param {HTMLElement} appendIn
+ * @param {string} slot
+ * @param {{webp:string, jpg:string}} imgSrc
+ * @param {string} linkTo
+ * @param {number} starRating
+ * @returns
+ */
+
+const AnimeCard = (appendIn, slot, imgSrc, linkTo, starRating) => {
+  const returnElement = document.createElement("anime-card");
+
+  const webpElement = returnElement.shadowRoot.querySelector("source");
+  const fallbackElement = returnElement.shadowRoot.querySelector("img");
+  console.log(imgSrc);
+  useImage({ webpElement, fallbackElement }, imgSrc, `${slot} 썸네일`);
+>>>>>>> 460cc4b9b84cf471f7bd9554cdea893d93d77c29
 
   const anchorElement = returnElement.shadowRoot.querySelector("a");
   anchorElement.setAttribute("href", href);

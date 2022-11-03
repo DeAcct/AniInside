@@ -68,7 +68,11 @@ const DaySelectorButton = (
   appendIn,
   slot,
   key,
+<<<<<<< HEAD
   { eventType, eventCallback }
+=======
+  { eventTarget, eventCallback }
+>>>>>>> 460cc4b9b84cf471f7bd9554cdea893d93d77c29
 ) => {
   const returnElement = document.createElement("day-selector-button");
   returnElement.setAttribute("aria-selected", false);
@@ -76,8 +80,14 @@ const DaySelectorButton = (
   returnElement.dataset.key = key;
   returnElement.appendChild(document.createTextNode(slot));
   appendIn.appendChild(returnElement);
+<<<<<<< HEAD
   if (eventCallback) {
     returnElement.addEventListener(eventType, eventCallback);
+=======
+  returnElement.dataset.key = key;
+  if (eventTarget) {
+    returnElement.addEventListener(eventTarget, eventCallback);
+>>>>>>> 460cc4b9b84cf471f7bd9554cdea893d93d77c29
   }
   return returnElement;
 };

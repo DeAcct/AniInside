@@ -18,7 +18,48 @@ const updateSW = registerSW({
   },
 });
 
-const DAY_DATA = [
+const $main = document.querySelector(".main");
+const $DaySelector = document.querySelector(".day-selector");
+const $partial = document.querySelector(".partial");
+const $FixedTop = document.querySelector(".fixed-area .top");
+
+LoadingBar();
+
+const darkmodeToggle = LabelledToggle($FixedTop, "다크 모드");
+const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
+  ? "dark"
+  : "light";
+const userMode = localStorage.getItem("theme");
+const $realCheckBox = darkmodeToggle.shadowRoot.querySelector(".real-checkbox");
+
+const useTheme = () => (userMode ? userMode : systemMode);
+
+const enable = () => {
+  document.documentElement.dataset.theme = "dark";
+  localStorage.setItem("theme", "dark");
+  $realCheckBox.checked = true;
+};
+const disable = () => {
+  document.documentElement.dataset.theme = "light";
+  localStorage.setItem("theme", "light");
+  $realCheckBox.checked = false;
+};
+
+if (useTheme() === "dark") {
+  enable();
+} else {
+  disable();
+}
+
+darkmodeToggle.addEventListener("click", () => {
+  if ($realCheckBox.checked) {
+    disable();
+  } else {
+    enable();
+  }
+});
+
+const days = [
   {
     key: "sunday",
     day: "일",
@@ -152,7 +193,6 @@ class App {
       ErrorUI(this.$AnimeMountPosition);
     }
   }
-  //요첮기능 추가
 }
 const app = new App();
 app.setup();
@@ -311,6 +351,91 @@ app.inject();
 //     });
 //   }
 
+//   const selected = days[index];
+//   const daySection = document.createElement("section");
+//   daySection.className = "day-section";
+//   const dayHeading = document.createElement("h2");
+//   dayHeading.className = "blind";
+//   dayHeading.appendChild(document.createTextNode("애니메이션 목록"));
+//   const cardWrap = document.createElement("div");
+//   cardWrap.className = "card-wrap";
+
+//   target[selected.request].forEach((day) => {
+//     const imgURL = day.image_url;
+//     const title = day.title;
+//     const link = day.url;
+//     const starRating = day.score;
+//     AnimeCard(cardWrap, title, imgURL, link, starRating);
+
+//     daySection.appendChild(dayHeading);
+//     daySection.appendChild(cardWrap);
+//   });
+
+//   $main.appendChild(daySection);
+// };
+
+// .then((data) => {
+//   console.log(data);
+//   let lastClicked = DaySelectorBtnArr[today];
+//   DaySelectorBtnArr.forEach((DaySelectorBtn, index) => {
+//     DaySelectorBtn.addEventListener("click", (e) => {
+//       scroll({
+//         top: 0,
+//       });
+//       DaySelectorBtnArr.forEach((DaySelectorBtn) => {
+//         DaySelectorBtn.setAttribute("aria-selected", false);
+//         DaySelectorBtn.classList.remove("selected");
+//       });
+//       e.currentTarget.setAttribute("aria-selected", true);
+//       e.currentTarget.classList.add("selected");
+//       e.currentTarget.blur();
+//       if (lastClicked === e.currentTarget) {
+//         return;
+//       }
+//       cardUpdate(data, index);
+//       lastClicked = e.currentTarget;
+//     });
+//   });
+
+//   const todaySeleted = $DaySelector.querySelectorAll("day-selector-button")[
+//     today
+//   ];
+//   todaySeleted.classList.add("selected");
+//   todaySeleted.setAttribute("aria-selected", true);
+
+//   cardUpdate(data, today);
+// })
+// .then(() => {
+//   const $loadingBar = document.querySelector("loading-bar");
+//   $loadingBar.remove();
+// });
+
+// const render = async () => {
+//   const { data } = await request(today.request);
+//   console.log(data);
+
+//   let $daySection = document.querySelector(".day-section");
+//   if ($daySection) {
+//     gsap.to($daySection, {
+//       y: 10,
+//       opacity: 0,
+//       duration: 0.15,
+//       ease: "expo.inOut",
+//       onComplete: () => {
+//         $daySection.remove();
+//         $daySection = document.querySelector(".day-section");
+//         gsap.from($daySection, {
+//           y: -10,
+//           opacity: 0,
+//           ease: "expo.inOut",
+//         });
+//       },
+//     });
+//   }
+// };
+// render();
+
+// const cardUpdate = async (target, index) => {
 //   const selected = days[index];
 //   const daySection = document.createElement("section");
 //   daySection.className = "day-section";
