@@ -7,11 +7,7 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "vite": "^3.2.0",
-=======
-    "vite": "^3.2.2",
->>>>>>> 460cc4b9b84cf471f7bd9554cdea893d93d77c29
     "vite-plugin-pwa": "^0.12.3"
   },
   "dependencies": {
