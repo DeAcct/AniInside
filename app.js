@@ -105,11 +105,10 @@ class App {
       AnimeCard(
         cardWrap,
         anime.title,
-        anime.imgURL,
+        anime.images.webp,
         anime.url,
         anime.starRating
       );
-      console.log(anime);
       daySection.appendChild(dayHeading);
       daySection.appendChild(cardWrap);
     });
@@ -147,7 +146,6 @@ class App {
         }`
       );
       $loadingBar.remove();
-      console.log($loadingBar);
       return animeData.data;
     } catch {
       $loadingBar.remove();

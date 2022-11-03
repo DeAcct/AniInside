@@ -38,8 +38,8 @@
     <link rel="apple-touch-icon" href="/assets/pwa-512x512.cd466f14.png" sizes="512x512" />
     <link rel="mask-icon" href="/assets/favicon.1882412b.svg" color="#FFFFFF" />
     <meta name="theme-color" content="#17ba76" />
-    <script type="module" crossorigin src="/assets/index.b3e181bd.js"></script>
-    <link rel="stylesheet" href="/assets/index.9b2b8ab9.css">
+    <script type="module" crossorigin src="/assets/index.48bea941.js"></script>
+    <link rel="stylesheet" href="/assets/index.f9a69320.css">
   <link rel="manifest" href="/manifest.webmanifest"></head>
   <body>
     <div id="app">
@@ -49,13 +49,10 @@
             <h1 class="page-title">
               <span class="page-name">애니인사이드</span>
             </h1>
-            <span class="sub-name">
-              <span class="partial"></span>
-              애니 목록
-            </span>
+            <strong class="season"> </strong>
           </div>
         </div>
-        <div class="day-selector" role="tablist" aria-label="요일 선택"></div>
+        <ul class="day-selector" role="tablist" aria-label="요일 선택"></ul>
       </header>
       <main class="main inner"></main>
       <footer class="footer inner">
@@ -146,7 +143,7 @@
     <template id="anime-card">
       <a class="card" target="_blank">
         <figure>
-          <img loading="lazy" />
+          <picture> </picture>
           <div class="right">
             <figcaption><slot></slot></figcaption>
           </div>

@@ -63,16 +63,25 @@ customElements.define(
         figure{
           display:flex;
         }
-        img {
+        picture {
           width: 10rem;
           height: calc(10rem / 7 * 10);
-          object-fit: cover;
+          border-radius: 0.25rem;
+          overflow: hidden;
           flex-shrink: 0;
           margin-right: 1.5rem;
-          border-radius: 0.25rem;
           background-image: linear-gradient(90deg, var(--depth-300), var(--depth-400), var(--depth-300));
           background-size: 300% 300%;
           animation: 0.8s ease-out infinite img-loading-animation; 
+        }
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0;
+        }
+        img.loaded{
+          opacity: 1;
         }
         @keyframes img-loading-animation {
           0% {
@@ -118,22 +127,41 @@ customElements.define(
 );
 
 const useImage = (dom, source, alt) => {
-  fetch(source)
-    .then((response) => response.blob())
-    .then((blob) => {
-      dom.setAttribute("src", URL.createObjectURL(blob));
-    });
-  dom.setAttribute("alt", alt);
+  console.log(source, dom);
+  const $pcImage = document.createElement("source");
+  const $mobileImage = document.createElement("img");
+  $pcImage.setAttribute("srcset", source.large_image_url);
+  $mobileImage.setAttribute("src", source.image_url);
+  $mobileImage.setAttribute("alt", alt);
+  $mobileImage.addEventListener("load", () => {
+    console.log(`${alt} 로딩됨`);
+    $mobileImage.classList.add("loaded");
+  });
+  dom.appendChild($mobileImage);
+  dom.appendChild($pcImage);
 };
 
-const AnimeCard = (appendIn, slot, imgSrc, linkTo, starRating) => {
+/**
+ *
+ * @param {HTMLElement} appendIn 카드가 추가될 부모요소를 받습니다.
+ * @param {string|number} slot 이 요소에 들어갈 문자나 숫자를 받습니다.
+ * @param {
+ *   image_url:`http://${string} | https://${string}`;
+ *   large_image_url:`http://${string} | https://${string}`;
+ *   small_image_url:`http://${string} | https://${string}`;
+ * } imgSrc 포스터의 url을 받습니다.
+ * @param {`http://${string} | https://${string}`} href 이 요소를 누르면 이동할 링크를 제공합니다.
+ * @param {number} starRating
+ * @returns 생성된 요소를 반환합니다.
+ */
+const AnimeCard = (appendIn, slot, imgSrc, href, starRating) => {
   const returnElement = document.createElement("anime-card");
 
-  const imgElement = returnElement.shadowRoot.querySelector("img");
+  const imgElement = returnElement.shadowRoot.querySelector("picture");
   useImage(imgElement, imgSrc, `${slot} 썸네일`);
 
   const anchorElement = returnElement.shadowRoot.querySelector("a");
-  anchorElement.setAttribute("href", linkTo);
+  anchorElement.setAttribute("href", href);
 
   returnElement.appendChild(document.createTextNode(slot));
 
