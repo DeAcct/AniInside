@@ -59,7 +59,7 @@ darkmodeToggle.addEventListener("click", () => {
   }
 });
 
-const days = [
+const DAY_DATA = [
   {
     key: "sunday",
     day: "일",

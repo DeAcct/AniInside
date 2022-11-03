@@ -1,6 +1,6 @@
 {
-  "name": "anime-api-request-test",
-  "version": "0.0.0",
+  "name": "aniinside",
+  "version": "2.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
