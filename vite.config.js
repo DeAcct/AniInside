@@ -6,12 +6,7 @@ export default {
   },
   plugins: [
     VitePWA({
-      includeAssets: [
-        "favicon.svg",
-        "favicon.ico",
-        "robots.txt",
-        "apple-touch-icon.png",
-      ],
+      includeAssets: ["favicon.svg", "favicon.ico", "apple-touch-icon.png"],
       manifest: {
         name: "애니인사이드",
         short_name: "애니인사이드",
@@ -19,17 +14,17 @@ export default {
         theme_color: "#17ba76",
         icons: [
           {
-            src: "assets/pwa-192x192.c5f0750d.png",
+            src: "pwa-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "assets/pwa-512x512.cd466f14.png",
+            src: "pwa-512x512.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "assets/pwa-512x512.cd466f14.png",
+            src: "pwa-512x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",

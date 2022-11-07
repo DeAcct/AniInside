@@ -38,7 +38,7 @@ const ErrorUI = (appendIn) => {
   refreshBtn.addEventListener("click", () => {
     location.reload();
   });
-  appendIn.appendChild(returnElement);
+  appendIn.prepend(returnElement);
 
   return returnElement;
 };

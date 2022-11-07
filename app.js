@@ -6,7 +6,7 @@ import LabelledToggle from "./components/LabelledToggle";
 import AnimeCard from "./components/AnimeCard";
 import LoadingBar from "./components/LoadingBar";
 import ErrorUI from "./components/ErrorUI";
-//import { gsap } from "gsap";
+import { gsap } from "gsap";
 import { registerSW } from "virtual:pwa-register";
 
 const updateSW = registerSW({
@@ -18,12 +18,7 @@ const updateSW = registerSW({
   },
 });
 
-const $main = document.querySelector(".main");
-const $DaySelector = document.querySelector(".day-selector");
-const $partial = document.querySelector(".partial");
 const $FixedTop = document.querySelector(".fixed-area .top");
-
-LoadingBar();
 
 const darkmodeToggle = LabelledToggle($FixedTop, "다크 모드");
 const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
@@ -32,7 +27,7 @@ const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
 const userMode = localStorage.getItem("theme");
 const $realCheckBox = darkmodeToggle.shadowRoot.querySelector(".real-checkbox");
 
-const useTheme = () => (userMode ? userMode : systemMode);
+const useTheme = () => userMode || systemMode;
 
 const enable = () => {
   document.documentElement.dataset.theme = "dark";
@@ -89,15 +84,21 @@ const DAY_DATA = [
     day: "토",
   },
 ];
+const DAY_REGEX = /월|화|수|목|금|토|일/;
 class App {
   constructor() {
-    this.$DaySelectorButtonArr = undefined;
-    this.selectedDay = this.today;
     this.sfwMode = false;
     this.kidsMode = false;
   }
   setup() {
     this.parseDOM();
+    const urlContainsDay = DAY_REGEX.test(decodeURI(window.location.href));
+    this.dayBasedRouter = urlContainsDay
+      ? DAY_DATA.find(
+          (day) =>
+            day.day === decodeURI(window.location.href).match(DAY_REGEX)[0]
+        )
+      : this.today;
   }
   parseDOM() {
     this.$AnimeMountPosition = document.querySelector(".main");
@@ -109,6 +110,10 @@ class App {
     this.$Season.textContent = `${this.season}분기 애니 목록`;
     this.mountDaySelector();
     await this.setAnimeCards();
+  }
+  set dayBasedRouter(day) {
+    this.selectedDay = day;
+    window.history.pushState(null, null, this.selectedDay.day);
   }
   mountDaySelector() {
     DAY_DATA.forEach((day) => {
@@ -132,11 +137,12 @@ class App {
     this.$DaySelectorButtonArr.forEach((element) => {
       element.setAttribute("aria-selected", element.dataset.key === day);
     });
+    this.dayBasedRouter = DAY_DATA.find((data) => data.key === day);
   }
   async setAnimeCards() {
     const animes = await this.requestAnimeData(this.selectedDay.key);
-    const daySection = document.createElement("section");
-    daySection.className = "day-section";
+    const freshCards = document.createElement("section");
+    freshCards.className = "day-section";
     const dayHeading = document.createElement("h2");
     dayHeading.className = "blind";
     dayHeading.appendChild(document.createTextNode("애니메이션 목록"));
@@ -148,12 +154,36 @@ class App {
         anime.title,
         anime.images.webp,
         anime.url,
-        anime.starRating
+        anime.score
       );
-      daySection.appendChild(dayHeading);
-      daySection.appendChild(cardWrap);
+      freshCards.appendChild(dayHeading);
+      freshCards.appendChild(cardWrap);
     });
-    this.$AnimeMountPosition.appendChild(daySection);
+    this.animateAnimeCards(freshCards);
+  }
+  animateAnimeCards(freshCards) {
+    if (!this.$DaySection) {
+      this.$DaySection = freshCards;
+      this.$AnimeMountPosition.appendChild(freshCards);
+      return;
+    }
+    gsap.to(this.$DaySection, {
+      duration: 0.15,
+      opacity: 0,
+      y: -10,
+      ease: "expo.inOut",
+      onComplete: () => {
+        this.$DaySection.remove();
+        this.$DaySection = freshCards;
+        this.$AnimeMountPosition.appendChild(freshCards);
+        gsap.from(freshCards, {
+          duration: 0.15,
+          y: -10,
+          opacity: 1,
+          ease: "expo.inOut",
+        });
+      },
+    });
   }
   get today() {
     const today = new Date().getDay();
@@ -179,17 +209,17 @@ class App {
     }
   }
   async requestAnimeData(day) {
-    const $loadingBar = LoadingBar();
+    this.$LoadingBar = LoadingBar();
     try {
       const { data: animeData } = await axios(
         `https://api.jikan.moe/v4/schedules?filter=${day}&sfw=${this.sfwMode}${
           this.kidsMode ? "&kids=true" : ""
         }`
       );
-      $loadingBar.remove();
+      this.$LoadingBar.remove();
       return animeData.data;
     } catch {
-      $loadingBar.remove();
+      this.$LoadingBar.remove();
       ErrorUI(this.$AnimeMountPosition);
     }
   }

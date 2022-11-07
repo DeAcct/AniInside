@@ -141,7 +141,10 @@
     <template id="anime-card">
       <a class="card" target="_blank">
         <figure>
-          <picture> </picture>
+          <picture>
+            <source media="screen and (min-width: 1080px)" />
+            <img loading="lazy" />
+          </picture>
           <div class="right">
             <figcaption><slot></slot></figcaption>
           </div>

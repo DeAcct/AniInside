@@ -105,10 +105,10 @@ customElements.define(
             justify-content: space-between;
             flex-direction: column;
           }
-          img{
+          picture{
             margin-right: 0;
             margin-bottom: 1rem;
-            width: 100%;
+            width: auto;
             height: auto;
             aspect-ratio: 7/10;
           }
@@ -127,18 +127,14 @@ customElements.define(
 );
 
 const useImage = (dom, source, alt) => {
-  console.log(source, dom);
-  const $pcImage = document.createElement("source");
-  const $mobileImage = document.createElement("img");
+  const $pcImage = dom.querySelector("source");
+  const $mobileImage = dom.querySelector("img");
   $pcImage.setAttribute("srcset", source.large_image_url);
   $mobileImage.setAttribute("src", source.image_url);
   $mobileImage.setAttribute("alt", alt);
   $mobileImage.addEventListener("load", () => {
-    console.log(`${alt} 로딩됨`);
     $mobileImage.classList.add("loaded");
   });
-  dom.appendChild($mobileImage);
-  dom.appendChild($pcImage);
 };
 
 /**
