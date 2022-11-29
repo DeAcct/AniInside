@@ -14,11 +14,11 @@ class AnimeCard extends HTMLElement {
     this.style.setProperty("--y", e.offsetY);
     this.style.setProperty(
       "--x-rotate-amount",
-      (e.offsetX / e.currentTarget.clientWidth - 0.5) * 20
+      (e.offsetX / e.currentTarget.clientWidth - 0.5) * -20
     );
     this.style.setProperty(
       "--y-rotate-amount",
-      (e.offsetY / e.currentTarget.clientHeight - 0.5) * 20
+      (e.offsetY / e.currentTarget.clientHeight - 0.5) * -20
     );
   }
   get template() {
