@@ -1,0 +1,28 @@
+@import "@/reset.scss";
+
+:host(star-rating) {
+  padding-top: 1.5rem !important;
+}
+.StarRating {
+  &__Holder {
+    width: 7rem;
+  }
+  &__Partial {
+    fill: hsl(var(--depth-300));
+    &--Filled {
+      fill: hsl(var(--star-color));
+    }
+  }
+  &__Number {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+}
+@keyframes loading-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}

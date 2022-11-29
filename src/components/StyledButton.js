@@ -8,10 +8,6 @@ customElements.define(
 
       const style = document.createElement("style");
       style.textContent = `
-        *{
-          margin: 0;
-          padding: 0;
-        }
         button{
           border:none ;
           padding: 1rem 1.5rem !important; 

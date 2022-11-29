@@ -1,0 +1,38 @@
+:root {
+  --depth-100: 260, 10%, 95%;
+  --depth-200: 260, 10%, 90%;
+  --depth-300: 260, 10%, 85%;
+  --depth-400: 260, 10%, 80%;
+  --depth-500: 260, 10%, 75%;
+  --depth-600: 260, 10%, 70%;
+  --depth-700: 260, 10%, 65%;
+  --depth-800: 260, 10%, 60%;
+  --depth-900: 260, 10%, 55%;
+
+  --text-color: 210, 29%, 24%;
+  --theme-color: 155, 78%, 41%;
+  --star-color: 38, 100%, 50%;
+
+  --inner-padding: 3rem;
+
+  --card-interaction-100: var(--depth-100);
+  --card-interaction-200: var(--depth-200);
+  --card-interaction-300: var(--depth-300);
+  --card-interaction-400: var(--depth-400);
+}
+
+[data-theme="dark"] {
+  --depth-100: 261, 30%, 8%;
+  --depth-200: 261, 30%, 16%;
+  --depth-300: 261, 30%, 24%;
+  --depth-400: 261, 30%, 32%;
+  --depth-500: 261, 30%, 40%;
+  --depth-600: 261, 30%, 48%;
+  --depth-700: 261, 30%, 56%;
+  --depth-800: 261, 30%, 64%;
+  --depth-900: 261, 30%, 72%;
+  --text-color: 213, 11%, 84%;
+
+  --card-interaction-100: var(--depth-200);
+  --card-interaction-200: var(--depth-100);
+}

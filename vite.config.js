@@ -1,8 +1,14 @@
 import { VitePWA } from "vite-plugin-pwa";
+import path from "path";
 
 export default {
   build: {
     outDir: "docs",
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
   plugins: [
     VitePWA({

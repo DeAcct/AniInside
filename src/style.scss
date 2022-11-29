@@ -1,6 +1,7 @@
 #app {
   position: relative;
   min-height: 100vh;
+  background-color: hsl(var(--depth-100));
 }
 
 .inner {
@@ -19,15 +20,16 @@
   left: 0;
   z-index: 100;
   padding-top: 1rem;
-  background-color: var(--depth-100);
-  box-shadow: 0 0.1rem 3rem var(--depth-100);
+  background-color: hsl(var(--depth-100), 50%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid hsl(var(--depth-200));
 }
 
 .fixed-area .top {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 .fixed-area .top .left {
   display: flex;
@@ -41,6 +43,7 @@
 .season {
   font-size: 1.2rem;
   font-weight: 500;
+  margin-top: 0.5rem;
 }
 .day-selector {
   display: flex;
@@ -60,7 +63,6 @@
 }
 .main {
   width: 100%;
-  height: 100%;
   padding-bottom: 22rem;
   padding-top: 13.1rem;
 }
@@ -84,7 +86,7 @@
   bottom: 0;
   width: 100%;
   padding: 3rem var(--inner-padding);
-  background-color: var(--depth-500);
+  background-color: hsl(var(--depth-500));
   display: flex;
   flex-direction: column;
 }
@@ -97,7 +99,7 @@
 .footer .col:not(:last-child) {
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid var(--depth-700);
+  border-bottom: 1px solid hsl(var(--depth-700));
 }
 
 .footer span {
@@ -119,7 +121,7 @@
     margin-bottom: 0;
     margin-right: 3rem;
     border-bottom: 0;
-    border-right: 1px solid var(--depth-700);
+    border-right: 1px solid hsl(var(--depth-700));
   }
 }
 @media screen and (min-width: 768px) {
