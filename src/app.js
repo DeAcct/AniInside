@@ -2,43 +2,43 @@ import "./color.scss";
 import "./reset.scss";
 import "./style.scss";
 import axios from "axios";
-import DaySelectorButton from "@/components/DaySelectorButton";
-import LabelledToggle from "./components/LabelledToggle";
 import "./components/AnimeCard/AnimeCard";
+//import "./components/DaySelectorButton/DaySelectorButton";
+//import LabelledToggle from "./components/LabelledToggle";
 import LoadingBar from "./components/LoadingBar";
-import ErrorUI from "./components/ErrorUI";
-import { gsap } from "gsap";
-import { registerSW } from "virtual:pwa-register";
+//import ErrorUI from "./components/ErrorUI";
 
-const updateSW = registerSW({
-  onNeedRefresh() {
-    console.log("새로고침 필요");
-  },
-  onOfflineReady() {
-    console.log("설치 준비 완료");
-  },
-});
+// import { registerSW } from "virtual:pwa-register";
 
-const $FixedTop = document.querySelector(".fixed-area .top");
+// registerSW({
+//   onNeedRefresh() {
+//     console.log("새로고침 필요");
+//   },
+//   onOfflineReady() {
+//     console.log("설치 준비 완료");
+//   },
+// });
 
-const darkmodeToggle = LabelledToggle($FixedTop, "다크 모드");
+//const $FixedTop = document.querySelector(".fixed-area .top");
+
+//const darkmodeToggle = LabelledToggle($FixedTop, "다크 모드");
 const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
   ? "dark"
   : "light";
 const userMode = localStorage.getItem("theme");
-const $realCheckBox = darkmodeToggle.shadowRoot.querySelector(".real-checkbox");
+//const $realCheckBox = darkmodeToggle.shadowRoot.querySelector(".real-checkbox");
 
 const useTheme = () => userMode || systemMode;
 
 const enable = () => {
   document.documentElement.dataset.theme = "dark";
   localStorage.setItem("theme", "dark");
-  $realCheckBox.checked = true;
+  //$realCheckBox.checked = true;
 };
 const disable = () => {
   document.documentElement.dataset.theme = "light";
   localStorage.setItem("theme", "light");
-  $realCheckBox.checked = false;
+  //$realCheckBox.checked = false;
 };
 
 if (useTheme() === "dark") {
@@ -47,6 +47,7 @@ if (useTheme() === "dark") {
   disable();
 }
 
+/*
 darkmodeToggle.addEventListener("click", () => {
   if ($realCheckBox.checked) {
     disable();
@@ -54,6 +55,7 @@ darkmodeToggle.addEventListener("click", () => {
     enable();
   }
 });
+*/
 
 const DAY_DATA = [
   {
@@ -104,44 +106,44 @@ class App {
   }
   parseDOM() {
     this.$AnimeMountPosition = document.querySelector(".main");
-    this.$DaySelector = document.querySelector(".day-selector");
+    //this.$DaySelector = document.querySelector(".day-selector");
     this.$Season = document.querySelector(".season");
-    this.$FixedTop = document.querySelector(".fixed-area .top");
+    //  this.$FixedTop = document.querySelector(".fixed-area .top");
   }
   async inject() {
     this.$Season.textContent = `${this.season}분기`;
-    this.mountDaySelector();
+    //this.mountDaySelector();
     await this.setAnimeCards();
   }
   set dayBasedRouter(day) {
     this.selectedDay = day;
     history.pushState(null, null, this.selectedDay.day);
   }
-  mountDaySelector() {
-    DAY_DATA.forEach((day) => {
-      DaySelectorButton(this.$DaySelector, day.day, day.key, {
-        eventType: "click",
-        eventCallback: (e) => this.onDaySelectorButtonClicked(e),
-      });
-    });
-    this.$DaySelectorButtonArr = this.$DaySelector.querySelectorAll(
-      "day-selector-button"
-    );
-    this.setDaySelector(this.selectedDay.key);
-  }
-  async onDaySelectorButtonClicked(e) {
-    if (e.currentTarget.getAttribute("aria-selected") === "true") {
-      return;
-    }
-    this.setDaySelector(e.currentTarget.dataset.key);
-    await this.setAnimeCards();
-  }
-  setDaySelector(day) {
-    this.$DaySelectorButtonArr.forEach((element) => {
-      element.setAttribute("aria-selected", element.dataset.key === day);
-    });
-    this.dayBasedRouter = DAY_DATA.find((data) => data.key === day);
-  }
+  // mountDaySelector() {
+  //   DAY_DATA.forEach((day) => {
+  //     DaySelectorButton(this.$DaySelector, day.day, day.key, {
+  //       eventType: "click",
+  //       eventCallback: (e) => this.onDaySelectorButtonClicked(e),
+  //     });
+  //   });
+  //   this.$DaySelectorButtonArr = this.$DaySelector.querySelectorAll(
+  //     "day-selector-button"
+  //   );
+  //   this.setDaySelector(this.selectedDay.key);
+  // }
+  // async onDaySelectorButtonClicked(e) {
+  //   if (e.currentTarget.getAttribute("aria-selected") === "true") {
+  //     return;
+  //   }
+  //   this.setDaySelector(e.currentTarget.dataset.key);
+  //   await this.setAnimeCards();
+  // }
+  // setDaySelector(day) {
+  //   this.$DaySelectorButtonArr.forEach((element) => {
+  //     element.setAttribute("aria-selected", element.dataset.key === day);
+  //   });
+  //   this.dayBasedRouter = DAY_DATA.find((data) => data.key === day);
+  // }
   async setAnimeCards() {
     if (this.$DaySection) {
       this.$DaySection.remove();
@@ -203,7 +205,7 @@ class App {
       return animeData.data;
     } catch {
       this.$LoadingBar.remove();
-      ErrorUI(this.$AnimeMountPosition);
+      // ErrorUI(this.$AnimeMountPosition);
     }
   }
 }

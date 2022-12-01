@@ -42,7 +42,7 @@ customElements.define(
         margin-left: 1rem;
         width: 4rem;
         height: 2.4rem;
-        background-color: var(--depth-400);
+        background-color: hsl(var(--depth-400));
         border-radius: 1.25rem;
         transition: background-color 150ms ease-out;
       }
@@ -52,19 +52,19 @@ customElements.define(
         width: 1.6rem;
         height: 1.6rem;
         border-radius: 50%;
-        background-color: var(--depth-200);
+        background-color: hsl(var(--depth-200));
         transition: transform 150ms ease-out;
       }
 
       .real-checkbox:checked ~ .track{
-        background-color: var(--theme-color);
+        background-color: hsl(var(--theme-color));
       }
       .real-checkbox:checked ~ .track .track-body{
         transform: translateX(1.6rem);
       }
 
       .real-checkbox:focus ~ .track .track-body{
-        background-color: var(--depth-300);
+        background-color: hsl(var(--depth-300));
       }
       `;
       const shadowRoot = this.attachShadow({ mode: "open" });

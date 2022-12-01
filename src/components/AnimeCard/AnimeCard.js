@@ -1,27 +1,21 @@
 import "../StarRating/StarRating";
 import Style from "./AnimeCard.scss";
+import Component from "@/Component";
 
-class AnimeCard extends HTMLElement {
-  connectedCallback() {
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.innerHTML = this.template;
-    const poster = shadowRoot.querySelector(".AnimeCard__Poster");
+class AnimeCard extends Component {
+  setEvent() {
+    this.addEventListener("mousemove", this.onMouseMove);
+    const poster = this.$selector(".AnimeCard__Poster");
     poster.addEventListener("load", this.onPosterReady);
-    this.addEventListener("mousemove", this.onMouseOver);
   }
-  onMouseOver(e) {
+  onMouseMove(e) {
     this.style.setProperty("--x", e.offsetX);
     this.style.setProperty("--y", e.offsetY);
-    this.style.setProperty(
-      "--x-rotate-amount",
-      (e.offsetX / e.currentTarget.clientWidth - 0.5) * -20
-    );
-    this.style.setProperty(
-      "--y-rotate-amount",
-      (e.offsetY / e.currentTarget.clientHeight - 0.5) * -20
-    );
   }
-  get template() {
+  onPosterReady(e) {
+    e.currentTarget.classList.add("AnimeCard__Poster--Loaded");
+  }
+  template() {
     return `
         <style>
           ${Style}
@@ -60,9 +54,6 @@ class AnimeCard extends HTMLElement {
           </div>
         </figure>
       `;
-  }
-  onPosterReady(e) {
-    e.currentTarget.classList.add("AnimeCard__Poster--Loaded");
   }
 }
 

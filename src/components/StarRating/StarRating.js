@@ -1,13 +1,9 @@
 import Style from "./StarRating.scss";
 import useBEMClass from "@/utility/useBEMClass";
-console.log(useBEMClass);
+import Component from "@/Component";
 
-class StarRating extends HTMLElement {
-  connectedCallback() {
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.innerHTML = this.template;
-  }
-  get template() {
+class StarRating extends Component {
+  template() {
     return `
         <style>
           ${Style}
