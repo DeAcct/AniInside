@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap");
+@import "@/color.scss";
 html,
 body,
 header,
@@ -39,7 +40,17 @@ option,
 label,
 img,
 video,
-svg {
+svg,
+ai-app,
+ai-header,
+anime-card,
+day-selector,
+hamburger-button,
+router-link,
+router-provider,
+star-rating,
+sticky-list,
+styled-button {
   margin: 0;
   padding: 0;
   margin-inline: 0;
@@ -61,11 +72,27 @@ svg {
   color: #fff;
 }
 :root {
+  min-height: calc(var(--vh) * 100 * 1px);
+  background: hsl(var(--depth-100));
+}
+:root,
+::after,
+::before {
   --inner-padding: 2rem;
   --card-padding: 2rem;
+  --chip-padding: 0.5rem 0.75rem;
   --header-height: 6rem;
   --card-radius-1: 1rem;
   --card-radius-2: 0.5rem;
+  --app-width-limit: 1080px;
+  --header-z-index: 100;
+  --nav-z-index: 50;
+  --sticky-list-z-index: 10;
+}
+::after,
+::before {
+  --vw: inherit;
+  --vh: inherit;
 }
 #app {
   -webkit-font-smoothing: antialiased;
@@ -94,7 +121,8 @@ b {
 html {
   font-size: 0.625em;
 }
-a {
+a,
+router-link {
   text-decoration: none;
   cursor: default;
 }
@@ -132,7 +160,7 @@ summary {
 @media (hover: hover) and (pointer: fine) {
   a,
   button,
-  [role="progressbar"],
+  router-link,
   [data-pointer="true"] {
     cursor: pointer;
   }
@@ -140,5 +168,6 @@ summary {
 @media screen and (min-width: 768px) {
   :root {
     --card-padding: 1rem;
+    --chip-padding: 1rem 1.5rem;
   }
 }

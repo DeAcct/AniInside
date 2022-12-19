@@ -1,5 +1,4 @@
-import "../StarRating/StarRating";
-import Style from "./AnimeCard.scss";
+import Style from "./AnimeCard.scss?inline";
 import Component from "@/Component";
 
 class AnimeCard extends Component {

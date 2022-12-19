@@ -4,22 +4,17 @@
   background-color: hsl(var(--depth-100));
 }
 
-.inner {
-  padding: 0 var(--inner-padding);
-  display: flex;
-  flex-direction: column;
-}
-
 .fixed-area {
   position: fixed;
   display: flex;
+  align-items: center;
   width: 100%;
   height: var(--header-height);
   top: 0;
   left: 0;
   z-index: 100;
-  padding-top: 1rem;
   background-color: hsl(var(--depth-100), 50%);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid hsl(var(--depth-200));
 }
@@ -29,9 +24,6 @@
   flex-direction: column;
 }
 .page-name {
-  margin-right: 1rem;
-  font-size: 2rem;
-  font-weight: 900;
 }
 .season {
   font-size: 1.2rem;

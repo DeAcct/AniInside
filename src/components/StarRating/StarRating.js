@@ -1,4 +1,4 @@
-import Style from "./StarRating.scss";
+import Style from "./StarRating.scss?inline";
 import useBEMClass from "@/utility/useBEMClass";
 import Component from "@/Component";
 

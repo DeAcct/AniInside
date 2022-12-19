@@ -40,35 +40,7 @@
     <meta name="theme-color" content="#17ba76" />
   </head>
   <body>
-    <div id="app">
-      <header class="fixed-area inner">
-        <div class="top">
-          <div class="left">
-            <h1 class="page-title">
-              <span class="page-name">애니인사이드</span>
-            </h1>
-            <strong class="season"> </strong>
-          </div>
-        </div>
-      </header>
-      <main class="main inner"></main>
-      <footer class="footer inner">
-        <p class="col">
-          API from
-          <span>
-            <strong>MyAnimeList</strong>
-            and
-            <strong>Jikan API</strong>
-          </span>
-        </p>
-        <p class="col">
-          Made by
-          <span>
-            <strong>Lee Hyeon Seong</strong>
-          </span>
-        </p>
-      </footer>
-    </div>
+    <div id="app"></div>
 
     <template id="styled-button">
       <button><slot></slot></button>
@@ -97,6 +69,6 @@
       </label>
     </template>
 
-    <script type="module" src="./src/app.js"></script>
+    <script type="module" src="./src/index.js"></script>
   </body>
 </html>
