@@ -1,0 +1,29 @@
+@import "@/reset.scss";
+
+:host(sticky-renderer) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.StickyRenderer {
+  &__Top {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: var(--header-height);
+    left: 0;
+    z-index: var(--sticky-list-z-index);
+    background-color: hsla(var(--depth-200));
+    border-radius: var(--card-radius-1);
+    width: min(
+      calc(100% - var(--inner-padding) * 2),
+      calc(var(--app-width-limit) / 2)
+    );
+  }
+  &__Content {
+    display: flex;
+    justify-content: center;
+    padding-top: var(--card-padding);
+    width: min(calc(100% - var(--inner-padding) * 2), var(--app-width-limit));
+  }
+}

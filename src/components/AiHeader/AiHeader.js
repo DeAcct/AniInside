@@ -8,12 +8,12 @@ class AiHeader extends Component {
         ${Style}
       </style>
       <header class="AiHeader">
-        <hamburger-button>
-          <span slot="alt-text" class="blind">
-            대메뉴 열기
-          </span>
-        </hamburger-button>
-        <div class="col">
+        <div class="wrap">
+          <hamburger-button>
+            <span slot="alt-text" class="blind">
+              대메뉴 열기
+            </span>
+          </hamburger-button>
           <h1 class="AiHeader__Logo">
             애니인사이드
           </h1>

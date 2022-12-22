@@ -13,7 +13,7 @@ class RouterLink extends Component {
   }
   setEvent() {
     this.addEventListener("click", () => {
-      useRouter(this.getAttribute("to"), this.getAttribute("method"));
+      useRouter(this.getAttribute("to"), this.hasAttribute("replace"));
     });
     this.$selector("a").addEventListener("click", (e) => {
       e.preventDefault();

@@ -1,13 +1,17 @@
 export default class Component extends HTMLElement {
-  state;
+  state = {};
   componentRoot;
   connectedCallback() {
     this.componentRoot = this.attachShadow({ mode: "open" });
-    this.setIsolatedEvent();
     this.setup();
+    this.setIsolatedEvent();
     this.render();
   }
+  /**
+   * 컴포넌트에 요소가 주입되기 직전 실행될 것을 여기서 정의한다.
+   */
   setup() {}
+  /**컴포넌트의 모양을 여기서 정의한다. */
   template() {
     return ``;
   }
@@ -15,30 +19,24 @@ export default class Component extends HTMLElement {
     this.componentRoot.innerHTML = this.template();
     this.setEvent();
   }
-  $selector(query) {
-    const isIDSelector = query.startsWith("#");
-    if (isIDSelector) {
-      return this.componentRoot.getElementById(query.split("#")[1]);
-    }
-    return this.componentRoot.querySelector(query);
+  /**
+   * 가상돔 내부에서 요소를 찾아 반환하는 메서드
+   * @param {`.${string}` | `#${string}` | string} query
+   * @param {boolean} [all=false] true일 경우 일치하는 모든 요소를 배열로 반환합니다.
+   * @returns {null | Element | NodeList}
+   */
+  $selector(query, all = false) {
+    return all
+      ? this.componentRoot.querySelectorAll(query)
+      : this.componentRoot.querySelector(query);
   }
+  /**
+   * 재렌더링이 필요한, 요소에 직접 등록하는 이벤트는 여기에서 정의한다.
+   */
   setEvent() {}
+  /**
+   * 렌더링과 상관이 없는 이벤트를 여기에서 정의한다.
+   * window에 등록하는 이벤트 등
+   */
   setIsolatedEvent() {}
-  setState(newState) {
-    //현재와 동일한 state가 들어온 경우
-    if (this.state === newState) {
-      return;
-    }
-    //새로 들어온 state를 반영해도 아무 변화도 없을 경우
-    if (
-      JSON.stringify(this.state) ===
-      JSON.stringify({ ...this.state, ...newState })
-    ) {
-      return;
-    }
-    //두 경우에 해당하지 않는다면 state를 바꾸고
-    this.state = { ...this.state, ...newState };
-    //재렌더링한다.
-    this.render();
-  }
 }

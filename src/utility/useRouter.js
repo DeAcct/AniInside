@@ -1,12 +1,11 @@
-import { DAY_DATA } from "@/constants/day";
+import DAY from "@/constants/day";
 export default function useRouter(to, method) {
-  const path = to === "/" ? `/${DAY_DATA[new Date().getDay()].day}` : to;
-  console.log(path);
+  const path = to === "/" ? `/${new DAY().now}` : to;
   const historyEvent = new CustomEvent("history-change", {
     detail: {
       path,
-      method: method ? method : "push",
+      method: method ? "replace" : "push",
     },
   });
-  dispatchEvent(historyEvent);
+  window.dispatchEvent(historyEvent);
 }

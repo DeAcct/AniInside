@@ -1,0 +1,17 @@
+@import "@/reset.scss";
+
+:host(optimized-image) {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.OptimizedImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  &--Loaded {
+    opacity: 1;
+  }
+}

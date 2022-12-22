@@ -2,10 +2,13 @@ import "./components/RouterLink/RouterLink";
 import "./components/RouterProvider/RouterProvider";
 import "./components/AiApp/AiApp";
 import "./components/AiHeader/AiHeader";
-import "./components/StickyList/StickyList";
+import "./components/StickyRenderer/StickyRenderer";
 import "./components/DaySelector/DaySelector";
 import "./components/HamburgerButton/HamburgerButton";
 import "./components/StarRating/StarRating";
+import "./components/AnimeList/AnimeList";
+import "./components/AnimeCard/AnimeCard";
+import "./components/OptimizedImage/OptimizedImage";
 
 import "./reset.scss";
 import "./color.scss";

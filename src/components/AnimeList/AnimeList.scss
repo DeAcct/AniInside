@@ -1,0 +1,45 @@
+@import "@/reset.scss";
+
+:host(anime-list) {
+  display: block;
+  width: 100%;
+}
+
+.AnimeList {
+  width: 100%;
+  max-width: 130rem;
+  display: grid;
+  grid-template-columns: repeat(1, 100%);
+  justify-content: space-between;
+  row-gap: calc(var(--card-padding) / 2);
+  transition: 300ms ease-out;
+  animation: 300ms mount-animation forwards ease-out;
+}
+
+@media screen and (min-width: 512px) {
+  /*GALAXY_FOLD*/
+  .AnimeList {
+    grid-template-columns: repeat(2, 49%);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  /*IPAD_MINI*/
+  .AnimeList {
+    grid-template-columns: repeat(3, 32%);
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  /*PC*/
+  .AnimeList {
+    grid-template-columns: repeat(4, 24%);
+  }
+}
+
+@keyframes mount-animation {
+  from {
+    transform: translateY(-3rem);
+    opacity: 0;
+  }
+}

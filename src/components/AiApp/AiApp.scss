@@ -1,11 +1,6 @@
 @import "@/reset.scss";
 
-sticky-list {
-  padding-top: var(--header-height);
+sticky-renderer {
+  padding: var(--header-height) 0 var(--card-padding);
   width: 100%;
-  day-selector {
-    width: 100%;
-    overflow: hidden;
-    padding: 1rem 0;
-  }
 }

@@ -1,32 +1,34 @@
 import Component from "@/Component";
-import { DAY_REGEX, DAY_DATA } from "@/constants/day";
 import Style from "./RouterProvider.scss?inline";
+import useRouter from "@/utility/useRouter";
+import { usePathName } from "@/utility/location";
+import { useDayRegex } from "@/utility/regex";
+import DAY from "@/constants/day";
 
 class RouterProvider extends Component {
-  setup() {
-    this.pathSetup();
-  }
   template() {
     return `
       <style>${Style}</style>
       <slot></slot>
     `;
   }
-  setEvent() {
+  setIsolatedEvent() {
     addEventListener("history-change", (e) => {
       if (e.detail.method === "replace") {
-        history.replaceState(null, null, `/${e.detail.path.slice(-1)}`);
+        history.replaceState(null, null, e.detail.path);
       } else {
-        history.pushState(null, null, `/${e.detail.path.slice(-1)}`);
+        history.pushState(null, null, e.detail.path);
       }
     });
   }
-  pathSetup() {
-    const decoded = decodeURI(location.pathname);
-    const urlContainsDay = DAY_REGEX.test(decoded);
-    if (!urlContainsDay) {
-      history.replaceState(null, null, `/${DAY_DATA[new Date().getDay()].day}`);
+  setup() {
+    const day = new DAY();
+    if (!useDayRegex(usePathName())) {
+      console.log("asdf", day.now.day);
+      history.replaceState(null, null, day.now.day);
+      return;
     }
+    history.pushState(null, null, `/${day.find(usePathName()).day}`);
   }
 }
 

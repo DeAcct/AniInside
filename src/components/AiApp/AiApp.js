@@ -1,11 +1,6 @@
-// import "./color.scss";
-// import "./reset.scss";
-// import "./style.scss";
 import Component from "@/Component";
-// import "@/AnimeCard/AnimeCard";
-
 import Style from "./AiApp.scss?inline";
-import { DAY_DATA } from "./../../constants/day";
+import DAY from "@/constants/day";
 
 // registerSW({
 //   onNeedRefresh() {
@@ -55,11 +50,15 @@ import { DAY_DATA } from "./../../constants/day";
 // */
 
 class AiApp extends Component {
+  state = {
+    selectedDay: new DAY().now,
+  };
   setup() {
     this.setViewport();
   }
   setIsolatedEvent() {
     addEventListener("resize", this.setViewport);
+    addEventListener("history-change", (e) => this.changeSelected(e));
   }
   setViewport() {
     const root = document.documentElement;
@@ -67,17 +66,28 @@ class AiApp extends Component {
     root.style.setProperty("--vh", window.innerHeight / 100);
   }
   template() {
+    const { selectedDay } = this.state;
     return `
       <style>${Style}</style>
       <ai-header></ai-header>
       <router-provider>
-        <sticky-list root="main">
+        <sticky-renderer root="main">
           <day-selector slot="top"></day-selector>
-          <ul slot="content">
-          </ul>
-        </sticky-list>
+          <anime-list 
+            src="https://api.jikan.moe/v4/schedules?filter=${selectedDay.key}" 
+            slot="content"
+          >
+          </anime-list>
+        </sticky-renderer>
       </router-provider>
     `;
+  }
+  changeSelected(e) {
+    this.state.selectedDay = new DAY().find(e.detail.path.replace("/", ""));
+    this.$selector("anime-list").setAttribute(
+      "src",
+      `https://api.jikan.moe/v4/schedules?filter=${this.state.selectedDay.key}`
+    );
   }
 }
 
