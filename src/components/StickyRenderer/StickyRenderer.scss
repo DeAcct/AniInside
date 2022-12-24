@@ -13,8 +13,6 @@
     top: var(--header-height);
     left: 0;
     z-index: var(--sticky-list-z-index);
-    background-color: hsla(var(--depth-200));
-    border-radius: var(--card-radius-1);
     width: min(
       calc(100% - var(--inner-padding) * 2),
       calc(var(--app-width-limit) / 2)

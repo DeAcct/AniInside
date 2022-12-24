@@ -1,13 +1,15 @@
 import Style from "./AnimeCard.scss?inline";
 import Component from "@/Component";
+import { useMouseCoordinate } from "@/utility/mouseInteraction";
 
 class AnimeCard extends Component {
   setEvent() {
-    this.addEventListener("mousemove", this.onMouseMove);
+    this.addEventListener("mousemove", (e) => this.onMouseMove(e));
   }
   onMouseMove(e) {
-    this.style.setProperty("--x", e.offsetX);
-    this.style.setProperty("--y", e.offsetY);
+    const { x, y } = useMouseCoordinate(e, "anime-card");
+    this.style.setProperty("--x", x);
+    this.style.setProperty("--y", y);
   }
 
   template() {
@@ -24,19 +26,13 @@ class AnimeCard extends Component {
             <slot name="poster"></slot>
           </a>
           <div class="right">
+            <slot name="rating"></slot>
             <figcaption class="AnimeCard__Title">
               <a target="_blank" href="${this.getAttribute("href")}">
                 <slot></slot>
               </a>
             </figcaption>
-            ${
-              JSON.parse(this.getAttribute("rating"))
-                ? `<star-rating 
-                    rating="${this.getAttribute("rating")}"
-                  ></star-rating>`
-                : "<span class='AnimeCard__StarRatingFallback'>점수 없음</span>"
-            }
-            
+            <slot name="score"></slot>
           </div>
         </figure>
       `;

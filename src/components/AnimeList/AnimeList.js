@@ -30,13 +30,18 @@ class AnimeList extends Component {
         .map(
           (item) => `
             <li class="AnimeList__Item">
-              <anime-card>
+              <anime-card
+                href="${item.url}"
+              >
+                ${item.title}
                 <optimized-image
                   slot="poster"
                   src-obj=${JSON.stringify(item.images)}
                   alt-text="${item.title} 포스터"
                 ></optimized-image>
-                ${item.title}
+                <star-rating slot="score" score="${JSON.stringify(
+                  item.score
+                )}"></star-rating>
               </anime-card>
             </li>
           `
@@ -53,9 +58,9 @@ class AnimeList extends Component {
       });
       return;
     } catch {
-      console.log("errorui");
+      this.isFailed = true;
+      this.render();
     }
-    this.render();
   }
 }
 

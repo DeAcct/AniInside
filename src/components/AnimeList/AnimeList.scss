@@ -14,6 +14,9 @@
   row-gap: calc(var(--card-padding) / 2);
   transition: 300ms ease-out;
   animation: 300ms mount-animation forwards ease-out;
+  &__Item anime-card {
+    height: 100%;
+  }
 }
 
 @media screen and (min-width: 512px) {

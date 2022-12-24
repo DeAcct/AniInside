@@ -18,6 +18,10 @@
     font-size: 1.3rem;
     font-weight: 700;
   }
+  &__Error {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
 }
 @keyframes loading-animation {
   0% {
@@ -32,9 +36,6 @@
   .StarRating {
     &__Holder {
       width: 12rem;
-    }
-    &__Number {
-      font-size: 1.5rem;
     }
   }
 }

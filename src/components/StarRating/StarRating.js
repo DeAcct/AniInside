@@ -9,28 +9,36 @@ class StarRating extends Component {
           ${Style}
         </style>
         <figure class="StarRating">
-          <svg viewBox="0 0 280 48" role="img" class="StarRating__Holder">
-            ${this.pathData
-              .map(
-                (data, index) =>
-                  `<path 
-                    d="${data}" 
-                    class="${useBEMClass("StarRating__Partial", {
-                      condition: this.score >= index,
-                      modifier: "Filled",
-                    })}"
-                  />`
-              )
-              .join("")}
-          </svg>
-          <figcaption class="StarRating__Number">
-            ${this.getAttribute("rating")}점
-          </figcaption>
+        ${
+          this.score
+            ? `<svg viewBox="0 0 280 48" role="img" class="StarRating__Holder">
+              ${this.pathData
+                .map(
+                  (data, index) =>
+                    `<path 
+                      d="${data}" 
+                      class="${useBEMClass("StarRating__Partial", {
+                        condition: this.score >= index,
+                        modifier: "Filled",
+                      })}"
+                    />`
+                )
+                .join("")}
+              </svg>
+              <figcaption class="StarRating__Number">
+                ${Number(this.score).toFixed(2)}점
+              </figcaption>
+              `
+            : `<figcaption class="StarRating__Error">
+                점수가 없어요!
+              </figcaption
+              `
+        }
         </figure>
       `;
   }
   get score() {
-    return Math.floor(Number(this.getAttribute("rating")));
+    return JSON.parse(this.getAttribute("score"));
   }
   get pathData() {
     return [
