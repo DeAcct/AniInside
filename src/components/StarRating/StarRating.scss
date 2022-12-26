@@ -1,12 +1,10 @@
 @import "@/reset.scss";
 
-:host(star-rating) {
-  padding-top: 1.5rem !important;
-}
 .StarRating {
+  display: flex;
+  gap: 0.5rem;
   &__Holder {
     width: 7rem;
-    margin-bottom: 1rem;
   }
   &__Partial {
     fill: hsl(var(--depth-300));
@@ -15,11 +13,11 @@
     }
   }
   &__Number {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
   }
   &__Error {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
   }
 }
@@ -29,13 +27,5 @@
   }
   100% {
     transform: translateX(200%);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .StarRating {
-    &__Holder {
-      width: 12rem;
-    }
   }
 }

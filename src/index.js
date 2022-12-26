@@ -9,6 +9,7 @@ import "./components/StarRating/StarRating";
 import "./components/AnimeList/AnimeList";
 import "./components/AnimeCard/AnimeCard";
 import "./components/OptimizedImage/OptimizedImage";
+import "./components/TagList/TagList";
 
 import "./reset.scss";
 import "./color.scss";

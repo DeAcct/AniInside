@@ -1,6 +1,6 @@
 import Component from "@/Component";
 import Style from "./DaySelector.scss?inline";
-import useBEMClass from "@/utility/useBEMClass";
+import useBEMClass from "@/utility/styleClasses";
 import DAY from "@/constants/day";
 import { usePathName } from "@/utility/location";
 import { useDayRegex } from "@/utility/regex";
@@ -11,7 +11,7 @@ class DaySelector extends Component {
   };
   setup() {
     const day = new DAY();
-    const decoded = decodeURI(usePathName());
+    const decoded = decodeURIComponent(usePathName());
     const urlContainsDay = useDayRegex(decoded);
     if (urlContainsDay) {
       this.state.selectedDay = day.find(decoded);
@@ -27,8 +27,7 @@ class DaySelector extends Component {
           .map(
             (data) => `
             <li class="${useBEMClass("DaySelector__Item", {
-              condition: data.day === this.state.selectedDay.day,
-              modifier: "Selected",
+              Selected: data.day === this.state.selectedDay.day,
             })}" data-key="${data.day}">
               <router-link to="/${data.day}" replace>
                 ${data.day}

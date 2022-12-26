@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     position: sticky;
-    top: var(--header-height);
+    top: var(--card-padding);
     left: 0;
     z-index: var(--sticky-list-z-index);
     width: min(

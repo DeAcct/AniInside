@@ -23,7 +23,6 @@ class AnimeList extends Component {
     `;
   }
   successUI(items) {
-    console.log(items);
     return `
     <ul class="AnimeList">
       ${items
@@ -33,15 +32,26 @@ class AnimeList extends Component {
               <anime-card
                 href="${item.url}"
               >
-                ${item.title}
                 <optimized-image
                   slot="poster"
                   src-obj=${JSON.stringify(item.images)}
                   alt-text="${item.title} 포스터"
                 ></optimized-image>
-                <star-rating slot="score" score="${JSON.stringify(
-                  item.score
-                )}"></star-rating>
+                <tag-list 
+                  slot="tags"
+                  data=${JSON.stringify(
+                    //encodeURIComponent를 이용하여 일부 escaping 되어있지 않은 문자열(특수문자 등)을 처리한다.
+                    item.genres.map(({ name, url }) => ({
+                      name: encodeURIComponent(name),
+                      url,
+                    }))
+                  )}
+                ></tag-list>
+                ${item.title}
+                <star-rating 
+                  slot="score" 
+                  score=${JSON.stringify(item.score)}
+                ></star-rating>
               </anime-card>
             </li>
           `
@@ -61,6 +71,10 @@ class AnimeList extends Component {
       this.isFailed = true;
       this.render();
     }
+  }
+  get shortenTitle() {
+    //말줄임 로직 구현하기. 20글자로 제한
+    return 0;
   }
 }
 

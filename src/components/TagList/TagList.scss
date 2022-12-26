@@ -1,0 +1,50 @@
+@import "@/reset.scss";
+
+:host(tag-list) {
+  width: 100%;
+  height: 2.5rem;
+  position: relative;
+}
+
+.TagList {
+  display: flex;
+  gap: 0.3rem;
+  width: 100%;
+  overflow-x: scroll;
+  border-radius: 9999px;
+  scrollbar-width: 0;
+  position: absolute;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &__Item {
+    display: flex;
+    a {
+      display: flex;
+      white-space: nowrap;
+      height: 2.5rem;
+      align-items: center;
+      padding: 0 1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background-color: hsl(var(--depth-300));
+      border-radius: 9999px;
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .TagList {
+    cursor: grab;
+    &__Item,
+    &__Item a {
+      cursor: inherit;
+    }
+    &--Grabbing {
+      cursor: grabbing;
+    }
+    &--OutOfRange {
+      cursor: not-allowed;
+    }
+  }
+}

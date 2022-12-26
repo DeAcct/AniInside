@@ -1,6 +1,5 @@
 import Component from "@/Component";
 import Style from "./RouterProvider.scss?inline";
-import useRouter from "@/utility/useRouter";
 import { usePathName } from "@/utility/location";
 import { useDayRegex } from "@/utility/regex";
 import DAY from "@/constants/day";

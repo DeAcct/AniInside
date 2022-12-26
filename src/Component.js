@@ -6,6 +6,7 @@ export default class Component extends HTMLElement {
     this.setup();
     this.setIsolatedEvent();
     this.render();
+    this.afterRender();
   }
   /**
    * 컴포넌트에 요소가 주입되기 직전 실행될 것을 여기서 정의한다.
@@ -36,6 +37,7 @@ export default class Component extends HTMLElement {
       ? this.componentRoot.querySelectorAll(query)
       : this.componentRoot.querySelector(query);
   }
+  afterRender() {}
   /**
    * 재렌더링이 필요한, 요소에 직접 등록하는 이벤트는 여기에서 정의한다.
    */

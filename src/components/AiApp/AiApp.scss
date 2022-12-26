@@ -1,6 +1,6 @@
 @import "@/reset.scss";
 
 sticky-renderer {
-  padding: var(--header-height) 0 var(--card-padding);
+  padding-bottom: var(--card-padding);
   width: 100%;
 }

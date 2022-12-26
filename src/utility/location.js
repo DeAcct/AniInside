@@ -1,6 +1,6 @@
 /**
- * 현재 location객체의 pathName을 반환합니다. "/"를 제거한 값입니다.
- * @returns {string}
+ * 현재 location객체의 pathName을 반환합니다.
+ * @returns {string} "/"를 제거한 값을 반환합니다.
  */
 export function usePathName() {
   const { pathname } = location;

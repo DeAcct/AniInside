@@ -1,5 +1,5 @@
 import Style from "./StarRating.scss?inline";
-import useBEMClass from "@/utility/useBEMClass";
+import useBEMClass from "@/utility/styleClasses";
 import Component from "@/Component";
 
 class StarRating extends Component {
@@ -18,15 +18,14 @@ class StarRating extends Component {
                     `<path 
                       d="${data}" 
                       class="${useBEMClass("StarRating__Partial", {
-                        condition: this.score >= index,
-                        modifier: "Filled",
+                        Filled: this.score >= index,
                       })}"
                     />`
                 )
                 .join("")}
               </svg>
               <figcaption class="StarRating__Number">
-                ${Number(this.score).toFixed(2)}점
+                (${this.score.toFixed(2)})
               </figcaption>
               `
             : `<figcaption class="StarRating__Error">
