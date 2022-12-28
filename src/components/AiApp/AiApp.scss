@@ -4,3 +4,10 @@ sticky-renderer {
   padding-bottom: var(--card-padding);
   width: 100%;
 }
+
+loading-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

@@ -1,5 +1,9 @@
 import DAY from "@/constants/day";
+import { usePathName } from "./location";
 export default function useRouter(to, method) {
+  if (usePathName() === to.replace("/", "")) {
+    return;
+  }
   const path = to === "/" ? `/${new DAY().now}` : to;
   const historyEvent = new CustomEvent("history-change", {
     detail: {

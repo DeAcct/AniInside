@@ -10,6 +10,8 @@ import "./components/AnimeList/AnimeList";
 import "./components/AnimeCard/AnimeCard";
 import "./components/OptimizedImage/OptimizedImage";
 import "./components/TagList/TagList";
+import "./components/ErrorView/ErrorView";
+import "./components/LoadingBar/LoadingBar";
 
 import "./reset.scss";
 import "./color.scss";

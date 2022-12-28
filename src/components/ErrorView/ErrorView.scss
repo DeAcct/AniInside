@@ -1,0 +1,30 @@
+@import "@/reset.scss";
+
+:host(error-view) {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.ErrorView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__MainTitle {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  &__Code {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+  }
+  &__RefreshButton {
+    padding: 1rem 1.5rem;
+    background-color: hsl(var(--theme-color));
+    border-radius: var(--card-radius-2);
+    color: #fff;
+    font-weight: 500;
+  }
+}

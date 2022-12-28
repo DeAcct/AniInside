@@ -19,7 +19,11 @@ class AnimeList extends Component {
       <style>
         ${Style}
       </style>
-      ${isFailed ? `<error-ui></error-ui>` : this.successUI(animes)}
+      ${
+        isFailed
+          ? `<error-view>애니메이션 리스트를 불러오는데 실패했어요ㅠㅠ</error-view>`
+          : this.successUI(animes)
+      }
     `;
   }
   successUI(items) {
@@ -59,22 +63,36 @@ class AnimeList extends Component {
         .join("")}
     </ul>`;
   }
+  fireFetchComplete() {
+    const fetchCompleteEvent = new CustomEvent("fetch-complete");
+    this.dispatchEvent(fetchCompleteEvent);
+  }
+  fireFetchStart() {
+    const fetchStartEvent = new CustomEvent("fetch-start");
+    this.dispatchEvent(fetchStartEvent);
+  }
   async getData() {
-    const response = (await fetch(this.getAttribute("src"))).json();
     try {
+      this.fireFetchStart();
+      this.state.isFailed = false;
+      const response = (await fetch(this.getAttribute("src"))).json();
       response.then(({ data }) => {
         this.state.animes = data;
         this.render();
       });
-      return;
     } catch {
-      this.isFailed = true;
+      this.state.isFailed = true;
       this.render();
     }
+    this.fireFetchComplete();
   }
-  get shortenTitle() {
-    //말줄임 로직 구현하기. 20글자로 제한
-    return 0;
+  setEvent() {
+    const $errorView = this.$selector("error-view");
+    if ($errorView) {
+      $errorView.addEventListener("refetch-request", () => {
+        this.getData();
+      });
+    }
   }
 }
 

@@ -63,6 +63,16 @@ class AiApp extends Component {
       this.changeSelected(e.detail.path.replace("/", ""))
     );
   }
+  setEvent() {
+    const $loadingBar = this.$selector("loading-bar");
+    const $animeList = this.$selector("anime-list");
+    $animeList.addEventListener("fetch-start", () => {
+      $loadingBar.setAttribute("loading", "");
+    });
+    $animeList.addEventListener("fetch-complete", () => {
+      $loadingBar.removeAttribute("loading");
+    });
+  }
   setViewport() {
     const root = document.documentElement;
     root.style.setProperty("--vw", window.innerWidth / 100);
@@ -72,6 +82,7 @@ class AiApp extends Component {
     const { selectedDay } = this.state;
     return `
       <style>${Style}</style>
+      <loading-bar></loading-bar>
       <ai-header></ai-header>
       <router-provider>
         <sticky-renderer root="main">
