@@ -11,9 +11,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  publicDir: "public",
   plugins: [
     VitePWA({
-      includeAssets: ["favicon.svg", "favicon.ico", "apple-touch-icon.png"],
+      includeAssets: [
+        "favicon.svg",
+        "favicon.ico",
+        "apple-touch-icon.png",
+        "pwa-192x192.png",
+        "pwa-512x512.png",
+      ],
       manifest: {
         name: "애니인사이드",
         short_name: "애니인사이드",
