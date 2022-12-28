@@ -7,10 +7,11 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "vite-plugin-pwa": "^0.14.0"
+    "vite-plugin-pwa": "^0.14.0",
+    "workbox-window": "^6.5.4"
   },
   "dependencies": {
-    "sass": "^1.56.1",
+    "sass": "^1.57.1",
     "vite": "^4.0.3"
   },
   "packageManager": "yarn@3.3.1"
