@@ -1,3 +1,4 @@
+import { registerSW } from "virtual:pwa-register";
 import "./components/RouterLink/RouterLink";
 import "./components/RouterProvider/RouterProvider";
 import "./components/AiApp/AiApp";
@@ -19,3 +20,5 @@ import "./color.scss";
 const mountPosition = document.getElementById("app");
 const App = document.createElement("ai-app");
 mountPosition.appendChild(App);
+
+const updateSW = registerSW;

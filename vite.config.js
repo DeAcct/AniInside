@@ -14,6 +14,7 @@ export default defineConfig({
   publicDir: "public",
   plugins: [
     VitePWA({
+      registerType: "autoUpdate",
       includeAssets: [
         "favicon.svg",
         "favicon.ico",

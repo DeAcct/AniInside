@@ -23,7 +23,6 @@ class RouterProvider extends Component {
   setup() {
     const day = new DAY();
     if (!useDayRegex(usePathName())) {
-      console.log("asdf", day.now.day);
       history.replaceState(null, null, day.now.day);
       return;
     }
