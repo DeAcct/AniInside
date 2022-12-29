@@ -13,6 +13,7 @@ import "./components/OptimizedImage/OptimizedImage";
 import "./components/TagList/TagList";
 import "./components/ErrorView/ErrorView";
 import "./components/LoadingBar/LoadingBar";
+import "./components/IconBase/IconBase";
 
 import "./reset.scss";
 import "./color.scss";

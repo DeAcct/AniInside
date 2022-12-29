@@ -62,6 +62,10 @@ class AiApp extends Component {
     addEventListener("history-change", (e) =>
       this.changeSelected(e.detail.path.replace("/", ""))
     );
+    addEventListener("modal-request", (e) => {
+      console.log("modal이 요청되었습니다.");
+      console.log(e.detail);
+    });
   }
   setEvent() {
     const $loadingBar = this.$selector("loading-bar");

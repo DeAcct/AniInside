@@ -32,7 +32,7 @@
         right-radius: 9999px;
       }
       transform: translateX(-50%);
-      background-color: hsla(var(--theme-color));
+      background-color: hsla(var(--theme-base), var(--theme-depth-500));
       opacity: 0;
     }
     router-link {

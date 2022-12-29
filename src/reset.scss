@@ -68,6 +68,10 @@ sticky-list {
   word-break: keep-all;
   float: none;
 }
+.IconProvider {
+  display: none;
+}
+
 ::selection {
   background-color: hsl(var(--theme-color));
   color: #fff;
