@@ -48,12 +48,17 @@ ai-app,
 ai-header,
 anime-card,
 anime-list,
+cover-modal,
 day-selector,
+error-view,
 hamburger-button,
+icon-base,
+loading-bar,
+optimized-image,
 router-link,
 router-provider,
 star-rating,
-sticky-list {
+sticky-renderer {
   margin: 0;
   padding: 0;
   border: none;
@@ -174,4 +179,24 @@ summary {
     --card-padding: 1rem;
     --chip-padding: 1rem 1.5rem;
   }
+}
+
+@keyframes loading-animation {
+  0% {
+    background-position: 200% 200%;
+  }
+  80% {
+    background-position: 0% 0%;
+  }
+}
+
+.LoadingTarget {
+  background-image: linear-gradient(
+    90deg,
+    hsl(var(--depth-300)),
+    hsl(var(--depth-400)),
+    hsl(var(--depth-300))
+  );
+  background-size: 300% 300%;
+  animation: 0.8s ease-out infinite loading-animation;
 }

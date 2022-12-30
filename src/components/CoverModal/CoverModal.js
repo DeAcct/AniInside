@@ -17,6 +17,7 @@ class CoverModal extends Component {
       <div class="CoverModal">
         <h2 class="CoverModal__Title">${this.title || ""}</h2>
         ${this.contentWrapper}
+        <button class="CoverModal__CloseButton">닫기</button>
       </div>
     `;
   }
@@ -25,13 +26,22 @@ class CoverModal extends Component {
     $B_CoverModal.addEventListener("click", (e) => {
       e.stopPropagation();
     });
-    this.addEventListener("click", () => {
-      this.removeAttribute("open");
-      this.removeAttribute("m-type");
-      this.removeAttribute("m-title");
-      this.removeAttribute("m-content");
-      useModalSideEffect(false);
+    this.addEventListener("click", () => this.close());
+
+    const $E_CloseButton = this.$selector(".CoverModal__CloseButton");
+    $E_CloseButton.addEventListener("click", () => this.close());
+
+    const $E_Iframe = this.$selector(".CoverModal__Iframe");
+    $E_Iframe?.addEventListener("load", (e) => {
+      e.target.classList.add("CoverModal__Iframe--Loaded");
     });
+  }
+  close() {
+    this.removeAttribute("open");
+    this.removeAttribute("m-type");
+    this.removeAttribute("m-title");
+    this.removeAttribute("m-content");
+    useModalSideEffect(false);
   }
   get type() {
     return this.getAttribute("m-type");
@@ -45,8 +55,9 @@ class CoverModal extends Component {
   get contentWrapper() {
     const WrapperMap = {
       video: `
-        <div class="CoverModal__Video">
+        <div class="CoverModal__VideoWrap LoadingTarget">
           <iframe
+            class="CoverModal__Iframe"
             src="${this.content}" 
             title="${this.title} 예고편 동영상 플레이어" 
             frameborder="0" 

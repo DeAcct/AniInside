@@ -12,7 +12,7 @@ class AnimeCard extends Component {
         <a 
           target="_blank" 
           href="${this.href}" 
-          class="AnimeCard__Anchor"
+          class="AnimeCard__Anchor LoadingTarget"
         >
           <slot name="poster"></slot>
         </a>
