@@ -92,6 +92,7 @@ sticky-list {
   --card-radius-1: 1rem;
   --card-radius-2: 0.5rem;
   --app-width-limit: 1080px;
+  --cover-modal-z-index: 150;
   --loading-bar-z-index: 110;
   --sticky-list-z-index: 100;
   --nav-z-index: 50;
@@ -140,7 +141,8 @@ ul,
 li {
   list-style: none;
 }
-img {
+img,
+iframe {
   vertical-align: middle;
 }
 summary {

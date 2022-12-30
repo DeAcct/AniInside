@@ -28,7 +28,6 @@ class AnimeList extends Component {
     `;
   }
   successUI(items) {
-    console.log(items);
     return `
     <ul class="AnimeList">
       ${items
@@ -36,9 +35,10 @@ class AnimeList extends Component {
           (item) => `
             <li class="AnimeList__Item">
               <anime-card
+                ani-title="${item.title}"
                 href="${item.url}"
                 synopsis="${
-                  item.synopsis ? decodeURIComponent(item.synopsis) : ""
+                  item.synopsis ? encodeURIComponent(item.synopsis) : ""
                 }"
                 pv-url="${item.trailer.embed_url || ""}"
               >
@@ -51,7 +51,6 @@ class AnimeList extends Component {
                   slot="score" 
                   score=${JSON.stringify(item.score)}
                 ></star-rating>
-                ${item.title}
                 <tag-list 
                   slot="tags"
                   data=${JSON.stringify(

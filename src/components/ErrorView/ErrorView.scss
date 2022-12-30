@@ -22,7 +22,7 @@
   }
   &__RefreshButton {
     padding: 1rem 1.5rem;
-    background-color: hsl(var(--theme-color));
+    background-color: hsl(var(--theme-base), var(--theme-depth-500));
     border-radius: var(--card-radius-2);
     color: #fff;
     font-weight: 500;

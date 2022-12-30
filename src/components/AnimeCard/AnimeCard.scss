@@ -6,7 +6,7 @@
   z-index: 1;
   display: flex;
   border-radius: var(--card-radius-1);
-  transition: box-shadow 150ms ease-out;
+  transition: 150ms ease-out;
 }
 
 .AnimeCard {
@@ -45,11 +45,13 @@
       text-overflow: ellipsis;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      word-break: break-all; //띄어쓰기가 없이 길게 늘어지는 제목의 경우 옆으로 잘려나갈 수 있으므로 대응
     }
     margin: 0.5rem 0 1.5rem;
   }
   &__EtcMedia {
     display: flex;
+    align-items: center;
     margin: 0 calc(var(--card-radius-2) * -1);
     button {
       display: flex;
@@ -90,6 +92,7 @@
   }
   :host(anime-card:hover) {
     box-shadow: 0 0.3rem 1.5rem hsl(var(--card-interaction-300));
+    transform: translateY(-0.5rem);
   }
 }
 
@@ -104,6 +107,9 @@
     }
     &__Title {
       min-height: calc(1.8rem * 1.3 * 2);
+    }
+    &__EtcMedia {
+      margin-top: 0.75rem;
     }
   }
 }

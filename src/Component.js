@@ -29,7 +29,7 @@ export default class Component extends HTMLElement {
   /**
    * 가상돔 내부에서 요소를 찾아 반환하는 메서드
    * @param {`.${string}` | `#${string}` | string} query CSS선택자
-   * @param {boolean} [all=false] true일 경우 일치하는 모든 요소를 배열로 반환한다.
+   * @param {boolean} [all=false] true일 경우 일치하는 모든 요소를 NodeList로 반환한다.
    * @returns {null | Element | NodeList}
    */
   $selector(query, all = false) {

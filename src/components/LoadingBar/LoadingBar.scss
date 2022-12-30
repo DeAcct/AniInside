@@ -1,21 +1,24 @@
 @import "@/reset.scss";
 
 :host(loading-bar) {
-  opacity: 0;
-  transition: 150ms ease-out;
+  .LoadingBar {
+    opacity: 0;
+    height: 0.3rem;
+    &__Body {
+      width: 100%;
+      height: 100%;
+      background-color: hsl(var(--theme-base), var(--theme-depth-500));
+      transform-origin: 0%;
+      animation: none;
+    }
+  }
 }
 :host(loading-bar[loading]) {
-  opacity: 1;
-}
-
-.LoadingBar {
-  height: 0.3rem;
-  &__Body {
-    width: 100%;
-    height: 100%;
-    background-color: hsl(var(--theme-color));
-    animation: loading-animation 1000ms cubic-bezier(1, 0, 0, 1) infinite;
-    transform-origin: 0%;
+  .LoadingBar {
+    opacity: 1;
+    &__Body {
+      animation: loading-animation 1000ms cubic-bezier(1, 0, 0, 1) infinite;
+    }
   }
 }
 

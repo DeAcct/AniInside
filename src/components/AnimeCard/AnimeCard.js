@@ -1,6 +1,6 @@
 import Style from "./AnimeCard.scss?inline";
 import Component from "@/Component";
-import { Arrow } from "@/Icons/Arrow";
+import { useModal } from "@/utility/modal";
 
 class AnimeCard extends Component {
   template() {
@@ -21,25 +21,19 @@ class AnimeCard extends Component {
             <slot name="score"></slot>
             <figcaption class="AnimeCard__Title">
               <a target="_blank" href="${this.href}">
-                <slot></slot>
+                ${this.title}
               </a>
             </figcaption>
             <slot name="tags"></slot>
           </div>
           <div class="AnimeCard__EtcMedia">
             ${
-              this.synopsis
-                ? `<button class="AnimeCard__SynopsisButton">
-                    시놉시스
-                  </button>`
-                : ""
+              this.synopsis &&
+              "<button class='AnimeCard__SynopsisButton'>시놉시스</button>"
             }
             ${
-              this.pvUrl
-                ? `<button class="AnimeCard__PVOpenButton">
-                    예고편
-                  </button>`
-                : ""
+              this.pvUrl &&
+              "<button class='AnimeCard__PVOpenButton'>예고편</button>"
             }
           </div>
         </div>
@@ -50,27 +44,25 @@ class AnimeCard extends Component {
   setEvent() {
     const $PVOpenButton = this.$selector(".AnimeCard__PVOpenButton");
     const $SynopsisButton = this.$selector(".AnimeCard__SynopsisButton");
-    const globalPVModalRequestEvent = new CustomEvent("modal-request", {
-      detail: {
-        type: "pv",
-        content: this.pvUrl,
-      },
-    });
-    const globalSynopsisModalRequestEvent = new CustomEvent("modal-request", {
-      detail: {
-        type: "synopsis",
-        content: this.synopsis,
-      },
-    });
     $PVOpenButton?.addEventListener("click", () => {
-      console.log("asdf");
-      dispatchEvent(globalPVModalRequestEvent);
+      useModal({
+        type: "video",
+        title: `${this.title} 예고편`,
+        content: this.pvUrl,
+      });
     });
     $SynopsisButton?.addEventListener("click", () => {
-      dispatchEvent(globalSynopsisModalRequestEvent);
+      useModal({
+        type: "paragraph",
+        title: `${this.title} 시놉시스`,
+        content: this.synopsis,
+      });
     });
   }
 
+  get title() {
+    return this.getAttribute("ani-title");
+  }
   get pvUrl() {
     return this.getAttribute("pv-url");
   }
@@ -78,7 +70,7 @@ class AnimeCard extends Component {
     return this.getAttribute("href");
   }
   get synopsis() {
-    return this.getAttribute("synopsis");
+    return decodeURIComponent(this.getAttribute("synopsis"));
   }
 }
 

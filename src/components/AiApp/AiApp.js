@@ -1,7 +1,8 @@
 import Component from "@/Component";
 import Style from "./AiApp.scss?inline";
 import DAY from "@/constants/day";
-import { usePathName } from "./../../utility/location";
+import { usePathName } from "@/utility/location";
+import { useModalSideEffect } from "@/utility/modal";
 
 // registerSW({
 //   onNeedRefresh() {
@@ -62,10 +63,6 @@ class AiApp extends Component {
     addEventListener("history-change", (e) =>
       this.changeSelected(e.detail.path.replace("/", ""))
     );
-    addEventListener("modal-request", (e) => {
-      console.log("modal이 요청되었습니다.");
-      console.log(e.detail);
-    });
   }
   setEvent() {
     const $loadingBar = this.$selector("loading-bar");
@@ -75,6 +72,15 @@ class AiApp extends Component {
     });
     $animeList.addEventListener("fetch-complete", () => {
       $loadingBar.removeAttribute("loading");
+    });
+    addEventListener("modal-request", (e) => {
+      const $coverModal = this.$selector("cover-modal");
+      const { type, title, content } = e.detail;
+      $coverModal.setAttribute("open", "");
+      useModalSideEffect(true);
+      $coverModal.setAttribute("m-type", type);
+      $coverModal.setAttribute("m-title", title);
+      $coverModal.setAttribute("m-content", content);
     });
   }
   setViewport() {
@@ -100,6 +106,7 @@ class AiApp extends Component {
           </anime-list>
         </sticky-renderer>
       </router-provider>
+      <cover-modal></cover-modal>
     `;
   }
   changeSelected(findTarget) {
