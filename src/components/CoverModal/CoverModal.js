@@ -16,17 +16,18 @@ class CoverModal extends Component {
       </style>
       <div class="CoverModal">
         <h2 class="CoverModal__Title">${this.title || ""}</h2>
-        ${this.contentWrapper}
+        ${this.contentWrapper || ""}
         <button class="CoverModal__CloseButton">닫기</button>
       </div>
     `;
   }
   setEvent() {
+    this.addEventListener("click", () => this.close());
+
     const $B_CoverModal = this.$selector(".CoverModal");
     $B_CoverModal.addEventListener("click", (e) => {
       e.stopPropagation();
     });
-    this.addEventListener("click", () => this.close());
 
     const $E_CloseButton = this.$selector(".CoverModal__CloseButton");
     $E_CloseButton.addEventListener("click", () => this.close());
@@ -53,6 +54,16 @@ class CoverModal extends Component {
     return this.getAttribute("m-content");
   }
   get contentWrapper() {
+    console.log(this.type, this.title, this.content);
+
+    if (!(this.type || this.title || this.content)) {
+      return undefined;
+    }
+    // 드모르간의 법칙에 의해 아래 코드도 같은 동작을 함
+    // if (!this.type && !this.title && !this.content) {
+    //   return undefined;
+    // }
+    //
     const WrapperMap = {
       video: `
         <div class="CoverModal__VideoWrap LoadingTarget">
@@ -67,7 +78,7 @@ class CoverModal extends Component {
         </div>
       `,
       paragraph: `
-        <p>${this.content}</p>
+        <slice-paragraph s-content="${this.content}" source-bold></slice-paragraph>
       `,
     };
     return WrapperMap[this.type];
