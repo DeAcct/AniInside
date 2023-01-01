@@ -11,7 +11,7 @@ class StarRating extends Component {
             width: ${(this.score / 10) * 100}%;
           }
         </style>
-        <figure class="StarRating">
+        <${this.score ? "figure" : "div"}  class="StarRating">
         ${
           this.score
             ? `<svg class="StarRating__Holder" viewBox="0 0 280 48">
@@ -25,16 +25,16 @@ class StarRating extends Component {
                   <rect x="0" y="0" width="0%" height="100%" class="StarRating__Progress">
                 </g>
               </svg>
-              <p class="StarRating__Number">
+              <figcaption class="StarRating__Number">
                 (${this.score.toFixed(2)})
-              </p>
+              </figcaption>
               `
-            : `<p class="StarRating__Error">
+            : `<figcaption class="StarRating__Error">
                 점수가 없어요!
-              </p
+              </figcaption
               `
         }
-        </figure>
+        </${this.score ? "figure" : "div"}>
       `;
   }
   get score() {
