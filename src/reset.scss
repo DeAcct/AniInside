@@ -60,7 +60,8 @@ router-provider,
 slice-paragraph,
 star-rating,
 sticky-renderer,
-tag-list {
+tag-list,
+teleport-portal {
   margin: 0;
   padding: 0;
   border: none;
@@ -75,12 +76,12 @@ tag-list {
   word-break: keep-all;
   float: none;
 }
-.IconProvider {
+.static-asset {
   display: none;
 }
 
 ::selection {
-  background-color: hsl(var(--theme-color));
+  background-color: hsl(var(--theme-base), var(--theme-depth-500));
   color: #fff;
 }
 :root {

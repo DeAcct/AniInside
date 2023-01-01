@@ -54,8 +54,6 @@ class CoverModal extends Component {
     return this.getAttribute("m-content");
   }
   get contentWrapper() {
-    console.log(this.type, this.title, this.content);
-
     if (!(this.type || this.title || this.content)) {
       return undefined;
     }
@@ -78,7 +76,10 @@ class CoverModal extends Component {
         </div>
       `,
       paragraph: `
-        <slice-paragraph s-content="${this.content}" source-bold></slice-paragraph>
+        <slice-paragraph 
+          s-content="${encodeURIComponent(this.content)}" 
+          source-bold
+        ></slice-paragraph>
       `,
     };
     return WrapperMap[this.type];

@@ -6,26 +6,26 @@
   &__Holder {
     width: 7rem;
   }
-  &__Partial {
+  &__Progress {
+    fill: hsl(var(--star-color));
+    height: 100%;
+    animation: star-rating 600ms ease-out;
+  }
+  &__BG {
     fill: hsl(var(--depth-300));
-    &--Filled {
-      fill: hsl(var(--star-color));
-    }
   }
   &__Number {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
   }
   &__Error {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
   }
 }
-@keyframes loading-animation {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(200%);
+
+@keyframes star-rating {
+  from {
+    width: 0%;
   }
 }

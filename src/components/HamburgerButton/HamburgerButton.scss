@@ -16,7 +16,7 @@
     color: inherit;
   }
   &:hover {
-    background-color: hsl(var(--theme-color), 10%);
-    color: hsl(var(--theme-color));
+    background-color: hsl(var(--theme-base), var(--theme-depth-500), 10%);
+    color: hsl(var(--theme-base), var(--theme-depth-500));
   }
 }

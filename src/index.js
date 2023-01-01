@@ -16,6 +16,8 @@ import "./components/LoadingBar/LoadingBar";
 import "./components/IconBase/IconBase";
 import "./components/CoverModal/CoverModal";
 import "./components/SliceParagraph/SliceParagraph";
+import "./components/StarSet/StarSet";
+import "./components/TeleportPortal/TeleportPortal";
 
 import "./reset.scss";
 import "./color.scss";
@@ -24,4 +26,4 @@ const mountPosition = document.getElementById("app");
 const App = document.createElement("ai-app");
 mountPosition.appendChild(App);
 
-const updateSW = registerSW;
+const updateSW = registerSW();

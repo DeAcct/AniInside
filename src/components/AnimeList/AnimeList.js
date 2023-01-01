@@ -28,7 +28,6 @@ class AnimeList extends Component {
     `;
   }
   successUI(items) {
-    console.log(items);
     return `
     <ul class="AnimeList">
       ${items
