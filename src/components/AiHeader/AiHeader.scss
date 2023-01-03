@@ -12,7 +12,7 @@
   width: min(calc(100% - var(--inner-padding) * 2), var(--app-width-limit));
   height: var(--header-height);
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
   align-items: center;
   &__Logo {
     font-size: 2rem;

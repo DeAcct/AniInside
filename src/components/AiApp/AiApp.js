@@ -3,6 +3,7 @@ import Style from "./AiApp.scss?inline";
 import DAY from "@/constants/day";
 import { usePathName } from "@/utility/location";
 import { useModalSideEffect } from "@/utility/modal";
+import { getLocalStorage, setLocalStorage } from "./../../utility/localStorage";
 
 // registerSW({
 //   onNeedRefresh() {
@@ -54,15 +55,34 @@ import { useModalSideEffect } from "@/utility/modal";
 class AiApp extends Component {
   state = {
     selectedDay: new DAY().find(usePathName()),
+    root: document.documentElement,
   };
   setup() {
+    const { root } = this.state;
     this.setViewport();
+    if (!getLocalStorage("theme")) {
+      console.log("empty");
+      setLocalStorage(
+        "theme",
+        matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+      );
+    }
+    const theme = getLocalStorage("theme");
+    root.dataset.theme = theme;
   }
   setIsolatedEvent() {
-    addEventListener("resize", this.setViewport);
+    addEventListener("resize", () => {
+      this.setViewport();
+    });
     addEventListener("history-change", (e) =>
       this.changeSelected(e.detail.path.replace("/", ""))
     );
+    addEventListener("theme-change", (e) => {
+      const { root } = this.state;
+      const { detail: isDarkmode } = e;
+      root.dataset.theme = isDarkmode ? "dark" : "light";
+      setLocalStorage("theme", root.dataset.theme);
+    });
   }
   setEvent() {
     const $loadingBar = this.$selector("loading-bar");
@@ -84,7 +104,7 @@ class AiApp extends Component {
     });
   }
   setViewport() {
-    const root = document.documentElement;
+    const { root } = this.state;
     root.style.setProperty("--vw", window.innerWidth / 100);
     root.style.setProperty("--vh", window.innerHeight / 100);
   }
@@ -107,17 +127,6 @@ class AiApp extends Component {
         </sticky-renderer>
       </router-provider>
       <cover-modal></cover-modal>
-      <teleport-portal to="#app">
-        <svg class="static-asset" viewBox="0 0 280 48">
-          <defs>
-            <clipPath id="star-set">
-              <path
-                d="m47.19,20.86l-9.68,9.96,2.25,13.88c.38,2.34-2.09,4.09-4.16,2.94l-11.62-6.45-11.62,6.45c-2.06,1.15-4.54-.6-4.16-2.94l2.25-13.88L.81,20.86c-1.61-1.65-.68-4.44,1.6-4.79l13.24-2.03L21.44,1.63C21.95.54,22.98,0,24,0s2.05.54,2.56,1.63l5.8,12.4,13.24,2.03c2.27.35,3.2,3.13,1.6,4.79Zm56.4-4.79l-13.24-2.03-5.8-12.4C84.05.54,83.02,0,82,0s-2.05.54-2.56,1.63l-5.8,12.4-13.24,2.03c-2.27.35-3.2,3.13-1.6,4.79l9.68,9.96-2.25,13.88c-.38,2.34,2.09,4.09,4.16,2.94l11.62-6.45,11.62,6.45c2.06,1.15,4.54-.6,4.16-2.94l-2.25-13.88,9.68-9.96c1.61-1.65.68-4.44-1.6-4.79Zm58,0l-13.24-2.03-5.8-12.4C142.05.54,141.02,0,140,0s-2.05.54-2.56,1.63l-5.8,12.4-13.24,2.03c-2.27.35-3.2,3.13-1.6,4.79l9.68,9.96-2.25,13.88c-.38,2.34,2.09,4.09,4.16,2.94l11.62-6.45,11.62,6.45c2.06,1.15,4.54-.6,4.16-2.94l-2.25-13.88,9.68-9.96c1.61-1.65.68-4.44-1.6-4.79Zm58,0l-13.24-2.03-5.8-12.4C200.05.54,199.02,0,198,0s-2.05.54-2.56,1.63l-5.8,12.4-13.24,2.03c-2.27.35-3.2,3.13-1.6,4.79l9.68,9.96-2.25,13.88c-.38,2.34,2.09,4.09,4.16,2.94l11.62-6.45,11.62,6.45c2.06,1.15,4.54-.6,4.16-2.94l-2.25-13.88,9.68-9.96c1.61-1.65.68-4.44-1.6-4.79Zm58,0l-13.24-2.03-5.8-12.4C258.05.54,257.02,0,256,0s-2.05.54-2.56,1.63l-5.8,12.4-13.24,2.03c-2.27.35-3.2,3.13-1.6,4.79l9.68,9.96-2.25,13.88c-.38,2.34,2.09,4.09,4.16,2.94l11.62-6.45,11.62,6.45c2.06,1.15,4.54-.6,4.16-2.94l-2.25-13.88,9.68-9.96c1.61-1.65.68-4.44-1.6-4.79Z"
-              />
-            </clipPath>
-          </defs>
-        </svg>
-      </teleport-portal>
     `;
   }
   changeSelected(findTarget) {

@@ -3,7 +3,6 @@ import Component from "@/Component";
 
 class StarRating extends Component {
   template() {
-    console.log(this.score);
     return `
         <style>
           ${Style}
@@ -26,12 +25,12 @@ class StarRating extends Component {
                 </g>
               </svg>
               <figcaption class="StarRating__Number">
-                (${this.score.toFixed(2)})
+                (${this.score})
               </figcaption>
               `
-            : `<figcaption class="StarRating__Error">
+            : `<p class="StarRating__Error">
                 점수가 없어요!
-              </figcaption
+              </p>
               `
         }
         </${this.score ? "figure" : "div"}>

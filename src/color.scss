@@ -33,6 +33,16 @@
 }
 
 [data-theme="dark"] {
+  --theme-depth-100: 5%;
+  --theme-depth-200: 10%;
+  --theme-depth-300: 20%;
+  --theme-depth-400: 30%;
+  --theme-depth-500: 41%;
+  --theme-depth-600: 60%;
+  --theme-depth-700: 85%;
+  --theme-depth-800: 90%;
+  --theme-depth-900: 95%;
+
   --depth-100: 261, 30%, 8%;
   --depth-200: 261, 30%, 16%;
   --depth-300: 261, 30%, 24%;

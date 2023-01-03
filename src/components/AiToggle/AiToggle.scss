@@ -1,0 +1,87 @@
+@import "@/reset.scss";
+.AiToggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  -webkit-user-select: none;
+  user-select: none;
+  &__Bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    width: 4.6rem;
+    height: 2.8rem;
+    background-color: hsl(var(--depth-400));
+    border-radius: 9999px;
+    transition: background-color 150ms ease-out;
+    border: 2px solid hsl(var(--depth-900));
+  }
+  &__Knob {
+    position: absolute;
+    left: 0.5rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 2px dotted transparent;
+    border-radius: 50%;
+    background-color: hsl(var(--depth-900));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 150ms ease-out;
+  }
+  &__Icon {
+    width: 1.8rem;
+    height: 1.8rem;
+    flex-shrink: 0;
+    fill: hsl(var(--depth-100));
+    .Dark {
+      opacity: 0;
+      transition: 150ms ease-out;
+    }
+  }
+  &__RealCheckbox:focus ~ &__Bar {
+    background-color: hsl(var(--theme-base), var(--theme-depth-300)) !important;
+  }
+}
+
+:host(ai-toggle[checked]) {
+  .AiToggle {
+    &__Bar {
+      background-color: hsl(var(--theme-base), var(--theme-depth-500));
+      border-color: hsl(var(--theme-base), var(--theme-depth-500));
+    }
+    &__Knob {
+      width: 2rem;
+      height: 2rem;
+      transform: translateX(1.4rem);
+      background-color: hsl(var(--depth-100));
+    }
+    &__Icon {
+      transform: rotate(0);
+      fill: hsl(var(--depth-900));
+      .Dark {
+        opacity: 1;
+      }
+    }
+  }
+}
+:host(ai-toggle[disabled]) {
+  .AiToggle {
+    &__Knob {
+      opacity: 0.5;
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :host(ai-toggle:hover) {
+    .AiToggle {
+      &__Bar {
+        background-color: hsl(var(--theme-base), var(--theme-depth-300));
+      }
+    }
+  }
+}

@@ -12,9 +12,6 @@
   width: calc(var(--vw) * 100 * 1px);
   height: calc(var(--vh) * 100 * 1px);
   background-color: hsla(var(--cover-modal-bg));
-  -webkit-backdrop-filter: blur(var(--backdrop-blur-1));
-  backdrop-filter: blur(var(--backdrop-blur-1));
-  transition: 300ms ease-out;
   .CoverModal {
     display: flex;
     flex-direction: column;
@@ -50,7 +47,8 @@
       }
     }
     slice-paragraph {
-      font-size: 1.3rem;
+      --slice-paragraph-font-size: 1.3rem;
+      --slice-paragraph-line-height: 1.5;
     }
     &__CloseButton {
       display: flex;
@@ -75,8 +73,15 @@
   :host(cover-modal) {
     align-items: center;
     .CoverModal {
-      width: calc(var(--vw) * 50 * 1px);
+      width: 100ch;
       border-radius: var(--card-radius-1);
+      padding: 3rem;
+      &__Title {
+        font-size: 2rem;
+      }
+      slice-paragraph {
+        --slice-paragraph-font-size: 1.5rem;
+      }
     }
   }
 }

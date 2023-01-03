@@ -68,17 +68,19 @@ class AnimeList extends Component {
         .join("")}
     </ul>`;
   }
-  fireFetchComplete() {
-    const fetchCompleteEvent = new CustomEvent("fetch-complete");
-    this.dispatchEvent(fetchCompleteEvent);
-  }
-  fireFetchStart() {
+
+  dispatchFetchStart() {
     const fetchStartEvent = new CustomEvent("fetch-start");
     this.dispatchEvent(fetchStartEvent);
   }
+  dispatchFetchComplete() {
+    const fetchCompleteEvent = new CustomEvent("fetch-complete");
+    this.dispatchEvent(fetchCompleteEvent);
+  }
+
   async getData() {
     try {
-      this.fireFetchStart();
+      this.dispatchFetchStart();
       this.state.isFailed = false;
       const response = (await fetch(this.getAttribute("src"))).json();
       response.then(({ data }) => {
@@ -89,7 +91,7 @@ class AnimeList extends Component {
       this.state.isFailed = true;
       this.render();
     }
-    this.fireFetchComplete();
+    this.dispatchFetchComplete();
   }
   setEvent() {
     const $errorView = this.$selector("error-view");

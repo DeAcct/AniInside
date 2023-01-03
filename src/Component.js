@@ -1,8 +1,7 @@
 export default class Component extends HTMLElement {
   state = {};
-  componentRoot;
   connectedCallback() {
-    this.componentRoot = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
     this.setup();
     this.setIsolatedEvent();
     this.render();
@@ -17,7 +16,7 @@ export default class Component extends HTMLElement {
     return ``;
   }
   render() {
-    this.componentRoot.innerHTML = this.template();
+    this.shadowRoot.innerHTML = this.template();
     this.setEvent();
   }
   /** 테마 변경 이벤트를 감지하여 테마 관련 CSS Variables를 교체한다.*/
@@ -34,8 +33,8 @@ export default class Component extends HTMLElement {
    */
   $selector(query, all = false) {
     return all
-      ? this.componentRoot.querySelectorAll(query)
-      : this.componentRoot.querySelector(query);
+      ? this.shadowRoot.querySelectorAll(query)
+      : this.shadowRoot.querySelector(query);
   }
   afterRender() {}
   /**

@@ -23,20 +23,20 @@ class OptimizedImage extends Component {
       </style>
       <picture>
         <source 
-          media="screen and (max-width: 767px)" 
-          srcset="${webp.image_url}"
-        />
-        <source 
           media="screen and (min-width: 1080px)" 
           srcset="${webp.large_image_url}"
         />
+        <source
+          media="screen and (min-width: 1080px)" 
+          srcset="${jpg.large_image_url}"
+        />
         <source 
           media="screen and (max-width: 767px)" 
-          srcset="${jpg.image_url}"
+          srcset="${webp.image_url}"
         />
         <img 
           loading="lazy"
-          src="${jpg.large_image_url}" 
+          src="${jpg.image_url}" 
           alt="${this.getAttribute("alt-text")}"
           class="OptimizedImage"
         />

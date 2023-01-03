@@ -45,6 +45,7 @@ img,
 video,
 svg,
 ai-app,
+ai-toggle,
 ai-header,
 anime-card,
 anime-list,
@@ -75,6 +76,7 @@ teleport-portal {
   box-sizing: border-box;
   word-break: keep-all;
   float: none;
+  outline: none;
 }
 .static-asset {
   display: none;
@@ -93,9 +95,9 @@ teleport-portal {
 ::after,
 ::before {
   --inner-padding: 2rem;
-  --card-padding: 2rem;
+  --card-padding: 1.5rem;
   --chip-padding: 0.5rem 0.75rem;
-  --header-height: 8rem;
+  --header-height: 7rem;
   --day-selector-height: 6rem;
   --card-radius-1: 1rem;
   --card-radius-2: 0.5rem;
@@ -173,13 +175,17 @@ summary {
   a,
   button,
   router-link,
+  ai-toggle,
   [data-pointer="true"] {
     cursor: pointer;
   }
 }
 @media screen and (min-width: 768px) {
-  :root {
-    --card-padding: 1rem;
+  :host,
+  :root,
+  ::after,
+  ::before {
+    --card-padding: 2rem;
     --chip-padding: 1rem 1.5rem;
   }
 }
