@@ -50,6 +50,10 @@ class DaySelector extends Component {
     this.$selector(
       `[data-key="${e.detail.path.replace("/", "")}"]`
     ).classList.add("DaySelector__Item--Selected");
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 }
 
