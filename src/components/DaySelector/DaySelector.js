@@ -52,7 +52,6 @@ class DaySelector extends Component {
     ).classList.add("DaySelector__Item--Selected");
     window.scroll({
       top: 0,
-      behavior: "smooth",
     });
   }
 }
