@@ -3,54 +3,7 @@ import Style from "./AiApp.scss?inline";
 import DAY from "@/constants/day";
 import { usePathName } from "@/utility/location";
 import { useModalSideEffect } from "@/utility/modal";
-import { getLocalStorage, setLocalStorage } from "./../../utility/localStorage";
-
-// registerSW({
-//   onNeedRefresh() {
-//     console.log("새로고침 필요");
-//   },
-//   onOfflineReady() {
-//     console.log("설치 준비 완료");
-//   },
-// });
-
-//const $FixedTop = document.querySelector(".fixed-area .top");
-
-//const darkmodeToggle = LabelledToggle($FixedTop, "다크 모드");
-// const systemMode = matchMedia("(prefers-color-scheme: dark)").matches
-//   ? "dark"
-//   : "light";
-// const userMode = localStorage.getItem("theme");
-// //const $realCheckBox = darkmodeToggle.shadowRoot.querySelector(".real-checkbox");
-
-// const useTheme = () => userMode || systemMode;
-
-// const enable = () => {
-//   document.documentElement.dataset.theme = "dark";
-//   localStorage.setItem("theme", "dark");
-//   //$realCheckBox.checked = true;
-// };
-// const disable = () => {
-//   document.documentElement.dataset.theme = "light";
-//   localStorage.setItem("theme", "light");
-//   //$realCheckBox.checked = false;
-// };
-
-// if (useTheme() === "dark") {
-//   enable();
-// } else {
-//   disable();
-// }
-
-// /*
-// darkmodeToggle.addEventListener("click", () => {
-//   if ($realCheckBox.checked) {
-//     disable();
-//   } else {
-//     enable();
-//   }
-// });
-// */
+import { getLocalStorage, setLocalStorage } from "@/utility/localStorage";
 
 class AiApp extends Component {
   state = {
