@@ -1,4 +1,5 @@
 import Component from "@/Component";
+import { useObjArraySort } from "@/utility/sort";
 import Style from "./AnimeList.scss?inline";
 
 class AnimeList extends Component {
@@ -66,7 +67,9 @@ class AnimeList extends Component {
           `
         )
         .join("")}
-    </ul>`;
+    </ul>
+    <button class="AnimeList__SortButton"></button>
+    `;
   }
 
   dispatchFetchStart() {
@@ -84,7 +87,10 @@ class AnimeList extends Component {
       this.state.isFailed = false;
       const response = (await fetch(this.getAttribute("src"))).json();
       response.then(({ data }) => {
-        this.state.animes = data;
+        //놀랍게도, 제목길이로 정렬!
+        //"."을 통해 깊은 탐색도 가능!
+        //제목의 길이가 작품성을 대변하지는 않지만, 대부분 길거나 이상한 제목의 경우 내용물도 이상한 경우가 많다.
+        this.state.animes = useObjArraySort(data, "title.length");
         this.render();
       });
     } catch {

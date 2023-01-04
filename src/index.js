@@ -16,6 +16,7 @@ import "./components/RouterProvider/RouterProvider";
 import "./components/SliceParagraph/SliceParagraph";
 import "./components/StarRating/StarRating";
 import "./components/StickyRenderer/StickyRenderer";
+import "./components/TabSelector/TabSelector";
 import "./components/TagList/TagList";
 import "./components/TeleportPortal/TeleportPortal";
 
