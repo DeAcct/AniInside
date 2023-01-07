@@ -1,6 +1,8 @@
 import { registerSW } from "virtual:pwa-register";
 import "./components/AiApp/AiApp";
+import "./components/AiExpandable/AiExpandable";
 import "./components/AiHeader/AiHeader";
+import "./components/AiToggle/AiToggle";
 import "./components/AnimeCard/AnimeCard";
 import "./components/AnimeList/AnimeList";
 import "./components/CoverModal/CoverModal";
@@ -8,7 +10,6 @@ import "./components/DaySelector/DaySelector";
 import "./components/ErrorView/ErrorView";
 import "./components/HamburgerButton/HamburgerButton";
 import "./components/IconBase/IconBase";
-import "./components/AiToggle/AiToggle";
 import "./components/LoadingBar/LoadingBar";
 import "./components/OptimizedImage/OptimizedImage";
 import "./components/RouterLink/RouterLink";

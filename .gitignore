@@ -5,6 +5,8 @@ user-research
 
 .vscode
 
+node_modules
+
 .yarn/*
 !.yarn/cache
 !.yarn/patches

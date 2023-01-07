@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./LoadingBar.scss?inline";
 
 class LoadingBar extends Component {

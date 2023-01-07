@@ -4,7 +4,7 @@
   display: none;
   position: fixed;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   cursor: pointer;
   top: 0;
   left: 0;
@@ -19,7 +19,7 @@
     width: 100%;
     padding: var(--card-padding);
     background-color: hsl(var(--depth-100));
-    border-radius: var(--card-radius-1) var(--card-radius-1) 0 0;
+    border-radius: var(--card-radius-1);
     cursor: initial;
     transition: 300ms ease-out;
 
@@ -74,7 +74,6 @@
     align-items: center;
     .CoverModal {
       width: 100ch;
-      border-radius: var(--card-radius-1);
       padding: 3rem;
       &__Title {
         font-size: 2rem;

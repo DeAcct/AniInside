@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./AiToggle.scss?inline";
 
 class AiToggle extends Component {

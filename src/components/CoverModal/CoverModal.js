@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import { useModalSideEffect } from "@/utility/modal";
 import Style from "./CoverModal.scss?inline";
 

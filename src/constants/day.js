@@ -2,7 +2,6 @@ export const DAY_REGEX = /월|화|수|목|금|토|일/;
 
 /**
  * 한국어 날짜와 관련된 클래스입니다.
- * @class
  */
 export default class DAY {
   /**

@@ -1,6 +1,6 @@
 import DAY from "@/constants/day";
 import { usePathName } from "./location";
-export default function useRouter(to, method) {
+export function useRouter(to, method) {
   if (usePathName() === to.replace("/", "")) {
     return;
   }

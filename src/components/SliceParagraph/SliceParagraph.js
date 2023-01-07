@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./SliceParagraph.scss?inline";
 
 class SliceParagraph extends Component {

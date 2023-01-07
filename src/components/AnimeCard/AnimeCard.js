@@ -1,8 +1,11 @@
 import Style from "./AnimeCard.scss?inline";
-import Component from "@/Component";
+import { Component } from "@/Component";
 import { useModal } from "@/utility/modal";
 
 class AnimeCard extends Component {
+  state = {
+    isTitleExpanded: false,
+  };
   template() {
     return `
       <style>
@@ -19,11 +22,15 @@ class AnimeCard extends Component {
         <div class="right">
           <div class="col">
             <slot name="score"></slot>
-            <figcaption class="AnimeCard__Title">
-              <a target="_blank" href="${this.href}">
+            <ai-expandable root="figcaption" class="AnimeCard__Title">
+              <a 
+                target="_blank" 
+                href="${this.href}" 
+                class="AnimeCard__ExpandTarget"
+              >
                 ${this.title}
               </a>
-            </figcaption>
+            </ai-expandable>
             <slot name="tags"></slot>
           </div>
           <div class="AnimeCard__EtcMedia">
@@ -33,7 +40,7 @@ class AnimeCard extends Component {
             }
             ${
               this.pvUrl &&
-              "<button class='AnimeCard__PVOpenButton'>예고편</button>"
+              "<button class='AnimeCard__PVButton'>예고편</button>"
             }
           </div>
         </div>
@@ -42,9 +49,9 @@ class AnimeCard extends Component {
   }
 
   setEvent() {
-    const $PVOpenButton = this.$selector(".AnimeCard__PVOpenButton");
+    const $PVButton = this.$selector(".AnimeCard__PVButton");
     const $SynopsisButton = this.$selector(".AnimeCard__SynopsisButton");
-    $PVOpenButton?.addEventListener("click", () => {
+    $PVButton?.addEventListener("click", () => {
       useModal({
         type: "video",
         title: `${this.title} 예고편`,

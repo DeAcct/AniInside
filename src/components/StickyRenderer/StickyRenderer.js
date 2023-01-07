@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./StickyRenderer.scss?inline";
 
 class StickyRenderer extends Component {

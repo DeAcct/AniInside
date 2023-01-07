@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./TabSelector.scss?inline";
 
 class TabSelector extends Component {

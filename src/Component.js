@@ -1,4 +1,4 @@
-export default class Component extends HTMLElement {
+export class Component extends HTMLElement {
   state = {};
   connectedCallback() {
     this.attachShadow({ mode: "open" });

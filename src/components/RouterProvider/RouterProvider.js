@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./RouterProvider.scss?inline";
 import { usePathName } from "@/utility/location";
 import { useDayRegex } from "@/utility/regex";

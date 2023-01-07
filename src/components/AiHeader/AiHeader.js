@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./AiHeader.scss?inline";
 import { getLocalStorage } from "@/utility/localStorage";
 

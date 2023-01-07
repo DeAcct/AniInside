@@ -1,5 +1,5 @@
 import Style from "./StarRating.scss?inline";
-import Component from "@/Component";
+import { Component } from "@/Component";
 
 class StarRating extends Component {
   template() {

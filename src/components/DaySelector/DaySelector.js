@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./DaySelector.scss?inline";
 import useBEMClass from "@/utility/styleClasses";
 import DAY from "@/constants/day";

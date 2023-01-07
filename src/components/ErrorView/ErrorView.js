@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./ErrorView.scss?inline";
 
 class ErrorView extends Component {

@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./TagList.scss?inline";
 
 class TagList extends Component {

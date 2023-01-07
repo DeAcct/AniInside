@@ -1,0 +1,34 @@
+@import "@/reset.scss";
+
+.AiExpandable {
+  display: flex;
+  height: calc(var(--font-size) * var(--line-height) * 2);
+  &--Expandable {
+    overflow: hidden;
+  }
+  &--Expanded {
+    height: auto;
+    overflow: visible;
+  }
+
+  &__ExpandButton {
+    display: none;
+    bottom: 0;
+    right: 0;
+    width: calc(var(--font-size) * var(--line-height));
+    height: calc(var(--font-size) * var(--line-height));
+    transition: transform 300ms ease-out;
+    svg {
+      width: var(--font-size);
+      fill: currentColor;
+    }
+    &--Show {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &--Expanded {
+      transform: rotate(180deg);
+    }
+  }
+}

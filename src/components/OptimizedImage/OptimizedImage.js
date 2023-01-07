@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./OptimizedImage.scss?inline";
 
 class OptimizedImage extends Component {

@@ -1,4 +1,4 @@
-import { useFlatKeyValue } from "./deepParser";
+import { useDrill } from "./deepParser";
 
 //내림차순의 경우 반대로 정렬하기 위한 상수
 const ORDER_CONST = {
@@ -8,10 +8,10 @@ const ORDER_CONST = {
 
 /**
  * 객체를 원소로 가지는 배열을 키를 기준으로 오름차순 또는 내림차순으로 정렬하여 반환한다.
- * @template T 원본 배열의 원소의 타입을 지정하는 제너릭입니다. 반환할 배열의 원소도 동일합니다.
+ * @template T 원본 배열의 원소의 타입을 지정하는 제너릭입니다. 반환할 배열의 원소도 동일하다.
  * @param {Array<T>} array 원본 배열을 받습니다.
  * @param {string} key 정렬에 사용할 키를 받습니다. 반드시 배열의 원소에 존재하는 속성이어야 한다.
- * @param {'desc' | 'asc'} [order] desc는 내림차순, asc는 오름차순으로 정렬합니다. 아무 것도 적지 않으면 기본값은 asc이다.
+ * @param {'desc' | 'asc'} [order] desc는 내림차순, asc는 오름차순으로 정렬한다. 아무 것도 적지 않으면 기본값은 asc이다.
  * @returns {Array<T>}
  */
 export function useObjArraySort(array, key, order = "asc") {
@@ -27,12 +27,12 @@ export function useObjArraySort(array, key, order = "asc") {
     );
   }
 
-  //스페셜키인 경우 분리
+  const copyArray = [...array]; //sort 메소드는 원본 배열을 변경하기 때문에 복사가 필요하다.
 
   //정렬하기
-  array.sort((prev, next) => {
-    const flatPrev = useFlatKeyValue(key, prev);
-    const flatNext = useFlatKeyValue(key, next);
+  copyArray.sort((prev, next) => {
+    const flatPrev = useDrill(key, prev);
+    const flatNext = useDrill(key, next);
 
     const formattedPrev =
       typeof flatPrev === "string" ? flatPrev.toUpperCase() : flatPrev;
@@ -49,6 +49,5 @@ export function useObjArraySort(array, key, order = "asc") {
     }
     return 0;
   });
-
-  return array;
+  return copyArray;
 }

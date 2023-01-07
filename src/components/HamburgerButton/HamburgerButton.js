@@ -1,4 +1,4 @@
-import Component from "@/Component";
+import { Component } from "@/Component";
 import Style from "./HamburgerButton.scss?inline";
 
 class HamburgerButton extends Component {

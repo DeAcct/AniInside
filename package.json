@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "sass": "^1.57.1",
-    "vite": "^4.0.3"
+    "vite": "^4.0.4"
   },
   "packageManager": "yarn@3.3.1"
 }
