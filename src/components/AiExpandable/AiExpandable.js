@@ -34,9 +34,6 @@ class AiExpandable extends Component {
     if (this.state.isTitleOverflow) {
       $B_AiExpandable.classList.add(`${Block}--Expandable`);
       $E_ExpandButton.classList.add(`${Block}__ExpandButton--Show`);
-    } else {
-      $B_AiExpandable.classList.remove(`${Block}--Expandable`);
-      $E_ExpandButton.classList.remove(`${Block}__ExpandButton--Show`);
     }
   }
 

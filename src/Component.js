@@ -1,5 +1,7 @@
 export class Component extends HTMLElement {
-  state = {};
+  state = {
+    preventRender: false,
+  };
   connectedCallback() {
     this.attachShadow({ mode: "open" });
     this.setup();
@@ -16,7 +18,14 @@ export class Component extends HTMLElement {
     return ``;
   }
   render() {
-    this.shadowRoot.innerHTML = this.template();
+    const template = this.template();
+    if (this.state.preventRender || !template) {
+      return;
+    }
+    if (this.tagName === "ANIME-LIST") {
+      console.log("랜더");
+    }
+    this.shadowRoot.innerHTML = template;
     this.setEvent();
   }
   /** 테마 변경 이벤트를 감지하여 테마 관련 CSS Variables를 교체한다.*/

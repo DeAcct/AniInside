@@ -8,16 +8,30 @@
 .AnimeList {
   width: 100%;
   max-width: 130rem;
-  display: grid;
-  grid-template-columns: repeat(1, 100%);
-  justify-content: space-between;
-  row-gap: calc(var(--card-padding) * 0.75);
-  transition: 300ms ease-out;
-  animation: 300ms mount-animation forwards ease-out;
-  &__Item anime-card {
-    height: 100%;
-    tag-list {
-      margin-left: -0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &__Grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+    justify-content: space-between;
+    row-gap: calc(var(--card-padding) * 1.5);
+    transition: 300ms ease-out;
+    animation: 300ms mount-animation forwards ease-out;
+    &__Item anime-card {
+      height: 100%;
+      tag-list {
+        margin-left: -0.3rem;
+      }
+    }
+  }
+  &__SortButton {
+    display: flex;
+    background-color: hsla(var(--theme-base), var(--theme-depth-500));
+    .icon {
+      width: 1.8rem;
+      height: 1.8rem;
     }
   }
 }
@@ -25,22 +39,28 @@
 @media screen and (min-width: 512px) {
   /*GALAXY_FOLD*/
   .AnimeList {
-    row-gap: calc(var(--card-padding) / 2);
-    grid-template-columns: repeat(2, 49%);
+    &__Grid {
+      row-gap: calc(var(--card-padding) / 2);
+      grid-template-columns: repeat(2, 49%);
+    }
   }
 }
 
 @media screen and (min-width: 768px) {
   /*IPAD_MINI*/
   .AnimeList {
-    grid-template-columns: repeat(3, 32%);
+    &__Grid {
+      grid-template-columns: repeat(3, 32%);
+    }
   }
 }
 
 @media screen and (min-width: 1080px) {
   /*PC*/
   .AnimeList {
-    grid-template-columns: repeat(4, 24%);
+    &__Grid {
+      grid-template-columns: repeat(4, 24%);
+    }
   }
 }
 

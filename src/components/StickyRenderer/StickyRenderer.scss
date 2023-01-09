@@ -21,7 +21,7 @@
   &__Content {
     display: flex;
     justify-content: center;
-    padding-top: var(--card-padding);
+    padding-top: calc(var(--card-padding) * 1.75);
     width: min(calc(100% - var(--inner-padding) * 2), var(--app-width-limit));
     min-height: calc(
       var(--vh) * 100 * 1px - var(--header-height) - var(--day-selector-height) -

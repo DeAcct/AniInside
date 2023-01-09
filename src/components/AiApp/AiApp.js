@@ -79,6 +79,7 @@ class AiApp extends Component {
         </sticky-renderer>
       </router-provider>
       <cover-modal></cover-modal>
+      <slot></slot>
     `;
   }
   changeSelected(findTarget) {

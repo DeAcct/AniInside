@@ -2,10 +2,15 @@ import { Component } from "@/Component";
 import { useObjArraySort } from "@/utility/sort";
 import Style from "./AnimeList.scss?inline";
 
+const SORT_KEYS = ["title.length", "title", "score"];
+
 class AnimeList extends Component {
   state = {
     animes: [],
     isFailed: false,
+    sortKey: "title",
+    ageMode: "teen",
+    preventRender: true,
   };
   static get observedAttributes() {
     return ["src"];
@@ -29,47 +34,53 @@ class AnimeList extends Component {
     `;
   }
   successUI(items) {
-    console.log(items);
     return `
-    <ul class="AnimeList">
-      ${items
-        .map(
-          (item) => `
-            <li class="AnimeList__Item">
-              <anime-card
-                ani-title="${item.title}"
-                href="${item.url}"
-                synopsis="${
-                  item.synopsis ? encodeURIComponent(item.synopsis) : ""
-                }"
-                pv-url="${item.trailer.embed_url || ""}"
-              >
-                <optimized-image
-                  slot="poster"
-                  src-obj=${JSON.stringify(item.images)}
-                  alt-text="${item.title} 포스터"
-                ></optimized-image>
-                <star-rating 
-                  slot="score" 
-                  score=${JSON.stringify(item.score)}
-                ></star-rating>
-                <tag-list 
-                  slot="tags"
-                  data=${JSON.stringify(
-                    //encodeURIComponent를 이용하여 일부 escaping 되어있지 않은 문자열(특수문자 등)을 처리한다.
-                    item.genres.map(({ name, url }) => ({
-                      name: encodeURIComponent(name),
-                      url,
-                    }))
-                  )}
-                ></tag-list>
-              </anime-card>
-            </li>
-          `
-        )
-        .join("")}
-    </ul>
-    <button class="AnimeList__SortButton"></button>
+    <div class="AnimeList">
+      <!--div class="AnimeList__Options">
+        <button class="AnimeList__SortButton">
+          <span class="text">정렬 기준</span>
+          <svg viewBox="0 0 24 24" class="icon"></svg>
+        </button>
+      </div-->
+      <ul class="AnimeList__Grid">
+        ${items
+          .map(
+            (item) => `
+              <li class="AnimeList__Item">
+                <anime-card
+                  ani-title="${item.title}"
+                  href="${item.url}"
+                  synopsis="${
+                    item.synopsis ? encodeURIComponent(item.synopsis) : ""
+                  }"
+                  pv-url="${item.trailer.embed_url || ""}"
+                >
+                  <optimized-image
+                    slot="poster"
+                    src-obj=${JSON.stringify(item.images)}
+                    alt-text="${item.title} 포스터"
+                  ></optimized-image>
+                  <star-rating 
+                    slot="score" 
+                    score=${JSON.stringify(item.score)}
+                  ></star-rating>
+                  <tag-list 
+                    slot="tags"
+                    data=${JSON.stringify(
+                      //encodeURIComponent를 이용하여 일부 escaping 되어있지 않은 문자열(특수문자 등)을 처리한다.
+                      item.genres.map(({ name, url }) => ({
+                        name: encodeURIComponent(name),
+                        url,
+                      }))
+                    )}
+                  ></tag-list>
+                </anime-card>
+              </li>
+            `
+          )
+          .join("")}
+      </ul>
+    <div>
     `;
   }
 
@@ -88,15 +99,12 @@ class AnimeList extends Component {
       this.dispatchFetchStart();
       const response = await fetch(this.getAttribute("src"));
       const { data: responseAnimes } = await response.json();
-      //놀랍게도, 제목길이로 정렬!
-      //"."을 통해 깊은 탐색도 가능!
-      //제목의 길이가 작품성을 대변하지는 않지만, 대부분 길거나 이상한 제목의 경우 내용물도 이상한 경우가 많다.
-      this.state.animes = useObjArraySort(responseAnimes, "title.length");
-      this.render();
+      this.sortArray(responseAnimes);
     } catch {
       this.state.isFailed = true;
-      this.render();
     }
+    this.state.preventRender = false;
+    this.render();
     this.dispatchFetchComplete();
   }
   setEvent() {
@@ -106,6 +114,12 @@ class AnimeList extends Component {
         this.getData();
       });
     }
+  }
+  sortArray(origin) {
+    //놀랍게도, 제목길이로 정렬!
+    //"."을 통해 깊은 탐색!
+    //제목의 길이가 작품성을 대변하지는 않지만, 대부분 길거나 이상한 제목의 경우 내용물도 이상한 경우가 많다.
+    this.state.animes = useObjArraySort(origin, this.state.sortKey);
   }
 }
 

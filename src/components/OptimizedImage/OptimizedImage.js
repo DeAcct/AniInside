@@ -13,7 +13,7 @@ class OptimizedImage extends Component {
   setEvent() {
     //load event는 버블링 불가하므로 직접 이벤트 등록
     const poster = this.$selector(".OptimizedImage");
-    poster.addEventListener("load", this.onPosterReady);
+    poster.addEventListener("load", (e) => this.onPosterReady(e));
   }
   template() {
     const { jpg, webp } = this.imgSet;
