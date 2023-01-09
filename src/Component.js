@@ -22,9 +22,9 @@ export class Component extends HTMLElement {
     if (this.state.preventRender || !template) {
       return;
     }
-    if (this.tagName === "ANIME-LIST") {
-      console.log("랜더");
-    }
+    //if (this.tagName === "ANIME-LIST") {
+    //  console.log("랜더");
+    //}
     this.shadowRoot.innerHTML = template;
     this.setEvent();
   }
