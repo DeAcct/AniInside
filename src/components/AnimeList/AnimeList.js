@@ -36,12 +36,14 @@ class AnimeList extends Component {
   successUI(items) {
     return `
     <div class="AnimeList">
-      <!--div class="AnimeList__Options">
+      <div class="AnimeList__Options">
         <button class="AnimeList__SortButton">
           <span class="text">정렬 기준</span>
-          <svg viewBox="0 0 24 24" class="icon"></svg>
+          <svg viewBox="0 0 24 24" class="icon">
+            <path d="m12,19c-.26,0-.51-.1-.71-.29L2.29,9.71c-.39-.3-.39-1.02,0-1.41s1.02-.39,1.41,0l8.29,8.29,8.29-8.29c.39-.39,1.02-.39,1.41,0s.39,1.02,0,1.41l-9,9c-.2.2-.45.29-.71.29Z"/>
+          </svg>
         </button>
-      </div-->
+      </div>
       <ul class="AnimeList__Grid">
         ${items
           .map(

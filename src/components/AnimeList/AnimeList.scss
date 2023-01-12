@@ -26,12 +26,22 @@
       }
     }
   }
+  &__Options {
+    display: flex;
+    padding: var(--card-padding) 0;
+  }
   &__SortButton {
     display: flex;
-    background-color: hsla(var(--theme-base), var(--theme-depth-500));
+    align-items: center;
+    gap: 0.5rem;
+    .text {
+      font-weight: 500;
+      font-size: 1.4rem;
+    }
     .icon {
-      width: 1.8rem;
-      height: 1.8rem;
+      width: 1.4rem;
+      height: 1.4rem;
+      fill: currentColor;
     }
   }
 }
