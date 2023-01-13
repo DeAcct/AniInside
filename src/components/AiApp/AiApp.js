@@ -12,7 +12,9 @@ class AiApp extends Component {
   };
   setup() {
     const { root } = this.state;
+
     this.setViewport();
+
     if (!getLocalStorage("theme")) {
       setLocalStorage(
         "theme",
@@ -21,6 +23,8 @@ class AiApp extends Component {
     }
     const theme = getLocalStorage("theme");
     root.dataset.theme = theme;
+
+    this.id = "app";
   }
   setIsolatedEvent() {
     addEventListener("resize", () => {
@@ -35,6 +39,14 @@ class AiApp extends Component {
       root.dataset.theme = isDarkmode ? "dark" : "light";
       setLocalStorage("theme", root.dataset.theme);
     });
+    addEventListener("modal-request", (e) => {
+      const $coverModal = this.$selector("cover-modal");
+      const { title, content } = e.detail;
+      $coverModal.setAttribute("open", "");
+      useModalSideEffect(true); //모달이 열리면 측면 스크롤바 제거, 반드시 닫는 로직에서 사이드이펙트 제거 필요
+      $coverModal.setAttribute("m-title", title);
+      $coverModal.innerHTML = content;
+    });
   }
   setEvent() {
     const $loadingBar = this.$selector("loading-bar");
@@ -44,15 +56,6 @@ class AiApp extends Component {
     });
     $animeList.addEventListener("fetch-complete", () => {
       $loadingBar.removeAttribute("loading");
-    });
-    addEventListener("modal-request", (e) => {
-      const $coverModal = this.$selector("cover-modal");
-      const { type, title, content } = e.detail;
-      $coverModal.setAttribute("open", "");
-      useModalSideEffect(true); //모달이 열리면 측면 스크롤바 제거, 반드시 닫는 로직에서 사이드이펙트 제거 필요
-      $coverModal.setAttribute("m-type", type);
-      $coverModal.setAttribute("m-title", title);
-      $coverModal.setAttribute("m-content", content);
     });
   }
   setViewport() {
@@ -79,7 +82,6 @@ class AiApp extends Component {
         </sticky-renderer>
       </router-provider>
       <cover-modal></cover-modal>
-      <slot></slot>
     `;
   }
   changeSelected(findTarget) {

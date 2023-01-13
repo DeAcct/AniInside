@@ -24,7 +24,7 @@ class SliceParagraph extends Component {
   }
 
   get content() {
-    return decodeURIComponent(this.getAttribute("s-content"));
+    return this.innerHTML.trim(); //혹시라도 있을 앞뒤 공백 제거
   }
 }
 

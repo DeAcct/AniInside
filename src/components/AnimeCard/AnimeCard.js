@@ -55,14 +55,24 @@ class AnimeCard extends Component {
       useModal({
         type: "video",
         title: `${this.title} 예고편`,
-        content: this.pvUrl,
+        content: `
+          <frame-holder 
+            src=${this.pvUrl}
+            alt-title=${this.title}
+          >
+          </frame-holder>
+        `,
       });
     });
     $SynopsisButton?.addEventListener("click", () => {
       useModal({
         type: "paragraph",
         title: `${this.title} 시놉시스`,
-        content: this.synopsis,
+        content: `
+          <slice-paragraph>
+            ${this.synopsis}
+          </slice-paragraph>
+        `,
       });
     });
   }

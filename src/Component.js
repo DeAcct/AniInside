@@ -19,7 +19,7 @@ export class Component extends HTMLElement {
   }
   render() {
     const template = this.template();
-    if (this.state.preventRender || !template) {
+    if (!template) {
       return;
     }
     //if (this.tagName === "ANIME-LIST") {

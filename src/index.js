@@ -8,6 +8,7 @@ import "./components/AnimeList/AnimeList";
 import "./components/CoverModal/CoverModal";
 import "./components/DaySelector/DaySelector";
 import "./components/ErrorView/ErrorView";
+import "./components/FrameHolder/FrameHolder";
 import "./components/HamburgerButton/HamburgerButton";
 import "./components/IconBase/IconBase";
 import "./components/LoadingBar/LoadingBar";
@@ -24,8 +25,8 @@ import "./components/TeleportPortal/TeleportPortal";
 import "./reset.scss";
 import "./color.scss";
 
-const mountPosition = document.getElementById("app");
+const mountPosition = document.body;
 const App = document.createElement("ai-app");
-mountPosition.appendChild(App);
+mountPosition.insertBefore(App, mountPosition.firstChild);
 
 const updateSW = registerSW();

@@ -4,10 +4,12 @@ import Style from "./CoverModal.scss?inline";
 
 class CoverModal extends Component {
   static get observedAttributes() {
-    return ["m-type", "m-title", "m-content"];
+    return ["m-title"];
   }
   attributeChangedCallback(name, oldValue, newValue) {
-    this.render();
+    if (name === "m-title") {
+      this.render();
+    }
   }
   template() {
     return `
@@ -16,7 +18,9 @@ class CoverModal extends Component {
       </style>
       <div class="CoverModal">
         <h2 class="CoverModal__Title">${this.title || ""}</h2>
-        ${this.contentWrapper || ""}
+        <div class="CoverModal__Wrap">
+          <slot></slot>
+        </div>
         <button class="CoverModal__CloseButton">닫기</button>
       </div>
     `;
@@ -39,10 +43,9 @@ class CoverModal extends Component {
   }
   close() {
     this.removeAttribute("open");
-    this.removeAttribute("m-type");
-    this.removeAttribute("m-title");
-    this.removeAttribute("m-content");
     useModalSideEffect(false);
+    this.innerHTML = "";
+    this.setAttribute("m-title", "");
   }
   get type() {
     return this.getAttribute("m-type");
@@ -52,37 +55,6 @@ class CoverModal extends Component {
   }
   get content() {
     return this.getAttribute("m-content");
-  }
-  get contentWrapper() {
-    if (!(this.type || this.title || this.content)) {
-      return undefined;
-    }
-    // 드모르간의 법칙에 의해 아래 코드도 같은 동작을 함
-    // if (!this.type && !this.title && !this.content) {
-    //   return undefined;
-    // }
-    //
-    const WrapperMap = {
-      video: `
-        <div class="CoverModal__VideoWrap LoadingTarget">
-          <iframe
-            class="CoverModal__Iframe"
-            src="${this.content}" 
-            title="${this.title} 예고편 동영상 플레이어" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen
-          ></iframe>
-        </div>
-      `,
-      paragraph: `
-        <slice-paragraph 
-          s-content="${encodeURIComponent(this.content)}" 
-          source-bold
-        ></slice-paragraph>
-      `,
-    };
-    return WrapperMap[this.type];
   }
 }
 

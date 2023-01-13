@@ -52,6 +52,7 @@ anime-list,
 cover-modal,
 day-selector,
 error-view,
+frame-holder,
 hamburger-button,
 icon-base,
 loading-bar,
@@ -61,8 +62,7 @@ router-provider,
 slice-paragraph,
 star-rating,
 sticky-renderer,
-tag-list,
-teleport-portal {
+tag-list {
   margin: 0;
   padding: 0;
   border: none;
@@ -115,10 +115,6 @@ teleport-portal {
 ::before {
   --vw: inherit;
   --vh: inherit;
-}
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,

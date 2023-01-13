@@ -13,9 +13,6 @@ class TeleportPortal extends HTMLElement {
     const result = this.getAttribute("to").slice(1);
     return document.getElementById(result);
   }
-  get rootElement() {
-    return this.getAttribute("root");
-  }
 }
 
 customElements.define("teleport-portal", TeleportPortal);
