@@ -17,22 +17,26 @@ export class Component extends HTMLElement {
   template() {
     return ``;
   }
+  style() {
+    return ``;
+  }
   render() {
     const template = this.template();
+    const style = this.style();
     if (!template) {
       return;
     }
-    //if (this.tagName === "ANIME-LIST") {
-    //  console.log("랜더");
-    //}
-    this.shadowRoot.innerHTML = template;
+    // if (this.tagName === "ANIME-LIST") {
+    //   console.log(template);
+    // }
+    this.shadowRoot.innerHTML = `
+      ${style ? `<style>${style}</style>` : ""}
+      ${template}
+    `;
     this.setEvent();
   }
-  /** 테마 변경 이벤트를 감지하여 테마 관련 CSS Variables를 교체한다.*/
-  theme() {
-    addEventListener("theme-change", () => {
-      console.log("asdf");
-    });
+  applyStyle() {
+    this.shadowRoot.innerHTML += this.style();
   }
   /**
    * 가상돔 내부에서 요소를 찾아 반환하는 메서드

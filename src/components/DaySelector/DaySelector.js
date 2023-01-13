@@ -17,11 +17,11 @@ class DaySelector extends Component {
       this.state.selectedDay = day.find(decoded);
     }
   }
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-      ${Style}
-      </style>
       <ul class="DaySelector">
         ${new DAY().all
           .map(

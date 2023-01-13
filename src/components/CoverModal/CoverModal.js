@@ -11,11 +11,11 @@ class CoverModal extends Component {
       this.render();
     }
   }
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <div class="CoverModal">
         <h2 class="CoverModal__Title">${this.title || ""}</h2>
         <div class="CoverModal__Wrap">

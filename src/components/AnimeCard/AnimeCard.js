@@ -6,11 +6,11 @@ class AnimeCard extends Component {
   state = {
     isTitleExpanded: false,
   };
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <figure class="AnimeCard">
         <a 
           target="_blank" 

@@ -1,11 +1,11 @@
 import { Component } from "@/Component";
 import Style from "./FrameHolder.scss?inline";
 class FrameHolder extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <div class="FrameHolder LoadingTarget">
         <iframe
           class="FrameHolder__Content"

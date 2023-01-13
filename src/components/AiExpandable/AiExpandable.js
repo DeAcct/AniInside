@@ -5,11 +5,11 @@ class AiExpandable extends Component {
   refs = {
     Block: "AiExpandable",
   };
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <${this.getAttribute("root")} class="AiExpandable">
         <slot></slot>
         <button class="AiExpandable__ExpandButton">

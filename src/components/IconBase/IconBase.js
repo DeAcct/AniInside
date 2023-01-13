@@ -15,11 +15,11 @@ class IconBase extends HTMLElement {
         });
     });
   }
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <svg viewBox="0 0 24 24" class="IconBase">
         <slot name="body"></slot>
       </svg>

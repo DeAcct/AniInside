@@ -2,11 +2,11 @@ import { Component } from "@/Component";
 import Style from "./StickyRenderer.scss?inline";
 
 class StickyRenderer extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <div class="StickyRenderer__Top">
         <slot name="top"/>
       </div>

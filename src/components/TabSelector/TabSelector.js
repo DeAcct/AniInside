@@ -2,6 +2,9 @@ import { Component } from "@/Component";
 import Style from "./TabSelector.scss?inline";
 
 class TabSelector extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
       <style>

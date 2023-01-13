@@ -2,11 +2,11 @@ import { Component } from "@/Component";
 import Style from "./HamburgerButton.scss?inline";
 
 class HamburgerButton extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <button class="HamburgerButton">
         <slot name="alt-text"></slot>
         <span class="HamburgerButton__Line"></span>

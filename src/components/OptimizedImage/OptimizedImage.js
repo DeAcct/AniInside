@@ -15,12 +15,12 @@ class OptimizedImage extends Component {
     const poster = this.$selector(".OptimizedImage");
     poster.addEventListener("load", (e) => this.onPosterReady(e));
   }
+  style() {
+    return Style;
+  }
   template() {
     const { jpg, webp } = this.imgSet;
     return `
-      <style>
-        ${Style}
-      </style>
       <picture>
         <source 
           media="screen and (min-width: 1080px)" 

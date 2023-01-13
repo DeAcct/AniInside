@@ -18,12 +18,12 @@ class AnimeList extends Component {
       this.getData();
     }
   }
+  style() {
+    return Style;
+  }
   template() {
     const { animes, isFailed } = this.state;
     return `
-      <style>
-        ${Style}
-      </style>
       ${
         isFailed
           ? `<error-view>애니메이션 리스트를 불러오는데 실패했어요ㅠㅠ</error-view>`

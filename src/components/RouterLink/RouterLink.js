@@ -3,9 +3,11 @@ import { useRouter } from "@/utility/router";
 import Style from "./RouterLink.scss?inline";
 
 class RouterLink extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
-    <style>${Style}</style>
       <a href="${this.getAttribute("to")}">
         <slot></slot>
       </a>

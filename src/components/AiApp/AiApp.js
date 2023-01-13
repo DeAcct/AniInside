@@ -63,10 +63,12 @@ class AiApp extends Component {
     root.style.setProperty("--vw", window.innerWidth / 100);
     root.style.setProperty("--vh", window.innerHeight / 100);
   }
+  style() {
+    return Style;
+  }
   template() {
     const { selectedDay } = this.state;
     return `
-      <style>${Style}</style>
       <loading-bar></loading-bar>
       <ai-header></ai-header>
       <router-provider>

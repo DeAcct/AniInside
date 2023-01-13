@@ -3,11 +3,11 @@ import Style from "./AiHeader.scss?inline";
 import { getLocalStorage } from "@/utility/localStorage";
 
 class AiHeader extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <header class="AiHeader">
         <h1 class="AiHeader__Logo">
           애니인사이드

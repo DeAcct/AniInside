@@ -2,11 +2,11 @@ import { Component } from "@/Component";
 import Style from "./SliceParagraph.scss?inline";
 
 class SliceParagraph extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <div class="SliceParagraph">
         ${
           this.content

@@ -14,11 +14,11 @@ class AiToggle extends Component {
       $E_RealCheckbox.disabled = this.disabled;
     }
   }
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <label class="AiToggle">
         <slot></slot>
         <input 

@@ -2,11 +2,11 @@ import { Component } from "@/Component";
 import Style from "./ErrorView.scss?inline";
 
 class ErrorView extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <div class="ErrorView">
         <strong class="ErrorView__MainTitle">앗! 오류가 발생했어요!</strong>
         <p class="ErrorView__Code"><slot></slot></p>

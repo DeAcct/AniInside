@@ -8,11 +8,11 @@ class TagList extends Component {
     startX: 0,
     scrollLeft: 0,
   };
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>
-        ${Style}
-      </style>
       <ul class="TagList">
         ${this.tags
           .map(

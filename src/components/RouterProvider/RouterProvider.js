@@ -5,9 +5,11 @@ import { useDayRegex } from "@/utility/regex";
 import DAY from "@/constants/day";
 
 class RouterProvider extends Component {
+  style() {
+    return Style;
+  }
   template() {
     return `
-      <style>${Style}</style>
       <slot></slot>
     `;
   }
