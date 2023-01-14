@@ -5,6 +5,7 @@ import "./components/AiHeader/AiHeader";
 import "./components/AiToggle/AiToggle";
 import "./components/AnimeCard/AnimeCard";
 import "./components/AnimeList/AnimeList";
+import "./components/BottomSheet/BottomSheet";
 import "./components/CoverModal/CoverModal";
 import "./components/DaySelector/DaySelector";
 import "./components/ErrorView/ErrorView";

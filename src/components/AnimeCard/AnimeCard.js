@@ -1,6 +1,6 @@
 import Style from "./AnimeCard.scss?inline";
 import { Component } from "@/Component";
-import { useModal } from "@/utility/modal";
+import { useModal } from "@/utility/overayUI";
 
 class AnimeCard extends Component {
   state = {
@@ -53,7 +53,6 @@ class AnimeCard extends Component {
     const $SynopsisButton = this.$selector(".AnimeCard__SynopsisButton");
     $PVButton?.addEventListener("click", () => {
       useModal({
-        type: "video",
         title: `${this.title} 예고편`,
         content: `
           <frame-holder 
@@ -66,7 +65,6 @@ class AnimeCard extends Component {
     });
     $SynopsisButton?.addEventListener("click", () => {
       useModal({
-        type: "paragraph",
         title: `${this.title} 시놉시스`,
         content: `
           <slice-paragraph>

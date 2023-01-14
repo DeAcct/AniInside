@@ -2,6 +2,7 @@ import { Component } from "@/Component";
 import { useObjArraySort } from "@/utility/sort";
 import Style from "./AnimeList.scss?inline";
 import { SortOrigin } from "@/constants/sortOrigin";
+import { useBottomSheet } from "@/utility/overayUI";
 
 class AnimeList extends Component {
   state = {
@@ -32,11 +33,12 @@ class AnimeList extends Component {
     `;
   }
   successUI(items) {
+    const { originMap } = this.state;
     return `
     <div class="AnimeList">
       <div class="AnimeList__Options">
         <button class="AnimeList__SortButton">
-          <span class="text">정렬 기준</span>
+          <span class="text">${originMap.text}순</span>
           <svg class="icon" viewBox="0 0 24 24">
             <path d="m21.92,12.38c.1-.24.1-.52,0-.76-.05-.12-.12-.23-.22-.33L12.71,2.29c-.39-.39-1.02-.39-1.41,0s-.39,1.02,0,1.41l7.29,7.29H3c-.55,0-1,.45-1,1s.45,1,1,1h15.59l-7.29,7.29c-.39.39-.39,1.02,0,1.41.2.2.45.29.71.29s.51-.1.71-.29l9-9c.09-.09.17-.2.22-.33Z"/>
           </svg>
@@ -113,12 +115,23 @@ class AnimeList extends Component {
         this.getData();
       });
     }
+
+    const $E_SortButton = this.$selector(".AnimeList__SortButton");
+    // $E_SortButton.addEventListener("click", () => {
+    //   useBottomSheet({
+    //     title: "정렬 기준",
+    //     content: `
+    //       <ul></ul>
+    //     `,
+    //   });
+    // });
   }
   sortArray(origin) {
     const { key } = this.state.originMap;
     //놀랍게도, 제목길이로 정렬!
     //"."을 통해 깊은 탐색!
     //제목의 길이가 작품성을 대변하지는 않지만, 대부분 길거나 이상한 제목의 경우 내용물도 이상한 경우가 많다.
+    //유저에게 더 많은 선택권을 주었다.
     this.state.animes = useObjArraySort(origin, key);
   }
 }

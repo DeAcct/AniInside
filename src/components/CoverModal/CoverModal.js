@@ -1,5 +1,5 @@
 import { Component } from "@/Component";
-import { useModalSideEffect } from "@/utility/modal";
+import { useOveraySideEffect } from "@/utility/overayUI";
 import Style from "./CoverModal.scss?inline";
 
 class CoverModal extends Component {
@@ -43,18 +43,12 @@ class CoverModal extends Component {
   }
   close() {
     this.removeAttribute("open");
-    useModalSideEffect(false);
+    useOveraySideEffect(false);
     this.innerHTML = "";
     this.setAttribute("m-title", "");
   }
-  get type() {
-    return this.getAttribute("m-type");
-  }
   get title() {
     return this.getAttribute("m-title");
-  }
-  get content() {
-    return this.getAttribute("m-content");
   }
 }
 

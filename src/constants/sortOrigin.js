@@ -1,15 +1,15 @@
 export class SortOrigin {
   #SORT_KEYS = [
     {
-      viewText: "제목 길이",
+      text: "제목 길이",
       key: "title.length",
     },
     {
-      viewText: "제목 가나다",
+      text: "제목 가나다",
       key: "title",
     },
     {
-      viewText: "별점",
+      text: "별점",
       key: "score",
     },
   ];

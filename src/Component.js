@@ -1,7 +1,5 @@
 export class Component extends HTMLElement {
-  state = {
-    preventRender: false,
-  };
+  state = {};
   connectedCallback() {
     this.attachShadow({ mode: "open" });
     this.setup();
@@ -34,9 +32,6 @@ export class Component extends HTMLElement {
       ${template}
     `;
     this.setEvent();
-  }
-  applyStyle() {
-    this.shadowRoot.innerHTML += this.style();
   }
   /**
    * 가상돔 내부에서 요소를 찾아 반환하는 메서드

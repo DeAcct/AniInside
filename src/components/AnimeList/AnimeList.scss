@@ -28,7 +28,7 @@
   }
   &__Options {
     display: flex;
-    padding: var(--card-padding) 0;
+    padding: calc(var(--card-padding) * 1.5) 0;
   }
   &__SortButton {
     display: flex;
