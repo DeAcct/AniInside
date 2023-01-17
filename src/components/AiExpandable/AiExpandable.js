@@ -21,7 +21,7 @@ class AiExpandable extends Component {
   }
 
   setIsolatedEvent() {
-    window.addEventListener("resize", () => this.setExpandable());
+    addEventListener("resize", () => this.setExpandable());
   }
   afterRender() {
     this.setExpandable();
@@ -45,6 +45,9 @@ class AiExpandable extends Component {
       $B_AiExpandable.classList.toggle(`${Block}--Expanded`);
       $E_ExpandButton.classList.toggle(`${Block}__ExpandButton--Expanded`);
     });
+  }
+  disconnectedCallback() {
+    removeEventListener("resize", () => this.setExpandable());
   }
 }
 

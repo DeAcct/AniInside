@@ -3,6 +3,8 @@ import { useObjArraySort } from "@/utility/sort";
 import Style from "./AnimeList.scss?inline";
 import { SortOrigin } from "@/constants/sortOrigin";
 import { useBottomSheet } from "@/utility/overayUI";
+import { useCustomEvent } from "@/utility/event";
+import { useFetch } from "@/utility/fetch";
 
 class AnimeList extends Component {
   state = {
@@ -86,27 +88,18 @@ class AnimeList extends Component {
     `;
   }
 
-  dispatchFetchStart() {
-    const fetchStartEvent = new CustomEvent("fetch-start");
-    this.dispatchEvent(fetchStartEvent);
-  }
-  dispatchFetchComplete() {
-    const fetchCompleteEvent = new CustomEvent("fetch-complete");
-    this.dispatchEvent(fetchCompleteEvent);
-  }
-
   async getData() {
     this.state.isFailed = false;
     try {
-      this.dispatchFetchStart();
-      const response = await fetch(this.getAttribute("src"));
+      useCustomEvent("fetch-start", { target: this });
+      const response = await useFetch(this.getAttribute("src"));
       const { data: responseAnimes } = await response.json();
       this.sortArray(responseAnimes);
     } catch {
       this.state.isFailed = true;
     }
     this.render();
-    this.dispatchFetchComplete();
+    useCustomEvent("fetch-complete", { target: this });
   }
   setEvent() {
     const $errorView = this.$selector("error-view");

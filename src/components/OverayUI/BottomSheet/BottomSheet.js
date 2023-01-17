@@ -1,5 +1,5 @@
-import { Component } from "@/Component";
-class BottomSheet extends Component {
+import { OverayUI } from "../OverayUI";
+class BottomSheet extends OverayUI {
   template() {
     return `
       

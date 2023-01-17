@@ -5,7 +5,7 @@
 export function usePathName() {
   const { pathname } = location;
   if (pathname === "/") {
-    return pathname;
+    return null;
   }
   return decodeURI(pathname).replace("/", "");
 }

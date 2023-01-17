@@ -1,6 +1,7 @@
 import { Component } from "@/Component";
 import Style from "./AiHeader.scss?inline";
 import { getLocalStorage } from "@/utility/localStorage";
+import { useCustomEvent } from "@/utility/event";
 
 class AiHeader extends Component {
   style() {
@@ -22,8 +23,7 @@ class AiHeader extends Component {
     const $E_DarkmodeToggle = this.$selector(".AiHeader__DarkmodeToggle");
     $E_DarkmodeToggle.addEventListener("toggle-change", (e) => {
       const { detail } = e;
-      const themeChangeEvent = new CustomEvent("theme-change", { detail });
-      dispatchEvent(themeChangeEvent);
+      useCustomEvent("theme-change", { detail });
       if (detail) {
         $E_DarkmodeToggle.setAttribute("checked", "");
         return;

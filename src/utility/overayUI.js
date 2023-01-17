@@ -2,18 +2,18 @@ import { useCustomEvent } from "./event";
 
 /**
  * 옵션을 사용하여 전역에 모달을 여는 요청을 보냅니다.
- * @param {{title:string;content:string;}} data
+ * @param {{title:string;content:string;}} detail
  */
-export function useModal(data) {
-  useCustomEvent("modal-request", data);
+export function useModal(detail) {
+  useCustomEvent("modal-request", { detail });
 }
 
 /**
  * 옵션을 사용하여 전역에 바텀시트(bottom-sheet)를 여는 요청을 보냅니다.
- * @param {{title:string;content:string;}} data
+ * @param {{title:string;content:string;}} detail
  */
-export function useBottomSheet(data) {
-  useCustomEvent("bottom-sheet-request", data);
+export function useBottomSheet(detail) {
+  useCustomEvent("bottom-sheet-request", { detail });
 }
 
 /**

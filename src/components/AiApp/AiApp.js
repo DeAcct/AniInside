@@ -45,7 +45,6 @@ class AiApp extends Component {
       const $coverModal = this.$selector("cover-modal");
       const { title, content } = e.detail;
       $coverModal.setAttribute("open", "");
-      useOveraySideEffect(true); //모달이 열리면 측면 스크롤바 제거, 반드시 닫는 로직에서 사이드이펙트 제거 필요
       $coverModal.setAttribute("m-title", title);
       $coverModal.innerHTML = content;
     });
@@ -53,7 +52,6 @@ class AiApp extends Component {
       const $bottomSheet = this.$selector("bottom-sheet");
       const { title, content } = e.detail;
       $bottomSheet.setAttribute("open", "");
-      useOveraySideEffect(true); //모달이 열리면 측면 스크롤바 제거, 반드시 닫는 로직에서 사이드이펙트 제거 필요
       $bottomSheet.setAttribute("m-title", title);
       $bottomSheet.innerHTML = content;
     });

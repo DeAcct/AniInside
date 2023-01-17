@@ -35,16 +35,12 @@
 
 @media (hover: hover) and (pointer: fine) {
   .TagList {
-    cursor: grab;
     &__Item,
     &__Item a {
       cursor: inherit;
     }
     &--Grabbing {
       cursor: grabbing;
-    }
-    &--OutOfRange {
-      cursor: not-allowed;
     }
   }
 }

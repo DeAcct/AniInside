@@ -54,6 +54,9 @@ class DaySelector extends Component {
       top: 0,
     });
   }
+  disconnectedCallback() {
+    removeEventListener("history-change", (e) => this.changeSelected(e));
+  }
 }
 
 customElements.define("day-selector", DaySelector);
