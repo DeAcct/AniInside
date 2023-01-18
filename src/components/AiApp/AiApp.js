@@ -41,7 +41,7 @@ class AiApp extends Component {
       root.dataset.theme = isDarkmode ? "dark" : "light";
       setLocalStorage("theme", root.dataset.theme);
     });
-    addEventListener("modal-request", (e) => {
+    addEventListener("cover-modal-request", (e) => {
       const $coverModal = this.$selector("cover-modal");
       const { title, content } = e.detail;
       $coverModal.setAttribute("open", "");

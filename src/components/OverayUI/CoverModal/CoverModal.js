@@ -3,20 +3,24 @@ import { OverayUI } from "../OverayUI";
 
 class CoverModal extends OverayUI {
   static get observedAttributes() {
-    return ["m-title"];
+    return ["m-title", ...super.observedAttributes];
   }
   attributeChangedCallback(name, oldValue, newValue) {
+    super.attributeChangedCallback(name);
     if (name === "m-title") {
       this.render();
     }
   }
   style() {
-    return Style;
+    return `
+      ${super.style()}
+      ${Style}
+    `;
   }
   template() {
     return `
       <div class="CoverModal">
-        <h2 class="CoverModal__Title">${this.title || ""}</h2>
+        <strong class="CoverModal__Title">${this.title || ""}</strong>
         <div class="CoverModal__Wrap">
           <slot></slot>
         </div>

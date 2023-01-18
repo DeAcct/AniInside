@@ -1,19 +1,11 @@
 import { useCustomEvent } from "./event";
 
 /**
- * 옵션을 사용하여 전역에 모달을 여는 요청을 보냅니다.
- * @param {{title:string;content:string;}} detail
+ * 옵션을 사용하여 전역에 특정한 오버레이를 여는 요청을 보냅니다.
+ * @param {{type:'cover-modal'|'bottom-sheet';title:string;content:string;}} detail
  */
-export function useModal(detail) {
-  useCustomEvent("modal-request", { detail });
-}
-
-/**
- * 옵션을 사용하여 전역에 바텀시트(bottom-sheet)를 여는 요청을 보냅니다.
- * @param {{title:string;content:string;}} detail
- */
-export function useBottomSheet(detail) {
-  useCustomEvent("bottom-sheet-request", { detail });
+export function useOverayUI({ type, title, content }) {
+  useCustomEvent(`${type}-request`, { detail: { title, content } });
 }
 
 /**

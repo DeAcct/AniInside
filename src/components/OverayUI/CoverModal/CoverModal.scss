@@ -1,33 +1,20 @@
 @import "@/reset.scss";
 
 :host(cover-modal) {
-  display: none;
-  position: fixed;
+  background-color: hsla(var(--overay-ui-bg));
   justify-content: center;
   align-items: center;
-  top: 0;
-  left: 0;
-  z-index: var(--cover-modal-z-index);
-  width: calc(var(--vw) * 100 * 1px);
-  height: calc(var(--vh) * 100 * 1px);
-
-  //animation: modal-bg 300ms ease-out;
-  background-color: transparent;
-  transition: background-color 150ms ease-out;
 
   .CoverModal {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     width: 100%;
-    padding: var(--card-padding);
+    padding: var(--overay-ui-padding);
     background-color: hsl(var(--depth-100));
     border-radius: var(--card-radius-1);
     cursor: initial;
-    // animation: modal-body 300ms ease-out;
-    opacity: 0;
-    transform: translateY(1rem);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    animation: overay-ui-content 150ms ease-out;
 
     &__Title {
       font-size: 1.7rem;
@@ -54,33 +41,11 @@
     }
   }
 }
-:host(cover-modal[open]) {
-  display: flex;
-  background-color: hsla(var(--cover-modal-bg));
-  .CoverModal {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// @keyframes modal-bg {
-//   from {
-//     background-color: transparent;
-//   }
-// }
-// @keyframes modal-body {
-//   from {
-//     opacity: 0;
-//     transform: translateY(1rem);
-//   }
-// }
 
 @media screen and (min-width: 1080px) {
   :host(cover-modal) {
-    align-items: center;
     .CoverModal {
       width: 100ch;
-      padding: 3rem;
       &__Title {
         font-size: 2rem;
       }

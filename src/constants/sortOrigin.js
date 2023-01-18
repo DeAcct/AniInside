@@ -5,7 +5,7 @@ export class SortOrigin {
       key: "title.length",
     },
     {
-      text: "제목 가나다",
+      text: "제목",
       key: "title",
     },
     {

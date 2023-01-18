@@ -2,6 +2,7 @@ import { registerSW } from "virtual:pwa-register";
 import "./components/AiApp/AiApp";
 import "./components/AiExpandable/AiExpandable";
 import "./components/AiHeader/AiHeader";
+import "./components/AiSelect/AiSelect";
 import "./components/AiToggle/AiToggle";
 import "./components/AnimeCard/AnimeCard";
 import "./components/AnimeList/AnimeList";

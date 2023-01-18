@@ -102,7 +102,7 @@ tag-list {
   --card-radius-1: 1rem;
   --card-radius-2: 0.5rem;
   --app-width-limit: 1130px;
-  --cover-modal-z-index: 150;
+  --overay-ui-z-index: 150;
   --loading-bar-z-index: 110;
   --sticky-list-z-index: 100;
   --nav-z-index: 50;
@@ -110,6 +110,7 @@ tag-list {
   --backdrop-blur-1: 5px;
   --backdrop-blur-2: 10px;
   --backdrop-blur-3: 15px;
+  --overay-ui-padding: var(--card-padding);
 }
 ::after,
 ::before {
@@ -183,6 +184,7 @@ summary {
   ::before {
     --card-padding: 2rem;
     --chip-padding: 1rem 1.5rem;
+    --overay-ui-padding: 3rem;
   }
 }
 

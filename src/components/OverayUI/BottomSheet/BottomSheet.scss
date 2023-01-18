@@ -1,0 +1,19 @@
+@import "@/reset.scss";
+
+:host(bottom-sheet) {
+  background-color: hsla(var(--overay-ui-bg));
+  justify-content: center;
+  align-items: flex-end;
+  .BottomSheet {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: var(--overay-ui-padding);
+    background-color: hsl(var(--depth-100));
+    border-radius: var(--card-radius-1);
+    &__Title {
+      font-size: 1.7rem;
+      font-weight: 900;
+    }
+  }
+}
