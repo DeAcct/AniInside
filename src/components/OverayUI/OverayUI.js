@@ -15,7 +15,6 @@ export class OverayUI extends Component {
         z-index: var(--overay-ui-z-index);
         width: calc(var(--vw) * 100 * 1px);
         height: calc(var(--vh) * 100 * 1px);
-      
         animation: overay-ui-bg 150ms ease-out;
       }
       :host(${this.localName}[open]) {

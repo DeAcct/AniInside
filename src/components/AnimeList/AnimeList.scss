@@ -28,16 +28,22 @@
   }
   &__Options {
     display: flex;
-    padding: calc(var(--card-padding) * 1.5) 0;
+    gap: 0.5rem;
+    padding: var(--card-padding) 0;
   }
-  &__SortButton {
+  &__OriginButton {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    .text {
-      font-weight: 500;
-      font-size: 1.4rem;
-    }
+    font-weight: 500;
+    font-size: 1.4rem;
+    padding: 1;
+  }
+  &__DirectionButton {
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .icon {
       --direction: 1;
       width: 1.4rem;

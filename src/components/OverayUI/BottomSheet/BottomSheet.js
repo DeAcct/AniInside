@@ -14,6 +14,17 @@ class BottomSheet extends OverayUI {
     return `
       ${super.style()}
       ${Style}
+      @keyframes overay-ui-bg {
+        from {
+          background-color: transparent;
+        }
+      }
+      @keyframes overay-ui-content {
+        from {
+          opacity: 0;
+          transform: translateY(${this.clientHeight}px);
+        }
+      }
     `;
   }
   template() {
