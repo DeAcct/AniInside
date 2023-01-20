@@ -5,7 +5,7 @@
  * @returns
  */
 
-export default function useBEMClass(blockElement, conditionalModifier) {
+export function useBEMClass(blockElement, conditionalModifier) {
   if (typeof conditionalModifier !== "object") {
     throw new Error(
       `${conditionalModifier}는 {Modifier:boolean}를 만족시키지 않습니다.`

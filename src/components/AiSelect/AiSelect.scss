@@ -1,0 +1,19 @@
+@import "@/reset.scss";
+
+.AiSelect {
+  display: flex;
+  flex-direction: column;
+
+  &__Item {
+    display: flex;
+    align-items: center;
+    padding: var(--card-padding);
+    font-size: 1.3rem;
+    font-weight: 500;
+    width: calc(100% - var(--card-padding));
+    border-radius: 0 9999px 9999px 0;
+  }
+  &__BlindInput:checked + &__Item {
+    background-color: hsl(var(--theme-base), var(--theme-depth-500), 50%);
+  }
+}

@@ -1,6 +1,5 @@
 class ResponseError extends Error {
   /**
-   *
    * @param {string} message
    * @param {Response} res
    */
@@ -9,6 +8,12 @@ class ResponseError extends Error {
     this.response = res;
   }
 }
+
+/**
+ * http 200이 아닌 응답은 오류를 던지는 native fetch의 wrapper 함수다.
+ * @param  {{input: RequestInfo | URL, init?: RequestInit | undefined}} options fetch에 사용할 옵션이다.
+ * @returns {Promise<Response>} 응답을 담은 promise를 반환한다.
+ */
 
 export async function useFetch(...options) {
   const res = await fetch(...options);

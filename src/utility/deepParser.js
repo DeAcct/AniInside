@@ -5,6 +5,7 @@
  * @returns {string | number | bigint | boolean | null | undefined | symbol | Array<any>}
  */
 
+let i = 0;
 export function useDrill(deepKey, object) {
   const parsedKey = deepKey.split(".");
   const deepValue = parsedKey.reduce((prev, next) => prev[next], object); //값을 다시 키로 넣으며 가장 깊은 곳까지 탐색한다.

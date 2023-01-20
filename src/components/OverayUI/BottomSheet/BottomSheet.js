@@ -37,6 +37,7 @@ class BottomSheet extends OverayUI {
       </div>
     `;
   }
+
   setEvent() {
     const $B_CoverModal = this.$selector(".BottomSheet");
     this.state.closeTargets = [this];

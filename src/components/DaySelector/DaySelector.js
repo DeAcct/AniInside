@@ -1,6 +1,6 @@
 import { Component } from "@/Component";
 import Style from "./DaySelector.scss?inline";
-import useBEMClass from "@/utility/styleClasses";
+import { useBEMClass } from "@/utility/styleClasses";
 import DAY from "@/constants/day";
 import { usePathName } from "@/utility/location";
 import { useDayRegex } from "@/utility/regex";

@@ -2,8 +2,8 @@ import { Component } from "@/Component";
 import Style from "./AiApp.scss?inline";
 import DAY from "@/constants/day";
 import { usePathName } from "@/utility/location";
-import { useOveraySideEffect } from "@/utility/overayUI";
 import { getLocalStorage, setLocalStorage } from "@/utility/localStorage";
+import { useCustomEvent } from "@/utility/event";
 
 class AiApp extends Component {
   state = {
@@ -41,20 +41,27 @@ class AiApp extends Component {
       root.dataset.theme = isDarkmode ? "dark" : "light";
       setLocalStorage("theme", root.dataset.theme);
     });
-    addEventListener("cover-modal-request", (e) => {
-      const $coverModal = this.$selector("cover-modal");
-      const { title, content } = e.detail;
-      $coverModal.setAttribute("open", "");
-      $coverModal.setAttribute("m-title", title);
-      $coverModal.innerHTML = content;
+    addEventListener("overay-ui-request", (e) => {
+      const $overayRoot = this.overayUIRequest(e.detail);
+      const $sortRoot = $overayRoot.querySelector(
+        "ai-select[name='sort-select']"
+      );
+      $sortRoot?.addEventListener("select-change", ({ detail }) => {
+        useCustomEvent("sort-change", {
+          detail,
+        });
+        useCustomEvent("overay-ui-close", {
+          detail: undefined,
+        });
+      });
     });
-    addEventListener("bottom-sheet-request", (e) => {
-      const $bottomSheet = this.$selector("bottom-sheet");
-      const { title, content } = e.detail;
-      $bottomSheet.setAttribute("open", "");
-      $bottomSheet.setAttribute("m-title", title);
-      $bottomSheet.innerHTML = content;
-    });
+  }
+  overayUIRequest({ type, title, content }) {
+    const $overayRoot = this.$selector(type);
+    $overayRoot.setAttribute("open", "");
+    $overayRoot.setAttribute("m-title", title);
+    $overayRoot.innerHTML = content;
+    return $overayRoot;
   }
   setEvent() {
     const $loadingBar = this.$selector("loading-bar");

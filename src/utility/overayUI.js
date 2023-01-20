@@ -5,7 +5,7 @@ import { useCustomEvent } from "./event";
  * @param {{type:'cover-modal'|'bottom-sheet';title:string;content:string;}} detail
  */
 export function useOverayUI({ type, title, content }) {
-  useCustomEvent(`${type}-request`, { detail: { title, content } });
+  useCustomEvent(`overay-ui-request`, { detail: { type, title, content } });
 }
 
 /**

@@ -7,14 +7,16 @@
   .BottomSheet {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     width: 100%;
-    padding: var(--overay-ui-padding);
+    padding: var(--overay-ui-padding) 0;
     background-color: hsl(var(--depth-100));
     border-radius: var(--card-radius-1) var(--card-radius-1) 0 0;
     animation: overay-ui-content 150ms ease-out;
     &__Title {
       font-size: 1.7rem;
       font-weight: 900;
+      padding: 0 var(--overay-ui-padding);
     }
   }
 }

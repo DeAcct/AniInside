@@ -60,6 +60,11 @@ export class OverayUI extends Component {
       });
     }
   }
+  setIsolatedEvent() {
+    addEventListener("overay-ui-close", () => {
+      this.close();
+    });
+  }
   close() {
     this.removeAttribute("open");
     this.innerHTML = "";

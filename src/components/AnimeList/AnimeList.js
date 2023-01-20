@@ -46,7 +46,9 @@ class AnimeList extends Component {
         <button class="AnimeList__OriginButton">
           ${originMap.find("keys", key).text}
         </button>
-        <button class="AnimeList__DirectionButton">
+        <button class="AnimeList__DirectionButton AnimeList__DirectionButton--${
+          direction.charAt(0).toUpperCase() + direction.slice(1)
+        }">
           <svg class="icon" viewBox="0 0 24 24">
             <path d="m21.92,12.38c.1-.24.1-.52,0-.76-.05-.12-.12-.23-.22-.33L12.71,2.29c-.39-.39-1.02-.39-1.41,0s-.39,1.02,0,1.41l7.29,7.29H3c-.55,0-1,.45-1,1s.45,1,1,1h15.59l-7.29,7.29c-.39.39-.39,1.02,0,1.41.2.2.45.29.71.29s.51-.1.71-.29l9-9c.09-.09.17-.2.22-.33Z"/>
           </svg>
@@ -114,8 +116,10 @@ class AnimeList extends Component {
 
     const $errorView = this.$selector("error-view");
     if ($errorView) {
-      $errorView.addEventListener("refetch-request", () => {
-        this.getData();
+      $errorView.addEventListener("refetch-request", async () => {
+        await this.getData();
+        this.sortAnimes();
+        this.render();
       });
     }
 
@@ -132,12 +136,28 @@ class AnimeList extends Component {
         type: "bottom-sheet",
         title: "정렬 기준",
         content: `
-          <ai-select 
-            items='${JSON.stringify(originMap.allKeys)}'
+          <ai-select
+            type="radio"
+            name="sort-select"
+            items='${JSON.stringify(originMap.keys)}'
             selected="${key}"
           ></ai-select>
         `,
       });
+    });
+
+    const $E_DirecationButton = this.$selector(".AnimeList__DirectionButton");
+    $E_DirecationButton.addEventListener("click", () => {
+      this.state.direction = this.state.direction === "asc" ? "desc" : "asc";
+      this.sortAnimes();
+      this.render();
+    });
+  }
+  setIsolatedEvent() {
+    addEventListener("sort-change", ({ detail }) => {
+      this.state.key = detail;
+      this.sortAnimes();
+      this.render();
     });
   }
   sortAnimes() {

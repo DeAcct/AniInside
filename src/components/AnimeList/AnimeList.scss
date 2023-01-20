@@ -44,12 +44,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    --direction: 1;
     .icon {
-      --direction: 1;
       width: 1.4rem;
       height: 1.4rem;
       fill: currentColor;
       transform: rotate(calc(-90deg * var(--direction)));
+      transition: 150ms ease-out;
+    }
+    &--Desc {
+      --direction: -1;
     }
   }
 }
