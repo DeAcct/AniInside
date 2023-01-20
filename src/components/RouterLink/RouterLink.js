@@ -1,6 +1,6 @@
 import { Component } from "@/Component";
-import { useRouter } from "@/utility/router";
 import Style from "./RouterLink.scss?inline";
+import { useRouter } from "@/utility/router";
 
 class RouterLink extends Component {
   style() {

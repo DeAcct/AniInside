@@ -1,8 +1,8 @@
 import { Component } from "@/Component";
 import Style from "./RouterProvider.scss?inline";
-import { usePathName } from "@/utility/location";
-import { useDayRegex } from "@/utility/regex";
 import DAY from "@/constants/day";
+import { useDayRegex } from "@/utility/regex";
+import { usePathName } from "@/utility/location";
 
 class RouterProvider extends Component {
   style() {

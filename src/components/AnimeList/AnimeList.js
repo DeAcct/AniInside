@@ -1,10 +1,10 @@
 import { Component } from "@/Component";
-import { useObjArraySort } from "@/utility/sort";
 import Style from "./AnimeList.scss?inline";
 import { SortOrigin } from "@/constants/sortOrigin";
-import { useOverayUI } from "@/utility/overayUI";
 import { useCustomEvent } from "@/utility/event";
 import { useFetch } from "@/utility/fetch";
+import { useObjArraySort } from "@/utility/sort";
+import { useOverayUI } from "@/utility/overayUI";
 
 class AnimeList extends Component {
   state = {
@@ -125,13 +125,6 @@ class AnimeList extends Component {
 
     const $E_OriginButton = this.$selector(".AnimeList__OriginButton");
     $E_OriginButton.addEventListener("click", () => {
-      const isPC = matchMedia(
-        "(hover: hover) and (pointer: fine) and (min-width:1080px)"
-      ).matches;
-      if (isPC) {
-        console.log("context-menu");
-        return;
-      }
       useOverayUI({
         type: "bottom-sheet",
         title: "정렬 기준",

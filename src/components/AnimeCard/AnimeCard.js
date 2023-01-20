@@ -1,5 +1,5 @@
-import Style from "./AnimeCard.scss?inline";
 import { Component } from "@/Component";
+import Style from "./AnimeCard.scss?inline";
 import { useOverayUI } from "@/utility/overayUI";
 
 class AnimeCard extends Component {

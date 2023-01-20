@@ -1,10 +1,11 @@
 import { OverayUI } from "../OverayUI";
 import Style from "./BottomSheet.scss?inline";
+
 class BottomSheet extends OverayUI {
   static get observedAttributes() {
     return ["m-title", ...super.observedAttributes];
   }
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name) {
     super.attributeChangedCallback(name);
     if (name === "m-title") {
       this.render();

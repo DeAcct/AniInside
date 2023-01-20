@@ -1,6 +1,6 @@
 import { Component } from "@/Component";
-import { useCustomEvent } from "@/utility/event";
 import Style from "./AiSelect.scss?inline";
+import { useCustomEvent } from "@/utility/event";
 
 class AiSelect extends Component {
   state = {
@@ -27,6 +27,7 @@ class AiSelect extends Component {
               <label
                 for="${id}"
                 class="AiSelect__Item"
+                data-pointer="true"
               >
                 ${text}
               </label>

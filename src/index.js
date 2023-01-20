@@ -11,7 +11,6 @@ import "./components/OverayUI/BottomSheet/BottomSheet";
 import "./components/DaySelector/DaySelector";
 import "./components/ErrorView/ErrorView";
 import "./components/FrameHolder/FrameHolder";
-import "./components/IconBase/IconBase";
 import "./components/LoadingBar/LoadingBar";
 import "./components/OptimizedImage/OptimizedImage";
 import "./components/RouterLink/RouterLink";
@@ -19,9 +18,7 @@ import "./components/RouterProvider/RouterProvider";
 import "./components/SliceParagraph/SliceParagraph";
 import "./components/StarRating/StarRating";
 import "./components/StickyRenderer/StickyRenderer";
-import "./components/TabSelector/TabSelector";
 import "./components/TagList/TagList";
-import "./components/TeleportPortal/TeleportPortal";
 
 import "./reset.scss";
 import "./color.scss";

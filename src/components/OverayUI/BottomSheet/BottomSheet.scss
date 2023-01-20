@@ -18,5 +18,23 @@
       font-weight: 900;
       padding: 0 var(--overay-ui-padding);
     }
+    &__Wrap {
+      --ai-select-font-size: 1.3rem;
+      --ai-select-padding: var(--overay-ui-padding);
+    }
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  :host(bottom-sheet) {
+    .BottomSheet {
+      width: 100ch;
+      &__Title {
+        font-size: 2rem;
+      }
+      &__Wrap {
+        --ai-select-font-size: 1.5rem;
+      }
+    }
   }
 }

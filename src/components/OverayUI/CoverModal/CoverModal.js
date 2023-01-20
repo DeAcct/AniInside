@@ -5,7 +5,7 @@ class CoverModal extends OverayUI {
   static get observedAttributes() {
     return ["m-title", ...super.observedAttributes];
   }
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name) {
     super.attributeChangedCallback(name);
     if (name === "m-title") {
       this.render();

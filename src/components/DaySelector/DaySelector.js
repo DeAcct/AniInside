@@ -1,9 +1,9 @@
 import { Component } from "@/Component";
 import Style from "./DaySelector.scss?inline";
-import { useBEMClass } from "@/utility/styleClasses";
 import DAY from "@/constants/day";
-import { usePathName } from "@/utility/location";
+import { useBEMClass } from "@/utility/styleClasses";
 import { useDayRegex } from "@/utility/regex";
+import { usePathName } from "@/utility/location";
 
 class DaySelector extends Component {
   state = {

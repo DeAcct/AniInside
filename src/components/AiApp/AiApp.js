@@ -1,8 +1,8 @@
 import { Component } from "@/Component";
 import Style from "./AiApp.scss?inline";
 import DAY from "@/constants/day";
-import { usePathName } from "@/utility/location";
 import { getLocalStorage, setLocalStorage } from "@/utility/localStorage";
+import { usePathName } from "@/utility/location";
 import { useCustomEvent } from "@/utility/event";
 
 class AiApp extends Component {

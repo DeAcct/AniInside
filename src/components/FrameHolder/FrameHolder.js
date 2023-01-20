@@ -1,5 +1,6 @@
 import { Component } from "@/Component";
 import Style from "./FrameHolder.scss?inline";
+
 class FrameHolder extends Component {
   style() {
     return Style;
