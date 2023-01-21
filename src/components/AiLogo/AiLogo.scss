@@ -1,0 +1,16 @@
+@import "@/reset.scss";
+
+.AiLogo {
+  &__SVGRoot {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    filter: url("#glitch");
+  }
+  &__BGRect {
+    fill: url(#gradient);
+  }
+  &__Text {
+    fill: #382b50;
+  }
+}

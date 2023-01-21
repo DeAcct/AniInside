@@ -10,13 +10,10 @@ class AiHeader extends Component {
   template() {
     return `
       <header class="AiHeader">
-        <h1 class="AiHeader__Logo">
-          애니인사이드
-        </h1>
+        <ai-logo class="AiHeader__Logo"></ai-logo>
         <ai-toggle 
           class="AiHeader__DarkmodeToggle"
           type="toggle"
-          
         >
           야간 모드
         </ai-toggle>
