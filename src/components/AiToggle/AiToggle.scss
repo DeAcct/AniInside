@@ -1,17 +1,17 @@
 @import "@/reset.scss";
 .AiToggle {
   display: flex;
+  gap: var(--gap);
   justify-content: space-between;
   align-items: center;
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
   -webkit-user-select: none;
   user-select: none;
   &__Bar {
     position: relative;
     display: flex;
     align-items: center;
-    margin-left: 1rem;
     width: 4.6rem;
     height: 2.8rem;
     background-color: hsl(var(--depth-400));
@@ -42,37 +42,58 @@
       transition: 150ms ease-out;
     }
   }
-  &__RealCheckbox:focus ~ &__Bar {
-    background-color: hsl(var(--theme-base), var(--theme-depth-300)) !important;
+  &__Checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    fill: currentColor;
+    .icon {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+    .checked {
+      opacity: 0;
+    }
   }
-}
 
-:host(ai-toggle[checked]) {
-  .AiToggle {
-    &__Bar {
-      background-color: hsl(var(--theme-base), var(--theme-depth-500));
-      border-color: hsl(var(--theme-base), var(--theme-depth-500));
-    }
-    &__Knob {
-      width: 2rem;
-      height: 2rem;
-      transform: translateX(1.4rem);
-      background-color: hsl(var(--depth-100));
-    }
-    &__Icon {
-      transform: rotate(0);
-      fill: hsl(var(--depth-900));
-      .Dark {
-        opacity: 1;
-      }
+  &__RealCheckbox:focus ~ &__Bar {
+    background-color: hsl(var(--theme-base), var(--theme-depth-300));
+  }
+  &__RealCheckbox:focus ~ &__Checkbox {
+    fill: hsl(var(--theme-base), var(--theme-depth-300));
+  }
+
+  &__RealCheckbox:checked ~ &__Bar {
+    background-color: hsl(var(--theme-base), var(--theme-depth-500));
+    border-color: hsl(var(--theme-base), var(--theme-depth-500));
+  }
+  &__RealCheckbox:checked ~ &__Bar &__Knob {
+    width: 2rem;
+    height: 2rem;
+    transform: translateX(1.4rem);
+    background-color: hsl(var(--depth-100));
+  }
+  &__RealCheckbox:checked ~ &__Bar &__Icon {
+    transform: rotate(0);
+    fill: hsl(var(--depth-900));
+    .Dark {
+      opacity: 1;
     }
   }
-}
-:host(ai-toggle[disabled]) {
-  .AiToggle {
-    &__Knob {
-      opacity: 0.5;
+  &__RealCheckbox:checked ~ &__Checkbox {
+    fill: hsl(var(--theme-base), var(--theme-depth-500));
+    .no-checked {
+      opacity: 0;
     }
+    .checked {
+      opacity: 1;
+    }
+  }
+
+  &__RealCheckbox:disabled ~ &__Knob {
+    opacity: 0.5;
   }
 }
 
@@ -81,6 +102,9 @@
     .AiToggle {
       &__Bar {
         background-color: hsl(var(--theme-base), var(--theme-depth-300));
+      }
+      &__Checkbox {
+        fill: hsl(var(--theme-base), var(--theme-depth-400));
       }
     }
   }

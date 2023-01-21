@@ -1,4 +1,4 @@
-import DAY from "@/constants/day";
+import { DAY } from "@/constants/day";
 import { usePathName } from "./location";
 import { useCustomEvent } from "./event";
 export function useRouter(to, method) {

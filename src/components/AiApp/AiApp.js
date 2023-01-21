@@ -1,6 +1,6 @@
 import { Component } from "@/Component";
 import Style from "./AiApp.scss?inline";
-import DAY from "@/constants/day";
+import { DAY } from "@/constants/day";
 import { getLocalStorage, setLocalStorage } from "@/utility/localStorage";
 import { usePathName } from "@/utility/location";
 import { useCustomEvent } from "@/utility/event";

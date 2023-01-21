@@ -27,7 +27,7 @@ class StarRating extends Component {
               </g>
             </svg>
             <figcaption class="StarRating__Number">
-              (${this.score})
+              (${this.score.toFixed(2)})
             </figcaption>
             `
           : `<p class="StarRating__Error">

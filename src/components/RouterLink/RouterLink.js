@@ -8,7 +8,7 @@ class RouterLink extends Component {
   }
   template() {
     return `
-      <a href="${this.getAttribute("to")}">
+      <a href="${this.getAttribute("to")}" part="anchor">
         <slot></slot>
       </a>
     `;

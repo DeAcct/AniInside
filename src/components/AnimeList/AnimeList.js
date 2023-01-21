@@ -13,12 +13,14 @@ class AnimeList extends Component {
     originMap: new SortOrigin(),
     key: "title",
     direction: "asc",
-    ageMode: "teen",
+    mode: {
+      kids: false,
+    },
   };
   static get observedAttributes() {
     return ["src"];
   }
-  async attributeChangedCallback(name, oldValue, newValue) {
+  async attributeChangedCallback(name) {
     if (name === "src") {
       await this.getData();
       this.sortAnimes();
@@ -38,27 +40,40 @@ class AnimeList extends Component {
       }
     `;
   }
+  modeFilter(item) {
+    const { mode } = this.state;
+    return mode.kids || !/All|Children/.test(item.rating);
+  }
   successUI(items) {
-    const { originMap, key, direction } = this.state;
+    const { originMap, key, direction, mode } = this.state;
     return `
     <div class="AnimeList">
       <div class="AnimeList__Options">
-        <button class="AnimeList__OriginButton">
-          ${originMap.find("keys", key).text}
-        </button>
-        <button class="AnimeList__DirectionButton AnimeList__DirectionButton--${
-          direction.charAt(0).toUpperCase() + direction.slice(1)
-        }">
-          <svg class="icon" viewBox="0 0 24 24">
-            <path d="m21.92,12.38c.1-.24.1-.52,0-.76-.05-.12-.12-.23-.22-.33L12.71,2.29c-.39-.39-1.02-.39-1.41,0s-.39,1.02,0,1.41l7.29,7.29H3c-.55,0-1,.45-1,1s.45,1,1,1h15.59l-7.29,7.29c-.39.39-.39,1.02,0,1.41.2.2.45.29.71.29s.51-.1.71-.29l9-9c.09-.09.17-.2.22-.33Z"/>
-          </svg>
-          <span class="blind">
-            ${originMap.find("directions", direction).text}
-          </span>
-        </button>
+        <div class="sort">
+          <button class="AnimeList__OriginButton">
+            ${originMap.find("keys", key).text}
+          </button>
+          <button 
+            class="AnimeList__DirectionButton AnimeList__DirectionButton--${
+              direction.charAt(0).toUpperCase() + direction.slice(1)
+            }"
+          >
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="m21.92,12.38c.1-.24.1-.52,0-.76-.05-.12-.12-.23-.22-.33L12.71,2.29c-.39-.39-1.02-.39-1.41,0s-.39,1.02,0,1.41l7.29,7.29H3c-.55,0-1,.45-1,1s.45,1,1,1h15.59l-7.29,7.29c-.39.39-.39,1.02,0,1.41.2.2.45.29.71.29s.51-.1.71-.29l9-9c.09-.09.17-.2.22-.33Z"/>
+            </svg>
+            <span class="blind">
+              ${originMap.find("directions", direction).text}
+            </span>
+          </button>
+        </div>
+        <ai-toggle 
+          type="checkbox"
+          ${mode.kids ? "checked" : ""}
+        >저연령 애니</ai-toggle>
       </div>
       <ul class="AnimeList__Grid">
         ${items
+          .filter((item) => this.modeFilter(item))
           .map(
             (item) => `
               <li class="AnimeList__Item">
@@ -103,7 +118,7 @@ class AnimeList extends Component {
     this.state.isFailed = false;
     try {
       useCustomEvent("fetch-start", { target: this });
-      const response = await useFetch(this.getAttribute("src"));
+      const response = await useFetch(this.src);
       const { data: responseAnimes } = await response.json();
       this.state.animes = responseAnimes;
     } catch {
@@ -142,7 +157,13 @@ class AnimeList extends Component {
     const $E_DirecationButton = this.$selector(".AnimeList__DirectionButton");
     $E_DirecationButton.addEventListener("click", () => {
       this.state.direction = this.state.direction === "asc" ? "desc" : "asc";
-      this.sortAnimes();
+      this.reverseAnimes();
+      this.render();
+    });
+
+    const $aiToggle = this.$selector("ai-toggle");
+    $aiToggle.addEventListener("toggle-change", () => {
+      this.state.mode.kids = !this.state.mode.kids;
       this.render();
     });
   }
@@ -153,6 +174,9 @@ class AnimeList extends Component {
       this.render();
     });
   }
+  reverseAnimes() {
+    this.state.animes = [...this.state.animes].reverse();
+  }
   sortAnimes() {
     const { originMap, key, direction } = this.state;
     this.state.animes = useObjArraySort(
@@ -160,6 +184,17 @@ class AnimeList extends Component {
       originMap.find("keys", key).key,
       direction
     );
+  }
+  disconnectedCallback() {
+    removeEventListener("sort-change", ({ detail }) => {
+      this.state.key = detail;
+      this.sortAnimes();
+      this.render();
+    });
+  }
+
+  get src() {
+    return this.getAttribute("src");
   }
 }
 

@@ -13,7 +13,11 @@ class AiHeader extends Component {
         <h1 class="AiHeader__Logo">
           애니인사이드
         </h1>
-        <ai-toggle class="AiHeader__DarkmodeToggle">
+        <ai-toggle 
+          class="AiHeader__DarkmodeToggle"
+          type="toggle"
+          
+        >
           야간 모드
         </ai-toggle>
       </header>   

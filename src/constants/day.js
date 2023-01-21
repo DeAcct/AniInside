@@ -3,7 +3,7 @@ export const DAY_REGEX = /월|화|수|목|금|토|일/;
 /**
  * 한국어 날짜와 관련된 클래스입니다.
  */
-export default class DAY {
+export class DAY {
   /**
    * @private {Array<{key:"sunday"| "monday"| "tuesday" | "wednesday" | "thursday" | "friday" | "saturday"; day:"월" | "화" | "수" | "목" | "금" | "토" | "일"}>}
    * 이 자체로는 접근이 불가능한 내부 데이터입니다.

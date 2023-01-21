@@ -51,9 +51,12 @@
         opacity: 1;
       }
     }
-    &:not(&--Selected):hover {
+    &:not(&--Selected) {
       router-link {
-        opacity: 0.5;
+        &:hover,
+        &::part(anchor):focus {
+          opacity: 0.5;
+        }
       }
     }
   }
