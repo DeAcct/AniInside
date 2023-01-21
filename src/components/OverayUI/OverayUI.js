@@ -43,7 +43,7 @@ export class OverayUI extends Component {
   static get observedAttributes() {
     return ["open"];
   }
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name) {
     if (name === "open") {
       useOveraySideEffect(this.hasAttribute("open"));
     }

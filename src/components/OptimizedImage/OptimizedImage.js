@@ -5,7 +5,7 @@ class OptimizedImage extends Component {
   static get observedAttributes() {
     return ["src"];
   }
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue) {
     if (name === "src" && oldValue) {
       this.render();
     }
