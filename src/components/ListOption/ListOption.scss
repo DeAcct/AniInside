@@ -1,0 +1,44 @@
+@import "@/reset.scss";
+
+.ListOption {
+  display: flex;
+  gap: 2rem;
+  padding: var(--card-padding) 0;
+  .sort {
+    display: flex;
+    gap: 0.5rem;
+  }
+  &__OriginButton {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.4rem;
+  }
+
+  &__DirectionButton {
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .icon {
+      width: 1.8rem;
+      height: 1.8rem;
+      fill: currentColor;
+      transform: rotate(calc(-90deg * var(--direction)));
+    }
+    &--Asc {
+      --direction: 1;
+    }
+    &--Desc {
+      --direction: -1;
+    }
+  }
+  &__KidsMode {
+    display: flex;
+    margin-left: auto;
+    --font-size: 1.4rem;
+    --font-weight: 500;
+    --gap: 0.5rem;
+  }
+}

@@ -7,11 +7,14 @@ import { useCustomEvent } from "@/utility/event";
 
 class AiApp extends Component {
   state = {
-    selectedDay: usePathName() ? new DAY().find(usePathName()) : new DAY().now,
+    selectedDay: undefined,
     root: document.documentElement,
     src: new URL("https://api.jikan.moe/v4/schedules"),
   };
   setup() {
+    this.state.selectedDay = usePathName()
+      ? new DAY().find(usePathName())
+      : new DAY().now;
     const { root, src, selectedDay } = this.state;
 
     this.setViewport();

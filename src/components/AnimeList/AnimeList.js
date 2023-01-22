@@ -13,9 +13,6 @@ class AnimeList extends Component {
     originMap: new SortOrigin(),
     key: "title",
     direction: "asc",
-    mode: {
-      kids: false,
-    },
   };
   static get observedAttributes() {
     return ["src"];
@@ -40,40 +37,23 @@ class AnimeList extends Component {
       }
     `;
   }
-  modeFilter(item) {
-    const { mode } = this.state;
-    return mode.kids || !/All|Children/.test(item.rating);
-  }
   successUI(items) {
     const { originMap, key, direction, mode } = this.state;
     return `
     <div class="AnimeList">
-      <div class="AnimeList__Options">
-        <div class="sort">
-          <button class="AnimeList__OriginButton">
-            ${originMap.find("keys", key).text}
-          </button>
-          <button 
-            class="AnimeList__DirectionButton AnimeList__DirectionButton--${
-              direction.charAt(0).toUpperCase() + direction.slice(1)
-            }"
-          >
-            <svg class="icon" viewBox="0 0 24 24">
-              <path d="m21.92,12.38c.1-.24.1-.52,0-.76-.05-.12-.12-.23-.22-.33L12.71,2.29c-.39-.39-1.02-.39-1.41,0s-.39,1.02,0,1.41l7.29,7.29H3c-.55,0-1,.45-1,1s.45,1,1,1h15.59l-7.29,7.29c-.39.39-.39,1.02,0,1.41.2.2.45.29.71.29s.51-.1.71-.29l9-9c.09-.09.17-.2.22-.33Z"/>
-            </svg>
-            <span class="blind">
-              ${originMap.find("directions", direction).text}
-            </span>
-          </button>
-        </div>
-        <ai-toggle 
-          type="checkbox"
-          ${mode.kids ? "checked" : ""}
-        >저연령 애니</ai-toggle>
-      </div>
+      <list-option 
+        origin=${originMap.find("keys", key).text}
+        direction=${direction}
+        mode=${JSON.stringify(mode)}
+        class="AnimeList__Options"
+      ></list-option>
       <ul class="AnimeList__Grid">
         ${items
-          .filter((item) => this.modeFilter(item))
+          // 10~30대를 타깃으로 하여, 저연령 애니를 제외
+          //
+          // - api 이슈
+          //  searchParams로 저연령 애니는 거르도록 설정할 수는 있으나 api단의 버그로 해당 옵션이 무시되고 있다.
+          .filter((item) => !/All|Children/.test(item.rating))
           .map(
             (item) => `
               <li class="AnimeList__Item">
@@ -138,8 +118,8 @@ class AnimeList extends Component {
       });
     }
 
-    const $E_OriginButton = this.$selector(".AnimeList__OriginButton");
-    $E_OriginButton.addEventListener("click", () => {
+    const $E_Options = this.$selector(".AnimeList__Options");
+    $E_Options.addEventListener("origin-request", () => {
       useOverayUI({
         type: "bottom-sheet",
         title: "정렬 기준",
@@ -153,17 +133,9 @@ class AnimeList extends Component {
         `,
       });
     });
-
-    const $E_DirecationButton = this.$selector(".AnimeList__DirectionButton");
-    $E_DirecationButton.addEventListener("click", () => {
+    $E_Options.addEventListener("direction-change", () => {
       this.state.direction = this.state.direction === "asc" ? "desc" : "asc";
       this.reverseAnimes();
-      this.render();
-    });
-
-    const $aiToggle = this.$selector("ai-toggle");
-    $aiToggle.addEventListener("toggle-change", () => {
-      this.state.mode.kids = !this.state.mode.kids;
       this.render();
     });
   }

@@ -5,9 +5,9 @@
  */
 
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  return localStorage.getItem(key);
 }
 
 export function setLocalStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+  localStorage.setItem(key, value);
 }

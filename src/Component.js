@@ -1,7 +1,10 @@
 export class Component extends HTMLElement {
   state = {};
-  connectedCallback() {
+  constructor() {
+    super();
     this.attachShadow({ mode: "open" });
+  }
+  connectedCallback() {
     this.setup();
     this.setIsolatedEvent();
     this.render();
