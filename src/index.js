@@ -12,7 +12,7 @@ import "./components/OverayUI/BottomSheet/BottomSheet";
 import "./components/DaySelector/DaySelector";
 import "./components/ErrorView/ErrorView";
 import "./components/FrameHolder/FrameHolder";
-import "./Components/ListOption/ListOption";
+import "./components/ListOption/ListOption";
 import "./components/LoadingBar/LoadingBar";
 import "./components/OptimizedImage/OptimizedImage";
 import "./components/RouterLink/RouterLink";
